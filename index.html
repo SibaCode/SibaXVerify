@@ -3,35 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SibaXVerify - Payment Verification Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>SibaXVerify - Instant Payment Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --success: #4cc9f0;
-            --danger: #f72585;
-            --warning: #f8961e;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --radius: 12px;
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #3B82F6;
+            --secondary: #10B981;
+            --secondary-dark: #059669;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --light: #F8FAFC;
+            --dark: #0F172A;
+            --gray: #64748B;
+            --light-gray: #E2E8F0;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
         }
 
@@ -39,253 +28,249 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: #f5f7fb;
-            color: var(--gray-800);
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
+            color: var(--dark);
+            background-color: #ffffff;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header & Navigation */
+        /* Header Styles */
         header {
-            background-color: var(--white);
-            box-shadow: var(--shadow);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 0;
+            padding: 18px 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--dark);
+            text-decoration: none;
         }
 
-        .logo i {
-            font-size: 1.8rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            gap: 30px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--gray-700);
+            color: var(--dark);
             font-weight: 500;
             transition: var(--transition);
-            position: relative;
         }
 
         .nav-links a:hover {
             color: var(--primary);
         }
 
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 3px;
-        }
-
         .auth-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 15px;
         }
 
         .btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: var(--radius);
+            padding: 12px 28px;
+            border-radius: var(--border-radius);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             border: none;
+            font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         .btn-outline {
             background-color: transparent;
+            border: 2px solid var(--primary);
             color: var(--primary);
-            border: 1px solid var(--primary);
         }
 
         .btn-outline:hover {
             background-color: var(--primary);
-            color: var(--white);
+            color: white;
         }
 
-        .btn-success {
-            background-color: var(--success);
-            color: var(--white);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
         }
 
-        .btn-success:hover {
-            background-color: #3ab4d9;
-        }
-
-        .btn-danger {
-            background-color: var(--danger);
-            color: var(--white);
-        }
-
-        .btn-danger:hover {
-            background-color: #e11574;
-        }
-
-        .btn-light {
-            background-color: var(--gray-100);
-            color: var(--gray-700);
-        }
-
-        .btn-light:hover {
-            background-color: var(--gray-200);
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
 
         /* Hero Section */
         .hero {
-            padding: 5rem 0;
-            background: var(--gradient);
-            color: var(--white);
+            padding: 100px 0 80px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 Q500,80 1000,0 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"></path></svg>');
-            background-size: cover;
-            background-position: center;
-        }
-
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             position: relative;
             z-index: 1;
         }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            font-weight: 700;
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            font-weight: 400;
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 500px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
-        .hero-buttons .btn {
-            font-size: 1rem;
-            padding: 0.9rem 2.2rem;
-        }
-
-        /* Verification Section */
-        .verification-section {
-            padding: 5rem 0;
-            background-color: var(--white);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--gray-900);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .section-title p {
-            color: var(--gray-600);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
-        .verification-tabs {
+        .hero-image {
+            flex: 1;
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--gray-200);
+            justify-content: flex-end;
         }
 
-        .tab-btn {
-            padding: 1rem 1.5rem;
-            background: none;
-            border: none;
-            font-weight: 600;
-            color: var(--gray-600);
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Verification Interface */
+        .verification-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .verification-interface {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 15px 30px;
             cursor: pointer;
+            font-weight: 500;
             transition: var(--transition);
             border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .tab-btn.active {
+        .tab.active {
             color: var(--primary);
             border-bottom: 3px solid var(--primary);
         }
@@ -296,377 +281,245 @@
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.5s ease;
         }
 
-        .verification-card {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--gray-700);
-        }
-
-        .form-control {
+        .manual-entry textarea {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--gray-300);
-            border-radius: var(--radius);
+            min-height: 180px;
+            padding: 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
             font-size: 1rem;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
         }
 
-        .form-control:focus {
+        .manual-entry textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .file-upload-area {
-            border: 2px dashed var(--gray-300);
-            border-radius: var(--radius);
-            padding: 3rem 2rem;
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 60px 40px;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
+            background-color: #fafbfc;
         }
 
-        .file-upload-area:hover {
+        .upload-area:hover, .upload-area.dragover {
             border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.03);
         }
 
-        .file-upload-area.dragover {
-            border-color: var(--primary);
-            background-color: rgba(67, 97, 238, 0.05);
-        }
-
-        .file-upload-icon {
-            font-size: 3rem;
+        .upload-icon {
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
         }
 
-        .file-upload-text {
-            margin-bottom: 1.5rem;
+        .file-types {
+            color: var(--gray);
+            margin-top: 15px;
+            font-size: 0.9rem;
         }
 
-        .file-upload-text h3 {
-            margin-bottom: 0.5rem;
-            color: var(--gray-800);
+        .verify-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin-top: 25px;
+            font-size: 1.1rem;
             font-weight: 600;
-        }
-
-        .file-upload-text p {
-            color: var(--gray-600);
-            font-weight: 400;
-        }
-
-        .file-list {
-            margin-top: 1.5rem;
-        }
-
-        .file-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: var(--gray-100);
-            border-radius: var(--radius);
-            margin-bottom: 0.5rem;
-        }
-
-        .file-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .file-info {
-            flex: 1;
-        }
-
-        .file-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .file-size {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-        }
-
-        .file-remove {
-            color: var(--danger);
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background-color: var(--gray-200);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--gradient);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        /* Document Guide */
-        .document-guide {
-            background-color: var(--gray-100);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .document-guide h3 {
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-            font-weight: 600;
-        }
-
-        .document-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .document-type {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .doc-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.5rem;
-        }
-
-        .doc-info h4 {
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-        }
-
-        .doc-info p {
-            font-size: 0.85rem;
-            color: var(--gray-600);
         }
 
         /* Results Section */
         .results-section {
-            padding: 3rem 0;
-            background-color: var(--gray-100);
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+            display: none;
+            border: 1px solid var(--light-gray);
         }
 
         .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .results-filters {
+        .filter-tabs {
             display: flex;
-            gap: 1rem;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            background: var(--white);
-            border: 1px solid var(--gray-300);
-            border-radius: var(--radius);
+        .filter-tab {
+            padding: 10px 20px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: var(--transition);
             font-weight: 500;
+            transition: var(--transition);
+            background-color: var(--light-gray);
+            font-size: 0.9rem;
         }
 
-        .filter-btn.active {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
+        .filter-tab.active {
+            background-color: var(--primary);
+            color: white;
         }
 
         .results-table {
             width: 100%;
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            border-collapse: collapse;
         }
 
-        .table-header {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            padding: 1rem 1.5rem;
-            background-color: var(--gray-100);
+        .results-table th, .results-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .results-table th {
             font-weight: 600;
-            color: var(--gray-700);
-        }
-
-        .table-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--gray-200);
-            align-items: center;
-        }
-
-        .table-row:last-child {
-            border-bottom: none;
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .status {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 600;
         }
 
-        .status-verified {
-            background-color: rgba(76, 201, 240, 0.15);
-            color: var(--success);
+        .status.verified {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--secondary);
         }
 
-        .status-invalid {
-            background-color: rgba(247, 37, 133, 0.15);
+        .status.invalid {
+            background-color: rgba(239, 68, 68, 0.15);
             color: var(--danger);
         }
 
-        .status-pending {
-            background-color: rgba(248, 150, 30, 0.15);
+        .status.pending {
+            background-color: rgba(245, 158, 11, 0.15);
             color: var(--warning);
         }
 
-        .action-btn {
-            background: none;
-            border: none;
-            color: var(--primary);
-            cursor: pointer;
-            font-weight: 500;
+        .invalid-details {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 5px;
         }
 
         /* Dashboard Section */
         .dashboard-section {
-            padding: 5rem 0;
-            background-color: var(--white);
+            padding: 80px 0;
+            background-color: #f8fafc;
+        }
+
+        .dashboard {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+            border: 1px solid var(--light-gray);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
         }
 
         .stat-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px 25px;
+            text-align: center;
             transition: var(--transition);
+            border: 1px solid var(--light-gray);
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .stat-icon.primary {
-            background-color: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-        }
-
-        .stat-icon.success {
-            background-color: rgba(76, 201, 240, 0.1);
-            color: var(--success);
-        }
-
-        .stat-icon.danger {
-            background-color: rgba(247, 37, 133, 0.1);
-            color: var(--danger);
-        }
-
-        .stat-icon.warning {
-            background-color: rgba(248, 150, 30, 0.1);
-            color: var(--warning);
+            box-shadow: var(--box-shadow);
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            margin: 15px 0;
         }
 
-        .stat-label {
-            color: var(--gray-600);
-            font-size: 0.9rem;
-            font-weight: 500;
+        .stat-verified .stat-value {
+            color: var(--secondary);
+        }
+
+        .stat-invalid .stat-value {
+            color: var(--danger);
+        }
+
+        .stat-pending .stat-value {
+            color: var(--warning);
+        }
+
+        .stat-total .stat-value {
+            color: var(--primary);
         }
 
         /* Footer */
         footer {
-            background-color: var(--gray-900);
-            color: var(--white);
-            padding: 4rem 0 2rem;
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
+        .footer-section h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
         }
 
         .footer-links {
@@ -674,222 +527,137 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
-            color: var(--gray-400);
+            color: #B0B7C3;
             text-decoration: none;
             transition: var(--transition);
-            font-weight: 400;
         }
 
         .footer-links a:hover {
-            color: var(--white);
+            color: white;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray-400);
-            font-size: 0.9rem;
-            font-weight: 400;
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+        .social-links a {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification-icon {
+            justify-content: center;
             width: 40px;
             height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .notification-icon.success {
-            background-color: rgba(76, 201, 240, 0.15);
-            color: var(--success);
-        }
-
-        .notification-icon.danger {
-            background-color: rgba(247, 37, 133, 0.15);
-            color: var(--danger);
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .notification-close {
-            background: none;
-            border: none;
-            color: var(--gray-500);
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
+            color: white;
+            text-decoration: none;
             transition: var(--transition);
         }
 
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
+        .social-links a:hover {
+            background-color: var(--primary);
         }
 
-        .modal-content {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B0B7C3;
+            font-size: 0.9rem;
         }
 
-        .modal.show .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h3 {
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray-500);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--danger);
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            font-weight: 600;
-            color: var(--gray-700);
-        }
-
-        .detail-value {
-            color: var(--gray-800);
-            text-align: right;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
             }
             
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
+            .hero-text {
+                max-width: 100%;
+                margin-bottom: 50px;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .stats {
+                justify-content: center;
             }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 20px;
             }
             
             .nav-links {
-                gap: 1rem;
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .hero h1 {
+            .hero-text h1 {
                 font-size: 2.5rem;
+            }
+            
+            .stats {
+                gap: 30px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-tabs {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                justify-content: center;
+            }
+            
+            .verification-interface, .dashboard, .results-section {
+                padding: 25px;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .table-header, .table-row {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
-            }
-            
-            .verification-tabs {
-                flex-direction: column;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Hidden class for toggling visibility */
-        .hidden {
-            display: none;
         }
     </style>
 </head>
@@ -898,957 +666,497 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <div class="logo">
-                    <i class="fas fa-shield-check"></i>
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
                     <span>SibaXVerify</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#" class="active">Home</a>
+                    <a href="#verification">Verification</a>
+                    <a href="#dashboard">Dashboard</a>
+                    <a href="#features">Features</a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" data-page="homepage">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="verification">Verify</a></li>
-                    <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
-                </ul>
-                <!-- <div class="auth-buttons">
-                    <button class="btn btn-outline" id="login-btn">Log In</button>
-                    <button class="btn btn-primary" id="register-btn">Register</button>
-                    <button class="btn btn-outline hidden" id="logout-btn">Log Out</button>
-                </div> -->
+                <div class="auth-buttons">
+                    <button class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Log In</button>
+                    <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Sign Up</button>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Homepage -->
-    <section id="homepage">
-        <div class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Verify Multiple Payments in Seconds</h1>
-                    <p>SibaXVerify helps businesses confirm payment trace IDs instantly. Upload multiple documents or trace IDs and get real-time verification results.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Verify Payments in <span>Real-Time</span></h1>
+                    <p>SibaXVerify provides instant Proof of Payment verification without handling actual money transactions. Streamline your payment confirmation process with our secure platform.</p>
                     <div class="hero-buttons">
-                        <button class="btn btn-primary" id="hero-verify">
-                            <i class="fas fa-bolt"></i> Start Verifying
-                        </button>
-                        <button class="btn btn-light" id="hero-learn">
-                            <i class="fas fa-play-circle"></i> How It Works
-                        </button>
+                        <button class="btn btn-primary"><i class="fas fa-play-circle"></i> Watch Demo</button>
+                        <button class="btn btn-outline"><i class="fas fa-rocket"></i> Get Started Free</button>
                     </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">15K+</div>
+                            <div class="stat-label">Verifications</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2.3s</div>
+                            <div class="stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="SibaXVerify Dashboard">
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="verification-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Fast & Secure Payment Verification</h2>
-                    <p>Upload multiple payment documents or trace IDs and get instant verification results</p>
-                </div>
-
-                <div class="verification-tabs">
-                    <button class="tab-btn active" data-tab="manual">Manual Entry</button>
-                    <button class="tab-btn" data-tab="upload">Bulk Upload</button>
+    <!-- Verification Interface -->
+    <section class="verification-section" id="verification">
+        <div class="container">
+            <div class="section-header">
+                <h2>Verify Payment Trace IDs</h2>
+                <p>Check the status of your payments instantly using trace IDs or document upload</p>
+            </div>
+            <div class="verification-interface">
+                <div class="tabs">
+                    <div class="tab active" data-tab="manual">
+                        <i class="fas fa-keyboard"></i> Manual Entry
+                    </div>
+                    <div class="tab" data-tab="bulk">
+                        <i class="fas fa-file-upload"></i> Bulk Upload
+                    </div>
                 </div>
 
                 <div class="tab-content active" id="manual-tab">
-                    <div class="verification-card">
-                        <div class="input-group">
-                            <label for="trace-ids">Enter Trace IDs (one per line or comma-separated)</label>
-                            <textarea id="trace-ids" class="form-control" placeholder="TRC-2023-789123, TRC-2023-654321, TRC-2023-111222"></textarea>
-                        </div>
-                        <button class="btn btn-primary" id="verify-manual">
-                            <i class="fas fa-check-circle"></i> Verify Trace IDs
+                    <div class="manual-entry">
+                        <textarea placeholder="Enter trace IDs separated by commas or new lines. Example: TRC-2023-789123, TRC-2023-654321"></textarea>
+                        <button class="btn btn-primary verify-btn" id="verify-manual">
+                            <i class="fas fa-search"></i> Verify Trace IDs
                         </button>
                     </div>
                 </div>
 
-                <div class="tab-content" id="upload-tab">
-                    <div class="verification-card">
-                        <div class="file-upload-area" id="drop-zone">
-                            <div class="file-upload-icon">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </div>
-                            <div class="file-upload-text">
-                                <h3>Upload Payment Documents</h3>
-                                <p>Drag & drop files here or click to browse</p>
-                            </div>
-                            <button class="btn btn-outline" id="browse-files">
-                                <i class="fas fa-folder-open"></i> Select Files
-                            </button>
-                            <input type="file" id="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx" class="hidden">
+                <div class="tab-content" id="bulk-tab">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
                         </div>
-                        <div class="file-list" id="file-list">
-                            <!-- Files will be listed here -->
-                        </div>
-                        <button class="btn btn-primary" id="verify-upload">
-                            <i class="fas fa-check-circle"></i> Verify Uploaded Files
-                        </button>
+                        <h3>Drag & Drop Files Here</h3>
+                        <p>or click to browse your files</p>
+                        <div class="file-types">Supports: PDF, JPG, PNG, CSV, Excel</div>
+                        <input type="file" id="file-input" multiple style="display: none;">
                     </div>
-                </div>
-
-                <!-- Document Guide -->
-                <div class="document-guide">
-                    <h3>Supported Document Types</h3>
-                    <div class="document-types">
-                        <div class="document-type">
-                            <div class="doc-icon">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="doc-info">
-                                <h4>PDF Proof of Payment</h4>
-                                <p>Bank statements, payment confirmations, invoices with payment details</p>
-                            </div>
-                        </div>
-                        <div class="document-type">
-                            <div class="doc-icon">
-                                <i class="fas fa-file-image"></i>
-                            </div>
-                            <div class="doc-info">
-                                <h4>Image Files</h4>
-                                <p>Screenshots of banking apps, payment confirmations, scanned receipts</p>
-                            </div>
-                        </div>
-                        <div class="document-type">
-                            <div class="doc-icon">
-                                <i class="fas fa-file-csv"></i>
-                            </div>
-                            <div class="doc-info">
-                                <h4>CSV/Excel Files</h4>
-                                <p>Batch payment files, transaction exports from banking systems</p>
-                            </div>
-                        </div>
-                        <div class="document-type">
-                            <div class="doc-icon">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div class="doc-info">
-                                <h4>Text Files</h4>
-                                <p>Payment reference lists, transaction logs, payment confirmations</p>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="btn btn-primary verify-btn" id="verify-bulk">
+                        <i class="fas fa-search"></i> Verify Uploaded Files
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="results-section hidden" id="results-section">
-            <div class="container">
-                <div class="results-header">
-                    <h3>Verification Results</h3>
-                    <div class="results-filters">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="verified">Verified</button>
-                        <button class="filter-btn" data-filter="invalid">Invalid</button>
-                        <button class="filter-btn" data-filter="pending">Pending</button>
-                    </div>
+    <!-- Results Section -->
+    <section class="container">
+        <div class="results-section" id="results-section">
+            <div class="results-header">
+                <h2>Verification Results</h2>
+                <div class="filter-tabs">
+                    <div class="filter-tab active" data-filter="all">All</div>
+                    <div class="filter-tab" data-filter="verified">Verified</div>
+                    <div class="filter-tab" data-filter="invalid">Invalid</div>
+                    <div class="filter-tab" data-filter="pending">Pending</div>
                 </div>
-                <div class="results-table">
-                    <div class="table-header">
-                        <div>Trace ID</div>
-                        <div>Status</div>
-                        <div>Amount</div>
-                        <div>Date</div>
-                        <div>Actions</div>
-                    </div>
-                    <div id="results-container">
+            </div>
+            <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Trace ID</th>
+                            <th>Status</th>
+                            <th>Payer</th>
+                            <th>Payee</th>
+                            <th>Amount</th>
+                            <th>Bank</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
                         <!-- Results will be populated here -->
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- Dashboard -->
-    <section id="dashboard" class="hidden">
-        <div class="dashboard-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Business Dashboard</h2>
-                    <p>Monitor your payment verification activity and statistics</p>
-                </div>
-
+    <!-- Dashboard Section -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <div class="section-header">
+                <h2>Verification Analytics</h2>
+                <p>Monitor your payment verification statistics and performance</p>
+            </div>
+            <div class="dashboard">
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon primary">
-                            <i class="fas fa-receipt"></i>
-                        </div>
-                        <div class="stat-value" id="total-verifications">0</div>
-                        <div class="stat-label">Total Verifications</div>
+                    <div class="stat-card stat-total">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Total Verifications</h3>
+                        <div class="stat-value">1,247</div>
+                        <p>All time</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon success">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-value" id="verified-count">0</div>
-                        <div class="stat-label">Verified Payments</div>
+                    <div class="stat-card stat-verified">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Verified</h3>
+                        <div class="stat-value">892</div>
+                        <p>71.5% success rate</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon danger">
-                            <i class="fas fa-times-circle"></i>
-                        </div>
-                        <div class="stat-value" id="invalid-count">0</div>
-                        <div class="stat-label">Invalid Payments</div>
+                    <div class="stat-card stat-invalid">
+                        <i class="fas fa-times-circle"></i>
+                        <h3>Invalid</h3>
+                        <div class="stat-value">215</div>
+                        <p>17.2% failure rate</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon warning">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="stat-value" id="pending-count">0</div>
-                        <div class="stat-label">Pending Verifications</div>
+                    <div class="stat-card stat-pending">
+                        <i class="fas fa-clock"></i>
+                        <h3>Pending</h3>
+                        <div class="stat-value">140</div>
+                        <p>11.3% awaiting</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-icon success">
-            <i class="fas fa-check"></i>
-        </div>
-        <div class="notification-content">
-            <div class="notification-title">Verification Complete</div>
-            <div class="notification-message">5 payments verified successfully</div>
-        </div>
-        <button class="notification-close">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="details-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Payment Details</h3>
-                <button class="modal-close" id="modal-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Modal content will be populated here -->
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3>SibaXVerify</h3>
-                    <p>Real-time payment verification for businesses. We don't handle money, we just verify payments.</p>
+                    <p>The leading platform for payment verification and Proof of Payment confirmation in South Africa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
-                <div class="footer-column">
+                <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#" class="footer-link" data-page="homepage">Home</a></li>
-                        <li><a href="#" class="footer-link" data-page="verification">Verify Payments</a></li>
-                        <li><a href="#" class="footer-link" data-page="dashboard">Dashboard</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#verification">Verification</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#features">Features</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
                     <h3>Legal</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Terms & Conditions</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">POPIA Compliance</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:support@sibaxverify.co.za">support@sibaxverify.co.za</a></li>
-                        <li><a href="tel:+27123456789">+27 12 345 6789</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Compliance</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 SibaXVerify. All rights reserved.</p>
+            <div class="copyright">
+                &copy; 2023 SibaXVerify. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
-        // Mock database of valid trace IDs for demo
-        const validTraceIds = {
-            'TRC-2023-789123': {
-                verified: true,
-                payer: 'John Smith',
-                payee: 'ABC Suppliers',
-                amount: 'R 1,250.00',
-                currency: 'ZAR',
-                bank: 'Standard Bank',
-                date: '2023-10-15 14:30:22',
-                reference: 'INV-2023-0456'
+        // Mock data for testing with South African context
+        const mockData = [
+            {
+                traceId: "TRC-2023-789123",
+                status: "verified",
+                payer: "John Smith",
+                payee: "Acme Corporation",
+                amount: "R 1,250.00",
+                bank: "Standard Bank",
+                date: "2023-10-15",
+                reference: "INV-789123"
             },
-            'TRC-2023-654321': {
-                verified: true,
-                payer: 'Sarah Johnson',
-                payee: 'XYZ Enterprises',
-                amount: 'R 3,450.00',
-                currency: 'ZAR',
-                bank: 'First National Bank',
-                date: '2023-10-14 09:15:10',
-                reference: 'PAY-789012'
+            {
+                traceId: "TRC-2023-654321",
+                status: "verified",
+                payer: "Sarah Johnson",
+                payee: "Tech Solutions Ltd",
+                amount: "R 850.50",
+                bank: "FNB",
+                date: "2023-10-14",
+                reference: "INV-654321"
             },
-            'TRC-2023-111222': {
-                verified: true,
-                payer: 'Mike Williams',
-                payee: 'Tech Solutions Ltd',
-                amount: 'R 5,200.00',
-                currency: 'ZAR',
-                bank: 'Nedbank',
-                date: '2023-10-13 16:45:33',
-                reference: 'INV-TECH-456'
+            {
+                traceId: "TRC-2023-555666",
+                status: "invalid",
+                payer: "Unknown",
+                payee: "Unknown",
+                amount: "R 0.00",
+                bank: "Unknown",
+                date: "N/A",
+                reference: "N/A",
+                // invalidReason: "No payment found with this trace ID"
             },
-            'TRC-2023-333444': {
-                verified: true,
-                payer: 'Emma Brown',
-                payee: 'Global Imports',
-                amount: 'R 2,100.00',
-                currency: 'ZAR',
-                bank: 'Capitec',
-                date: '2023-10-12 11:20:05',
-                reference: 'INV-GLOB-789'
+            {
+                traceId: "TRC-2023-777888",
+                status: "invalid",
+                payer: "Unknown",
+                payee: "Unknown",
+                amount: "R 0.00",
+                bank: "Unknown",
+                date: "N/A",
+                reference: "N/A",
+                // invalidReason: "Trace ID format is incorrect"
             },
-            // Invalid examples with different reasons
-            'TRC-2023-555666': {
-                verified: false,
-                reason: 'Invalid reference format'
-            },
-            'TRC-2023-777888': {
-                verified: false,
-                reason: 'Payment reference not found in bank records'
-            },
-            'TRC-2023-999000': {
-                verified: false,
-                reason: 'Payment amount mismatch'
-            },
-            'TRC-2023-112233': {
-                verified: false,
-                reason: 'Payment date outside valid range'
-            },
-            'TRC-2023-445566': {
-                verified: false,
-                reason: 'Duplicate payment reference'
+            {
+                traceId: "TRC-2023-999000",
+                status: "pending",
+                payer: "Robert Wilson",
+                payee: "NextGen Solutions",
+                amount: "R 3,200.00",
+                bank: "Capitec",
+                date: "2023-10-11",
+                reference: "INV-999000"
             }
-        };
+        ];
 
         // DOM Elements
-        const homepage = document.getElementById('homepage');
-        const dashboard = document.getElementById('dashboard');
-        const resultsSection = document.getElementById('results-section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const footerLinks = document.querySelectorAll('.footer-link');
-        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const verifyManualBtn = document.getElementById('verify-manual');
-        const verifyUploadBtn = document.getElementById('verify-upload');
-        const traceIdsInput = document.getElementById('trace-ids');
-        const dropZone = document.getElementById('drop-zone');
-        const browseFilesBtn = document.getElementById('browse-files');
+        const uploadArea = document.getElementById('upload-area');
         const fileInput = document.getElementById('file-input');
-        const fileList = document.getElementById('file-list');
-        const resultsContainer = document.getElementById('results-container');
-        const notification = document.getElementById('notification');
-        const loginBtn = document.getElementById('login-btn');
-        const registerBtn = document.getElementById('register-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const heroVerifyBtn = document.getElementById('hero-verify');
-        const heroLearnBtn = document.getElementById('hero-learn');
-        const totalVerifications = document.getElementById('total-verifications');
-        const verifiedCount = document.getElementById('verified-count');
-        const invalidCount = document.getElementById('invalid-count');
-        const pendingCount = document.getElementById('pending-count');
-        const detailsModal = document.getElementById('details-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const modalClose = document.getElementById('modal-close');
+        const verifyManualBtn = document.getElementById('verify-manual');
+        const verifyBulkBtn = document.getElementById('verify-bulk');
+        const resultsSection = document.getElementById('results-section');
+        const resultsBody = document.getElementById('results-body');
+        const filterTabs = document.querySelectorAll('.filter-tab');
 
-        // Store verification results
-        let verificationResults = [];
-        let currentFilter = 'all';
-
-        // Initialize the app
-        function init() {
-            setupEventListeners();
-            updateDashboardStats();
-        }
-
-        // Set up event listeners
-        function setupEventListeners() {
-            // Navigation
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = e.target.getAttribute('data-page');
-                    showPage(page);
-                    
-                    // Update active nav link
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    e.target.classList.add('active');
+        // Tab switching functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-tab`) {
+                        content.classList.add('active');
+                    }
                 });
             });
+        });
 
-            footerLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = e.target.getAttribute('data-page');
-                    showPage(page);
-                });
-            });
+        // Drag and drop functionality
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
 
-            // Tabs
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const tabId = btn.getAttribute('data-tab');
-                    
-                    // Update active tab button
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    // Show corresponding tab content
-                    tabContents.forEach(content => {
-                        content.classList.remove('active');
-                        if (content.id === `${tabId}-tab`) {
-                            content.classList.add('active');
-                        }
-                    });
-                });
-            });
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
 
-            // Filters
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const filter = btn.getAttribute('data-filter');
-                    
-                    // Update active filter button
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    // Filter results
-                    currentFilter = filter;
-                    displayResults();
-                });
-            });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
 
-            // Verification buttons
-            verifyManualBtn.addEventListener('click', verifyManualEntries);
-            verifyUploadBtn.addEventListener('click', verifyUploadedFiles);
-            heroVerifyBtn.addEventListener('click', () => showPage('verification'));
-            heroLearnBtn.addEventListener('click', () => {
-                alert("How SibaXVerify Works:\n\n1. Upload your payment documents or enter trace IDs manually\n2. Our system extracts and verifies payment references\n3. Get instant results showing verified, invalid, or pending payments\n4. View detailed payment information for verified transactions");
-            });
-
-            // File upload
-            browseFilesBtn.addEventListener('click', () => fileInput.click());
-            dropZone.addEventListener('click', () => fileInput.click());
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('dragover');
-            });
-            dropZone.addEventListener('dragleave', () => {
-                dropZone.classList.remove('dragover');
-            });
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('dragover');
-                handleFiles(e.dataTransfer.files);
-            });
-            fileInput.addEventListener('change', (e) => {
-                handleFiles(e.target.files);
-            });
-
-            // Auth buttons
-            loginBtn.addEventListener('click', () => {
-                // Simulate login
-                loginBtn.classList.add('hidden');
-                registerBtn.classList.add('hidden');
-                logoutBtn.classList.remove('hidden');
-                showNotification('Login successful', 'success');
-            });
-
-            registerBtn.addEventListener('click', () => {
-                // Simulate registration
-                loginBtn.classList.add('hidden');
-                registerBtn.classList.add('hidden');
-                logoutBtn.classList.remove('hidden');
-                showNotification('Registration successful', 'success');
-            });
-
-            logoutBtn.addEventListener('click', () => {
-                // Simulate logout
-                loginBtn.classList.remove('hidden');
-                registerBtn.classList.remove('hidden');
-                logoutBtn.classList.add('hidden');
-                showNotification('Logged out successfully', 'success');
-            });
-
-            // Notification close
-            notification.querySelector('.notification-close').addEventListener('click', () => {
-                notification.classList.remove('show');
-            });
-
-            // Modal close
-            modalClose.addEventListener('click', () => {
-                detailsModal.classList.remove('show');
-            });
-
-            // Close modal when clicking outside
-            detailsModal.addEventListener('click', (e) => {
-                if (e.target === detailsModal) {
-                    detailsModal.classList.remove('show');
-                }
-            });
-        }
-
-        // Show specific page
-        function showPage(page) {
-            if (page === 'homepage') {
-                homepage.classList.remove('hidden');
-                dashboard.classList.add('hidden');
-            } else if (page === 'dashboard') {
-                homepage.classList.add('hidden');
-                dashboard.classList.remove('hidden');
-                updateDashboardStats();
-            } else if (page === 'verification') {
-                homepage.classList.remove('hidden');
-                dashboard.classList.add('hidden');
-                // Activate verification tab in homepage
-                document.querySelector('[data-page="homepage"]').click();
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                alert(`Successfully added ${e.dataTransfer.files.length} file(s)`);
             }
-        }
+        });
 
-        // Handle file selection
-        function handleFiles(files) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                addFileToList(file);
-            }
-        }
-
-        // Add file to the file list
-        function addFileToList(file) {
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
-            
-            const fileSize = formatFileSize(file.size);
-            
-            fileItem.innerHTML = `
-                <div class="file-icon">
-                    <i class="fas fa-file-${getFileIcon(file.type)}"></i>
-                </div>
-                <div class="file-info">
-                    <div class="file-name">${file.name}</div>
-                    <div class="file-size">${fileSize}</div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 0%"></div>
-                    </div>
-                </div>
-                <div class="file-remove" data-filename="${file.name}">
-                    <i class="fas fa-times"></i>
-                </div>
-            `;
-            
-            fileList.appendChild(fileItem);
-            
-            // Add event listener for remove button
-            fileItem.querySelector('.file-remove').addEventListener('click', (e) => {
-                e.stopPropagation();
-                fileItem.remove();
-            });
-            
-            // Simulate upload progress
-            simulateUploadProgress(fileItem);
-        }
-
-        // Get appropriate file icon based on file type
-        function getFileIcon(fileType) {
-            if (fileType.includes('pdf')) return 'pdf';
-            if (fileType.includes('image')) return 'image';
-            if (fileType.includes('sheet') || fileType.includes('excel')) return 'excel';
-            if (fileType.includes('csv')) return 'csv';
-            return 'alt';
-        }
-
-        // Format file size
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // Simulate upload progress
-        function simulateUploadProgress(fileItem) {
-            const progressBar = fileItem.querySelector('.progress');
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                } else {
-                    width += Math.random() * 10;
-                    progressBar.style.width = `${Math.min(width, 100)}%`;
-                }
-            }, 200);
-        }
-
-        // Verify manual trace ID entries
-        function verifyManualEntries() {
-            const input = traceIdsInput.value.trim();
-            if (!input) {
-                showNotification('Please enter at least one Trace ID', 'danger');
-                return;
-            }
-            
-            // Parse trace IDs (comma-separated or newline-separated)
-            const traceIds = input.split(/[\n,]+/).map(id => id.trim()).filter(id => id);
+        // Manual verification
+        verifyManualBtn.addEventListener('click', () => {
+            const textarea = document.querySelector('.manual-entry textarea');
+            const traceIds = textarea.value.split(/[\n,]+/).map(id => id.trim()).filter(id => id);
             
             if (traceIds.length === 0) {
-                showNotification('No valid Trace IDs found', 'danger');
+                alert('Please enter at least one trace ID');
                 return;
             }
             
-            // Show loading state
-            verifyManualBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-            verifyManualBtn.disabled = true;
+            // Simulate verification process
+            simulateVerification(traceIds);
+        });
+
+        // Bulk verification
+        verifyBulkBtn.addEventListener('click', () => {
+            if (!fileInput.files.length) {
+                alert('Please select at least one file');
+                return;
+            }
             
-            // Simulate API call
+            // Simulate OCR extraction and verification
+            const extractedIds = ['TRC-2023-789123', 'TRC-2023-654321', 'TRC-2023-555666'];
+            simulateVerification(extractedIds);
+        });
+
+        // Filter results
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filter = tab.getAttribute('data-filter');
+                
+                // Update active filter
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Filter results
+                filterResults(filter);
+            });
+        });
+
+        // Functions
+        function simulateVerification(traceIds) {
+            // Show loading state
+            verifyManualBtn.disabled = true;
+            verifyBulkBtn.disabled = true;
+            verifyManualBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            verifyBulkBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            
+            // Simulate API call delay
             setTimeout(() => {
-                processVerification(traceIds, 'manual');
-                verifyManualBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify Trace IDs';
+                // Reset buttons
                 verifyManualBtn.disabled = false;
+                verifyBulkBtn.disabled = false;
+                verifyManualBtn.innerHTML = '<i class="fas fa-search"></i> Verify Trace IDs';
+                verifyBulkBtn.innerHTML = '<i class="fas fa-search"></i> Verify Uploaded Files';
+                
+                // Show results
+                displayResults(traceIds);
             }, 1500);
         }
 
-        // Verify uploaded files
-        function verifyUploadedFiles() {
-            const fileItems = fileList.querySelectorAll('.file-item');
-            if (fileItems.length === 0) {
-                showNotification('Please upload at least one file', 'danger');
-                return;
-            }
+        function displayResults(traceIds) {
+            // Clear previous results
+            resultsBody.innerHTML = '';
             
-            // Show loading state
-            verifyUploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Files...';
-            verifyUploadBtn.disabled = true;
+            // Filter mock data to only include requested trace IDs
+            const results = mockData.filter(item => 
+                traceIds.includes(item.traceId)
+            );
             
-            // Extract trace IDs from uploaded files (simulated)
-            const traceIds = [];
-            const fileProcessPromises = [];
-            
-            fileItems.forEach(item => {
-                const fileName = item.querySelector('.file-name').textContent;
-                
-                // Simulate processing each file
-                const promise = new Promise(resolve => {
-                    setTimeout(() => {
-                        // Simulate OCR/text extraction from PDFs and images
-                        const extractedIds = extractTraceIdsFromFile(fileName);
-                        traceIds.push(...extractedIds);
-                        resolve();
-                    }, 1000);
-                });
-                
-                fileProcessPromises.push(promise);
-            });
-            
-            // Wait for all files to be processed
-            Promise.all(fileProcessPromises).then(() => {
-                if (traceIds.length === 0) {
-                    showNotification('No Trace IDs found in uploaded files', 'danger');
-                    verifyUploadBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify Uploaded Files';
-                    verifyUploadBtn.disabled = false;
-                    return;
-                }
-                
-                // Now verify the extracted trace IDs
-                processVerification(traceIds, 'upload');
-                verifyUploadBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify Uploaded Files';
-                verifyUploadBtn.disabled = false;
-                
-                // Clear file list after processing
-                fileList.innerHTML = '';
-            });
-        }
-
-        // Extract trace IDs from file (simulated OCR/text extraction)
-        function extractTraceIdsFromFile(fileName) {
-            // In a real app, this would use OCR or PDF parsing
-            // For demo, we'll simulate extraction based on file name patterns
-            const patterns = [
-                /TRC-\d{4}-\d{6}/g,
-                /INV-\d{4}-\d{4}/g,
-                /PAY-\d{6}/g,
-                /REF-\d{8}/g,
-                /TXN-\d{10}/g
-            ];
-            
-            const traceIds = [];
-            patterns.forEach(pattern => {
-                const matches = fileName.match(pattern);
-                if (matches) {
-                    traceIds.push(...matches);
-                }
-            });
-            
-            // If no patterns found, generate some random ones for demo
-            if (traceIds.length === 0) {
-                const demoIds = [
-                    'TRC-2023-789123', 
-                    'TRC-2023-654321', 
-                    'TRC-2023-111222',
-                    'TRC-2023-555666',
-                    'TRC-2023-777888'
-                ];
-                // Add 1-3 random trace IDs for demo
-                const count = Math.floor(Math.random() * 3) + 1;
-                for (let i = 0; i < count; i++) {
-                    traceIds.push(demoIds[Math.floor(Math.random() * demoIds.length)]);
-                }
-            }
-            
-            return traceIds;
-        }
-
-        // Process verification for multiple trace IDs
-        function processVerification(traceIds, source) {
-            const newResults = [];
-            
-            traceIds.forEach(traceId => {
-                // Check if trace ID exists in our mock database
-                const result = validTraceIds[traceId];
-                
-                if (result && result.verified) {
-                    newResults.push({
-                        traceId: traceId,
-                        status: 'verified',
-                        amount: result.amount,
-                        date: result.date,
-                        details: result,
-                        source: source
-                    });
-                } else {
-                    // For invalid results, include the reason
-                    const status = Math.random() > 0.3 ? 'invalid' : 'pending';
-                    newResults.push({
-                        traceId: traceId,
-                        status: status,
-                        amount: status === 'invalid' ? 'N/A' : 'Pending',
-                        date: new Date().toISOString().split('T')[0],
-                        details: result || { reason: 'Unknown error' },
-                        source: source
+            // Add any missing trace IDs as invalid
+            traceIds.forEach(id => {
+                if (!results.find(item => item.traceId === id)) {
+                    results.push({
+                        traceId: id,
+                        status: "invalid",
+                        payer: "Unknown",
+                        payee: "Unknown",
+                        amount: "R 0.00",
+                        bank: "Unknown",
+                        date: "N/A",
+                        reference: "N/A",
+                        // invalidReason: "No payment information available for this ID"
                     });
                 }
             });
             
-            // Add to existing results
-            verificationResults = [...newResults, ...verificationResults];
-            
-            // Show results section
-            resultsSection.classList.remove('hidden');
-            
-            // Display results
-            displayResults();
-            
-            // Update dashboard stats
-            updateDashboardStats();
-            
-            // Show notification
-            const verified = newResults.filter(r => r.status === 'verified').length;
-            const invalid = newResults.filter(r => r.status === 'invalid').length;
-            const pending = newResults.filter(r => r.status === 'pending').length;
-            
-            let message = '';
-            if (verified > 0) message += `${verified} verified`;
-            if (invalid > 0) message += `${message ? ', ' : ''}${invalid} invalid`;
-            if (pending > 0) message += `${message ? ', ' : ''}${pending} pending`;
-            
-            showNotification(`Verification complete: ${message}`, 'success');
-        }
-
-        // Display verification results
-        function displayResults() {
-            resultsContainer.innerHTML = '';
-            
-            let filteredResults = verificationResults;
-            
-            // Apply filter
-            if (currentFilter !== 'all') {
-                filteredResults = verificationResults.filter(result => result.status === currentFilter);
-            }
-            
-            if (filteredResults.length === 0) {
-                resultsContainer.innerHTML = `
-                    <div class="table-row" style="text-align: center; color: var(--gray-500); grid-template-columns: 1fr;">
-                        <div>No verification results to display</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            filteredResults.forEach(result => {
-                const row = document.createElement('div');
-                row.className = 'table-row';
+            // Populate results table
+            results.forEach(item => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-status', item.status);
                 
-                let statusIcon, statusClass;
-                switch (result.status) {
-                    case 'verified':
-                        statusIcon = 'fa-check-circle';
-                        statusClass = 'status-verified';
-                        break;
-                    case 'invalid':
-                        statusIcon = 'fa-times-circle';
-                        statusClass = 'status-invalid';
-                        break;
-                    case 'pending':
-                        statusIcon = 'fa-clock';
-                        statusClass = 'status-pending';
-                        break;
+                const statusClass = `status ${item.status}`;
+                const statusIcon = item.status === 'verified' ? '✅' : 
+                                 item.status === 'invalid' ? '❌' : '⏳';
+                
+                // For invalid items, show the reason
+                let payerCell = item.payer;
+                let payeeCell = item.payee;
+                let amountCell = item.amount;
+                let bankCell = item.bank;
+                let dateCell = item.date;
+                
+                if (item.status === 'invalid') {
+                    payerCell = `<div>${item.payer}</div><div class="invalid-details"></div>`;
+                    payeeCell = `<div>${item.payee}</div><div class="invalid-details"></div>`;
+                    amountCell = `<div>${item.amount}</div><div class="invalid-details"></div>`;
+                    bankCell = `<div>${item.bank}</div><div class="invalid-details"></div>`;
+                    dateCell = `<div>${item.date}</div><div class="invalid-details"></div>`;
                 }
                 
                 row.innerHTML = `
-                    <div>${result.traceId}</div>
-                    <div><span class="status ${statusClass}"><i class="fas ${statusIcon}"></i> ${result.status.charAt(0).toUpperCase() + result.status.slice(1)}</span></div>
-                    <div>${result.amount}</div>
-                    <div>${result.date}</div>
-                    <div><button class="action-btn" data-trace="${result.traceId}">View Details</button></div>
+                    <td>${item.traceId}</td>
+                    <td><span class="${statusClass}">${statusIcon} ${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</span></td>
+                    <td>${payerCell}</td>
+                    <td>${payeeCell}</td>
+                    <td>${amountCell}</td>
+                    <td>${bankCell}</td>
+                    <td>${dateCell}</td>
                 `;
                 
-                resultsContainer.appendChild(row);
+                resultsBody.appendChild(row);
             });
             
-            // Add event listeners to detail buttons
-            document.querySelectorAll('.action-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const traceId = e.target.getAttribute('data-trace');
-                    showTraceDetails(traceId);
-                });
+            // Show results section
+            resultsSection.style.display = 'block';
+            
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Apply current filter
+            const activeFilter = document.querySelector('.filter-tab.active').getAttribute('data-filter');
+            filterResults(activeFilter);
+        }
+
+        function filterResults(filter) {
+            const rows = document.querySelectorAll('#results-body tr');
+            
+            rows.forEach(row => {
+                if (filter === 'all' || row.getAttribute('data-status') === filter) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
             });
         }
 
-        // Show detailed information for a trace ID in modal
-        function showTraceDetails(traceId) {
-            const result = verificationResults.find(r => r.traceId === traceId);
-            if (!result) return;
-            
-            let detailsHtml = '';
-            
-            if (result.status === 'verified') {
-                modalTitle.innerHTML = '<i class="fas fa-check-circle" style="color: var(--success);"></i> Payment Verified';
-                detailsHtml = `
-                    <div class="detail-row">
-                        <span class="detail-label">Trace ID:</span>
-                        <span class="detail-value">${result.traceId}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Amount:</span>
-                        <span class="detail-value">${result.details.amount}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Payer:</span>
-                        <span class="detail-value">${result.details.payer}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Payee:</span>
-                        <span class="detail-value">${result.details.payee}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Bank:</span>
-                        <span class="detail-value">${result.details.bank}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Date:</span>
-                        <span class="detail-value">${result.details.date}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Reference:</span>
-                        <span class="detail-value">${result.details.reference}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Source:</span>
-                        <span class="detail-value">${result.source === 'manual' ? 'Manual Entry' : 'File Upload'}</span>
-                    </div>
-                `;
-            } else if (result.status === 'invalid') {
-                modalTitle.innerHTML = '<i class="fas fa-times-circle" style="color: var(--danger);"></i> Payment Not Verified';
-                detailsHtml = `
-                    <div class="detail-row">
-                        <span class="detail-label">Trace ID:</span>
-                        <span class="detail-value">${result.traceId}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Reason:</span>
-                        <span class="detail-value">${result.details.reason || 'Invalid payment reference'}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Source:</span>
-                        <span class="detail-value">${result.source === 'manual' ? 'Manual Entry' : 'File Upload'}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Suggested Action:</span>
-                        <span class="detail-value">Contact the payer to verify the payment details</span>
-                    </div>
-                `;
-            } else {
-                modalTitle.innerHTML = '<i class="fas fa-clock" style="color: var(--warning);"></i> Verification Pending';
-                detailsHtml = `
-                    <div class="detail-row">
-                        <span class="detail-label">Trace ID:</span>
-                        <span class="detail-value">${result.traceId}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Source:</span>
-                        <span class="detail-value">${result.source === 'manual' ? 'Manual Entry' : 'File Upload'}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Status:</span>
-                        <span class="detail-value">This payment is being verified. Please check back in a few minutes.</span>
-                    </div>
-                `;
-            }
-            
-            modalBody.innerHTML = detailsHtml;
-            detailsModal.classList.add('show');
-        }
-
-        // Update dashboard statistics
-        function updateDashboardStats() {
-            const total = verificationResults.length;
-            const verified = verificationResults.filter(r => r.status === 'verified').length;
-            const invalid = verificationResults.filter(r => r.status === 'invalid').length;
-            const pending = verificationResults.filter(r => r.status === 'pending').length;
-            
-            totalVerifications.textContent = total;
-            verifiedCount.textContent = verified;
-            invalidCount.textContent = invalid;
-            pendingCount.textContent = pending;
-        }
-
-        // Show notification
-        function showNotification(message, type) {
-            const icon = notification.querySelector('.notification-icon');
-            const title = notification.querySelector('.notification-title');
-            const messageEl = notification.querySelector('.notification-message');
-            
-            // Set notification content
-            title.textContent = type === 'success' ? 'Success' : 'Error';
-            messageEl.textContent = message;
-            
-            // Set notification style
-            icon.className = 'notification-icon ' + type;
-            icon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation-triangle"></i>';
-            
-            // Show notification
-            notification.classList.add('show');
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 5000);
-        }
-
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', init);
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
