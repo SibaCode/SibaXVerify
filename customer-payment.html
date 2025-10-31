@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerifyX - Complete Your Payment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px 0;
+        }
+
+        /* Payment Interface */
+        .payment-interface {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .business-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .business-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .payment-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .payment-description {
+            color: var(--gray);
+            font-size: 18px;
+        }
+
+        .instructions {
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .bank-details {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .bank-details h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .bank-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .bank-field {
+            margin-bottom: 10px;
+        }
+
+        .bank-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .bank-value {
+            font-weight: 500;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .copy-bank-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .upload-section {
+            margin-bottom: 25px;
+        }
+
+        .upload-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Tabs for testing different verification outcomes */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+        }
+
+        .upload-area.active {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .file-icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .file-action {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn:disabled {
+            background-color: var(--light-gray);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .verification-status {
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .status-pending {
+            background-color: rgba(248, 150, 30, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(248, 150, 30, 0.2);
+        }
+
+        .status-verified {
+            background-color: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(76, 201, 240, 0.2);
+        }
+
+        .status-failed {
+            background-color: rgba(247, 37, 133, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(247, 37, 133, 0.2);
+        }
+
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bank-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-interface {
+                padding: 20px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">VX</div>
+                <h1>VerifyX</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="payment-interface">
+                <div class="payment-header">
+                    <div class="business-info">
+                        <div class="business-avatar">SB</div>
+                        <div>Sarah's Beauty Salon</div>
+                    </div>
+                    <div class="payment-amount" id="paymentAmount">R 500</div>
+                    <div class="payment-description" id="paymentDescription">Haircut & Styling</div>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to Complete Your Payment</h3>
+                    <ol>
+                        <li>Make payment using the bank details below</li>
+                        <li>Take a screenshot or save your proof of payment</li>
+                        <li>Upload your proof using the form below</li>
+                        <li>We'll verify your payment automatically</li>
+                        <li>You'll receive confirmation within minutes</li>
+                    </ol>
+                </div>
+
+                <div class="bank-details">
+                    <h3>Bank Transfer Details</h3>
+                    <div class="bank-info">
+                        <div class="bank-field">
+                            <div class="bank-label">Bank Name</div>
+                            <div class="bank-value">Standard Bank</div>
+                        </div>
+                        <div class="bank-field">
+                            <div class="bank-label">Account Number</div>
+                            <div class="bank-value">0123456789</div>
+                        </div>
+                        <div class="bank-field">
+                            <div class="bank-label">Account Holder</div>
+                            <div class="bank-value">Sarah's Beauty Salon</div>
+                        </div>
+                        <div class="bank-field">
+                            <div class="bank-label">Reference</div>
+                            <div class="bank-value" id="referenceNumber">VX-8A3B9C</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex; align-items: center;">
+                        <div class="bank-label" style="margin-bottom: 0; margin-right: 10px;">Branch Code: 012345</div>
+                        <button class="copy-bank-btn" id="copyBankBtn">Copy All</button>
+                    </div>
+                </div>
+
+                <div class="upload-section">
+                    <h3>Upload Proof of Payment</h3>
+                    <p style="margin-bottom: 15px; color: var(--gray);">Upload a screenshot or PDF of your payment confirmation</p>
+                    
+                    <!-- Tabs for testing different verification outcomes -->
+                    <div class="tabs">
+                        <div class="tab active" data-result="success">Test Successful Verification</div>
+                        <div class="tab" data-result="failed">Test Failed Verification</div>
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📄</div>
+                        <div class="upload-text">Drag & drop your Proof of Payment here</div>
+                        <div style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">Supports PDF, JPG, PNG files (Max 5MB)</div>
+                        <button class="btn btn-primary" id="browseBtn" style="width: auto; padding: 10px 20px;">Browse Files</button>
+                        <input type="file" class="file-input" id="fileInput" accept=".pdf,.jpg,.jpeg,.png">
+                    </div>
+                    
+                    <ul class="file-list" id="fileList"></ul>
+                    
+                    <button class="btn btn-primary" id="verifyBtn" disabled>
+                        <i>✅</i> Submit for Verification
+                    </button>
+                </div>
+
+                <div class="verification-status status-pending" id="verificationStatus">
+                    <div class="status-icon">⏳</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Verifying Payment</div>
+                    <div>Please wait while we verify your payment. This usually takes 1-2 minutes.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Powered by VerifyX - Automated Payment Verification</p>
+            <p>Need help? Contact support@verifyx.co.za</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const paymentAmount = document.getElementById('paymentAmount');
+        const paymentDescription = document.getElementById('paymentDescription');
+        const referenceNumber = document.getElementById('referenceNumber');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
+        const fileList = document.getElementById('fileList');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const verificationStatus = document.getElementById('verificationStatus');
+        const copyBankBtn = document.getElementById('copyBankBtn');
+        const tabs = document.querySelectorAll('.tab');
+
+        // Track which verification result to show
+        let verificationResult = 'success';
+
+        // Mock order data - in a real app this would come from URL parameters
+        const mockOrder = {
+            id: 'VX-8A3B9C',
+            product: 'Haircut & Styling',
+            amount: 500,
+            business: "Sarah's Beauty Salon"
+        };
+
+        // Initialize the page with order data
+        document.addEventListener('DOMContentLoaded', function() {
+            paymentAmount.textContent = `R ${mockOrder.amount}`;
+            paymentDescription.textContent = mockOrder.product;
+            
+            // Set a random order ID to make it feel more realistic
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let orderId = 'VX-';
+            for (let i = 0; i < 6; i++) {
+                orderId += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            // Update reference in bank details
+            referenceNumber.textContent = orderId;
+        });
+
+        // Tab functionality for testing different verification outcomes
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                verificationResult = tab.getAttribute('data-result');
+            });
+        });
+
+        // File upload functionality
+        browseBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('active');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('active');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('active');
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', () => {
+            handleFiles(fileInput.files);
+        });
+
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check file size (5MB limit)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit. Please choose a smaller file.');
+                    continue;
+                }
+                
+                // Check file type
+                const fileType = file.type;
+                if (!fileType.match('image.*') && fileType !== 'application/pdf') {
+                    alert('Please upload only PDF, JPG, or PNG files.');
+                    continue;
+                }
+                
+                addFileToList(file);
+            }
+            verifyBtn.disabled = false;
+        }
+
+        function addFileToList(file) {
+            const listItem = document.createElement('li');
+            listItem.className = 'file-item';
+            
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'file-info';
+            
+            const fileIcon = document.createElement('span');
+            fileIcon.className = 'file-icon';
+            
+            // Set appropriate icon based on file type
+            if (file.type === 'application/pdf') {
+                fileIcon.textContent = '📄';
+            } else {
+                fileIcon.textContent = '🖼️';
+            }
+            
+            const fileName = document.createElement('span');
+            fileName.textContent = file.name;
+            
+            const fileSize = document.createElement('span');
+            fileSize.style.fontSize = '12px';
+            fileSize.style.color = 'var(--gray)';
+            fileSize.style.marginLeft = '10px';
+            fileSize.textContent = formatFileSize(file.size);
+            
+            fileInfo.appendChild(fileIcon);
+            fileInfo.appendChild(fileName);
+            fileInfo.appendChild(fileSize);
+            
+            const fileActions = document.createElement('div');
+            fileActions.className = 'file-actions';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'file-action';
+            removeBtn.innerHTML = '❌';
+            removeBtn.title = 'Remove file';
+            removeBtn.addEventListener('click', () => {
+                listItem.remove();
+                if (fileList.children.length === 0) {
+                    verifyBtn.disabled = true;
+                }
+            });
+            
+            fileActions.appendChild(removeBtn);
+            
+            listItem.appendChild(fileInfo);
+            listItem.appendChild(fileActions);
+            
+            fileList.appendChild(listItem);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) {
+                return bytes + ' bytes';
+            } else if (bytes < 1048576) {
+                return (bytes / 1024).toFixed(1) + ' KB';
+            } else {
+                return (bytes / 1048576).toFixed(1) + ' MB';
+            }
+        }
+
+        // Copy bank details to clipboard
+        copyBankBtn.addEventListener('click', function() {
+            const bankDetails = `Bank: Standard Bank\nAccount: 0123456789\nName: Sarah's Beauty Salon\nReference: ${referenceNumber.textContent}\nBranch: 012345`;
+            
+            navigator.clipboard.writeText(bankDetails)
+                .then(() => {
+                    copyBankBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyBankBtn.textContent = 'Copy All';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy bank details. Please copy them manually.');
+                });
+        });
+
+        // Verification process
+        verifyBtn.addEventListener('click', () => {
+            // Show verification in progress
+            verificationStatus.style.display = 'block';
+            verificationStatus.className = 'verification-status status-pending';
+            verificationStatus.innerHTML = `
+                <div class="status-icon">⏳</div>
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Verifying Payment</div>
+                <div>Please wait while we verify your payment. This usually takes 1-2 minutes.</div>
+                <div style="margin-top: 15px; font-size: 14px;">Checking bank records and validating your proof of payment...</div>
+            `;
+            
+            // Disable the verify button during verification
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'Verifying...';
+            
+            // Simulate verification process with different stages
+            setTimeout(() => {
+                verificationStatus.innerHTML = `
+                    <div class="status-icon">🔍</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Analyzing Document</div>
+                    <div>Extracting transaction details from your proof of payment...</div>
+                `;
+            }, 2000);
+            
+            setTimeout(() => {
+                verificationStatus.innerHTML = `
+                    <div class="status-icon">💳</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Checking Bank Records</div>
+                    <div>Verifying transaction with banking partner...</div>
+                `;
+            }, 4000);
+            
+            // Final result after 6 seconds based on selected tab
+            setTimeout(() => {
+                if (verificationResult === 'success') {
+                    verificationStatus.className = 'verification-status status-verified';
+                    verificationStatus.innerHTML = `
+                        <div class="status-icon">✅</div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Payment Verified!</div>
+                        <div>Your payment of <strong>R ${mockOrder.amount}</strong> has been successfully verified.</div>
+                        <div style="margin-top: 15px; font-size: 14px;">${mockOrder.business} has been notified and will process your order.</div>
+                        <div style="margin-top: 20px; font-size: 14px; color: var(--gray);">You can close this window now.</div>
+                    `;
+                } else {
+                    verificationStatus.className = 'verification-status status-failed';
+                    verificationStatus.innerHTML = `
+                        <div class="status-icon">❌</div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Verification Failed</div>
+                        <div>We couldn't verify your payment. This could be because:</div>
+                        <ul style="text-align: left; margin: 15px 0; padding-left: 20px;">
+                            <li>The payment reference doesn't match</li>
+                            <li>The payment hasn't cleared yet</li>
+                            <li>The proof of payment is unclear</li>
+                        </ul>
+                        <div>Please check your proof of payment and try again, or contact ${mockOrder.business} directly.</div>
+                    `;
+                    
+                    // Re-enable the verify button if verification failed
+                    verifyBtn.disabled = false;
+                    verifyBtn.innerHTML = '<i>🔄</i> Try Again';
+                }
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
