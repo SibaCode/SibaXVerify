@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScaleWise - Small Business Management Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --success: #4bb543;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Dashboard Preview */
+        .dashboard-preview {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .dashboard-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .dashboard-content {
+            flex: 1;
+        }
+        
+        .dashboard-visual {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Demo */
+        .demo {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .demo-container {
+            text-align: center;
+        }
+        
+        .demo-box {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+        
+        .demo-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .demo-tab {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .demo-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .demo-content {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* CTA */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .white-button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .white-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ScaleWise</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Scale Your Business with Confidence</h1>
+            <p>ScaleWise provides small businesses with essential management and financial planning tools to grow efficiently and sustainably.</p>
+            <div class="hero-buttons">
+                <button class="cta-button">Start Free Trial</button>
+                <button class="secondary-button">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features for Growth</h2>
+                <p>Everything you need to manage and scale your business effectively</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Financial Dashboard</h3>
+                    <p>Get a clear view of your cash flow, expenses, and profitability with our intuitive dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Pricing Assistant</h3>
+                    <p>Calculate the true cost of your products and services to set profitable pricing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Cash Flow Forecasting</h3>
+                    <p>Predict future cash needs and avoid crises with our smart forecasting tools.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Goal Tracking</h3>
+                    <p>Set financial targets and track your progress with visual goal monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Learning Modules</h3>
+                    <p>Build essential business skills with our bite-sized, interactive lessons.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Expense Tracking</h3>
+                    <p>Automatically categorize expenses and scan receipts with our smart tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview" id="dashboard">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-content">
+                    <h2>Your Business Health at a Glance</h2>
+                    <p>Our clean, intuitive dashboard gives you immediate insight into your business performance with key metrics and visualizations.</p>
+                    <ul style="margin-top: 20px; list-style: none;">
+                        <li style="margin-bottom: 10px;">✅ Real-time cash flow tracking</li>
+                        <li style="margin-bottom: 10px;">✅ Profit & loss statements</li>
+                        <li style="margin-bottom: 10px;">✅ Financial health score</li>
+                        <li style="margin-bottom: 10px;">✅ Expense categorization</li>
+                        <li style="margin-bottom: 10px;">✅ Goal progress tracking</li>
+                    </ul>
+                    <button class="cta-button" style="margin-top: 30px;">Explore Dashboard</button>
+                </div>
+                <div class="dashboard-visual">
+                    <h3 style="margin-bottom: 20px; color: var(--secondary);">Business Overview</h3>
+                    <div class="metric">
+                        <span>Monthly Revenue</span>
+                        <span class="metric-value">$12,458</span>
+                    </div>
+                    <div class="metric">
+                        <span>Monthly Profit</span>
+                        <span class="metric-value">$3,842</span>
+                    </div>
+                    <div class="metric">
+                        <span>Cash Runway</span>
+                        <span class="metric-value">42 days</span>
+                    </div>
+                    <div class="metric">
+                        <span>Growth Rate</span>
+                        <span class="metric-value">+18%</span>
+                    </div>
+                    <div class="metric">
+                        <span>Business Health</span>
+                        <span class="metric-value" style="color: var(--success);">7.2/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="section-title">
+                    <h2>See ScaleWise in Action</h2>
+                    <p>Experience how our platform transforms business management</p>
+                </div>
+                <div class="demo-box">
+                    <div class="demo-tabs">
+                        <div class="demo-tab active" onclick="showDemo('pricing')">Pricing Assistant</div>
+                        <div class="demo-tab" onclick="showDemo('cashflow')">Cash Flow</div>
+                        <div class="demo-tab" onclick="showDemo('learning')">Learning Hub</div>
+                    </div>
+                    <div class="demo-content">
+                        <div id="pricing-demo" class="demo-tab-content">
+                            <h3>Smart Pricing Analysis</h3>
+                            <p>Discover if you're charging the right price for your products and services.</p>
+                            <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>Your Current Price</span>
+                                    <span>$75</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>Recommended Price</span>
+                                    <span style="color: var(--success); font-weight: 600;">$98</span>
+                                </div>
+                                <div style="background: var(--success); color: white; padding: 10px; border-radius: 5px; text-align: center; margin-top: 15px;">
+                                    Potential Profit Increase: 31%
+                                </div>
+                            </div>
+                        </div>
+                        <div id="cashflow-demo" class="demo-tab-content" style="display: none;">
+                            <h3>Cash Flow Forecasting</h3>
+                            <p>Predict your financial future and avoid cash crunches.</p>
+                            <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                <div style="text-align: left; margin-bottom: 15px;">
+                                    <div>Next 30 Days: <span style="color: var(--success); font-weight: 600;">Positive</span></div>
+                                    <div>Next 60 Days: <span style="color: var(--success); font-weight: 600;">Stable</span></div>
+                                    <div>Next 90 Days: <span style="color: orange; font-weight: 600;">Watch</span></div>
+                                </div>
+                                <div style="background: #e9ecef; padding: 10px; border-radius: 5px; font-size: 0.9rem;">
+                                    Recommendation: Reduce non-essential expenses by 15%
+                                </div>
+                            </div>
+                        </div>
+                        <div id="learning-demo" class="demo-tab-content" style="display: none;">
+                            <h3>Interactive Learning</h3>
+                            <p>Learn business concepts exactly when you need them.</p>
+                            <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                <div style="margin-bottom: 15px;">
+                                    <strong>Recommended for you:</strong>
+                                </div>
+                                <div style="background: var(--light); padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                                    📊 Cash Flow Management Basics
+                                </div>
+                                <div style="background: var(--light); padding: 15px; border-radius: 5px;">
+                                    💰 Pricing Strategies for Service Businesses
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Scale Your Business?</h2>
+            <p>Join thousands of small business owners who are growing with confidence using ScaleWise.</p>
+            <button class="white-button">Start Your Free Trial</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ScaleWise</h3>
+                    <p>Empowering small businesses with essential management and financial planning tools.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ScaleWise. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Demo tab functionality
+        function showDemo(tab) {
+            // Hide all demo content
+            document.querySelectorAll('.demo-tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.demo-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content and activate tab
+            document.getElementById(tab + '-demo').style.display = 'block';
+            event.target.classList.add('active');
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // CTA button interactions
+        document.querySelectorAll('.cta-button, .white-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Welcome to ScaleWise! In a real application, this would redirect to signup.');
+            });
+        });
+        
+        // Add some interactive animations
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.08)';
+            });
+        });
+        
+        console.log('ScaleWise website loaded successfully! 🚀');
+    </script>
+</body>
+</html>
