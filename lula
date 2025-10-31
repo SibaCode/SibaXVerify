@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScaleWise - Small Business Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --success: #4bb543;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .element-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 20px;
+            animation-delay: 0s;
+        }
+        
+        .element-2 {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 85%;
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 50%;
+            animation-delay: 2s;
+        }
+        
+        .element-3 {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 15%;
+            background: rgba(58, 12, 163, 0.1);
+            border-radius: 15px;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #555;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .problem-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .problem-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230, 57, 70, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .problem-icon i {
+            font-size: 2rem;
+            color: #e63946;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Solution Section */
+        .solution {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .solution-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .solution-content {
+            flex: 1;
+        }
+        
+        .solution-visual {
+            flex: 1;
+            position: relative;
+        }
+        
+        .interactive-demo {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s;
+        }
+        
+        .interactive-demo:hover {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+        }
+        
+        .demo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .demo-title {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .demo-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-tab {
+            padding: 8px 15px;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .demo-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .demo-content {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .health-score {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+        }
+        
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 70%, #eee 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        .score-info h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .score-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .feature-card:hover:before {
+            width: 10px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Advanced Features */
+        .advanced-features {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+        }
+        
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .showcase-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        
+        .showcase-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .showcase-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .showcase-icon i {
+            font-size: 1.5rem;
+        }
+        
+        .showcase-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        /* User Journey */
+        .user-journey {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .journey-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 50px 0;
+        }
+        
+        .journey-steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+        }
+        
+        .journey-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-marker {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .solution-container {
+                flex-direction: column;
+            }
+            
+            .interactive-demo {
+                transform: none;
+            }
+            
+            .journey-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .journey-steps:before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ScaleWise</div>
+                <ul class="nav-links">
+                    <li><a href="#problem">The Challenge</a></li>
+                    <li><a href="#solution">Our Solution</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#journey">How It Works</a></li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+        </div>
+        <div class="container">
+            <h1>Business Intelligence for Every Entrepreneur</h1>
+            <p>Transform your small business with powerful, easy-to-use financial tools and guided learning—no MBA required.</p>
+            <div class="hero-buttons">
+                <button class="cta-button">Start Free Trial</button>
+                <button class="secondary-button">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Small Business Challenge</h2>
+                <p>Great at your craft, overwhelmed by the business side</p>
+            </div>
+            
+            <div class="problem-cards">
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">💸</div>
+                    <h3>Cash Flow Confusion</h3>
+                    <p>Never quite sure where your money is going or when the next crunch is coming</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">🎯</div>
+                    <h3>Pricing Guesswork</h3>
+                    <p>Undervaluing your work because you don't know your true costs and value</p>
+                </div>
+                
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">📊</div>
+                    <h3>Financial Overwhelm</h3>
+                    <p>Spreadsheet nightmares and accounting terms that make your head spin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-container">
+                <div class="solution-content">
+                    <div class="section-title" style="text-align: left;">
+                        <h2>Your Business Coach in a Browser</h2>
+                        <p>We translate complex financial concepts into simple, actionable insights</p>
+                    </div>
+                    
+                    <div class="fade-in">
+                        <h3 style="margin-bottom: 15px; color: var(--secondary);">Smart Business Management</h3>
+                        <div class="point">Connect your accounts in minutes, not hours</div>
+                        <div class="point">Understand your finances in plain English</div>
+                        <div class="point">Get personalized recommendations for growth</div>
+                        <div class="point">Learn business skills as you manage your operations</div>
+                    </div>
+                    
+                    <button class="cta-button" style="margin-top: 30px;">See How It Works</button>
+                </div>
+                
+                <div class="solution-visual fade-in">
+                    <div class="interactive-demo">
+                        <div class="demo-header">
+                            <div class="demo-title">Business Health Dashboard</div>
+                            <div style="color: var(--success); font-weight: 600;">Live Data</div>
+                        </div>
+                        
+                        <div class="demo-tabs">
+                            <div class="demo-tab active">Overview</div>
+                            <div class="demo-tab">Cash Flow</div>
+                            <div class="demo-tab">Pricing</div>
+                            <div class="demo-tab">Goals</div>
+                        </div>
+                        
+                        <div class="demo-content">
+                            <h4 style="margin-bottom: 15px; color: var(--secondary);">Your Business at a Glance</h4>
+                            <p style="margin-bottom: 15px; color: #666;">All your key metrics in one place, updated in real-time</p>
+                            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$12.4K</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Monthly Revenue</div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+18%</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Growth Rate</div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">42d</div>
+                                    <div style="font-size: 0.8rem; color: #666;">Cash Runway</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="health-score">
+                            <div class="score-display">
+                                <div class="score-circle">7.2</div>
+                                <div class="score-info">
+                                    <h4>Business Health Score</h4>
+                                    <p>Good - Trending Up</p>
+                                </div>
+                            </div>
+                            <button style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer;">
+                                Improve Score
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features Made Simple</h2>
+                <p>Everything you need to manage and grow your business effectively</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📈</div>
+                    <h3>Financial Health Score</h3>
+                    <p>One simple number that tells you how your business is really doing, with actionable tips to improve it.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3>Smart Pricing Assistant</h3>
+                    <p>Stop guessing. Our wizard calculates your true costs and suggests profitable pricing strategies.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Cash Flow Forecasting</h3>
+                    <p>See into the future. Predict cash shortages before they happen and plan with confidence.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Interactive Learning Hub</h3>
+                    <p>Bite-sized business lessons that actually make sense. Learn while you manage your business.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3>Seamless Integrations</h3>
+                    <p>Connect your bank, accounting software, and payment processors in seconds.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Bank-Level Security</h3>
+                    <p>Your financial data is protected with enterprise-grade security and encryption.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Features -->
+    <section class="advanced-features">
+        <div class="container">
+            <div class="section-title" style="color: white;">
+                <h2>Advanced Capabilities</h2>
+                <p>Going beyond basic accounting to true business intelligence</p>
+            </div>
+            
+            <div class="feature-showcase">
+                <div class="showcase-card fade-in">
+                    <div class="showcase-icon">🤖</div>
+                    <h3>AI-Powered Insights</h3>
+                    <p>Get personalized recommendations based on businesses like yours and industry trends.</p>
+                </div>
+                
+                <div class="showcase-card fade-in">
+                    <div class="showcase-icon">📚</div>
+                    <h3>Contextual Learning</h3>
+                    <p>Learn business concepts exactly when you need them, integrated into your workflow.</p>
+                </div>
+                
+                <div class="showcase-card fade-in">
+                    <div class="showcase-icon">🎯</div>
+                    <h3>Goal Tracking</h3>
+                    <p>Set financial targets and track your progress with visual goal monitoring and celebration.</p>
+                </div>
+                
+                <div class="showcase-card fade-in">
+                    <div class="showcase-icon">🔍</div>
+                    <h3>Expense Intelligence</h3>
+                    <p>Automatically categorize expenses and scan receipts with our smart tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="user-journey" id="journey">
+        <div class="container">
+            <div class="section-title">
+                <h2>From Confusion to Confidence</h2>
+                <p>Your journey to business mastery in four simple steps</p>
+            </div>
+            
+            <div class="journey-steps">
+                <div class="journey-step fade-in">
+                    <div class="step-marker">1</div>
+                    <div class="step-title">Connect & Discover</div>
+                    <p>Link your accounts and get immediate insights into your business health</p>
+                </div>
+                
+                <div class="journey-step fade-in">
+                    <div class="step-marker">2</div>
+                    <div class="step-title">Learn & Understand</div>
+                    <p>Interactive modules explain what your numbers mean in plain language</p>
+                </div>
+                
+                <div class="journey-step fade-in">
+                    <div class="step-marker">3</div>
+                    <div class="step-title">Plan & Optimize</div>
+                    <p>Use guided tools to fix pricing, improve cash flow, and set goals</p>
+                </div>
+                
+                <div class="journey-step fade-in">
+                    <div class="step-marker">4</div>
+                    <div class="step-title">Grow & Scale</div>
+                    <p>Watch your business health score improve as you make better decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Join the thousands of small business owners who have taken control of their finances and accelerated their growth with ScaleWise.</p>
+            <button class="cta-button" style="font-size: 1.2rem; padding: 15px 40px;">Start Your Free Trial Today</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ScaleWise</h3>
+                    <p>Business intelligence for every entrepreneur. No MBA required.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Learning Center</a></li>
+                        <li><a href="#">Business Guides</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ScaleWise. All rights reserved. | Hackathon Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeInOnScroll.observe(element);
+        });
+        
+        // Interactive demo tabs
+        const demo
+        // Interactive demo tabs
+        const demoTabs = document.querySelectorAll('.demo-tab');
+        const demoContent = document.querySelector('.demo-content');
+        
+        demoTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                demoTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Update demo content based on selected tab
+                const tabText = this.textContent;
+                updateDemoContent(tabText);
+            });
+        });
+        
+        function updateDemoContent(tab) {
+            let contentHTML = '';
+            
+            switch(tab) {
+                case 'Overview':
+                    contentHTML = `
+                        <h4 style="margin-bottom: 15px; color: var(--secondary);">Your Business at a Glance</h4>
+                        <p style="margin-bottom: 15px; color: #666;">All your key metrics in one place, updated in real-time</p>
+                        <div style="display: flex; gap: 15px; margin-top: 20px;">
+                            <div style="flex: 1; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$12.4K</div>
+                                <div style="font-size: 0.8rem; color: #666;">Monthly Revenue</div>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+18%</div>
+                                <div style="font-size: 0.8rem; color: #666;">Growth Rate</div>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">42d</div>
+                                <div style="font-size: 0.8rem; color: #666;">Cash Runway</div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Cash Flow':
+                    contentHTML = `
+                        <h4 style="margin-bottom: 15px; color: var(--secondary);">Cash Flow Forecast</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Predict your financial future with confidence</p>
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>This Month</span>
+                                <span style="color: var(--success); font-weight: 600;">+$2,840</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Next Month</span>
+                                <span style="color: var(--success); font-weight: 600;">+$3,120</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>90-Day Outlook</span>
+                                <span style="color: var(--success); font-weight: 600;">Healthy</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Pricing':
+                    contentHTML = `
+                        <h4 style="margin-bottom: 15px; color: var(--secondary);">Pricing Insights</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Optimize your pricing for maximum profit</p>
+                        <div style="background: var(--warning); color: white; padding: 10px; border-radius: 8px; margin-top: 10px; text-align: center;">
+                            <strong>Opportunity Found!</strong>
+                            <div style="font-size: 0.9rem;">You could increase prices by 22%</div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Goals':
+                    contentHTML = `
+                        <h4 style="margin-bottom: 15px; color: var(--secondary);">Goal Progress</h4>
+                        <p style="margin-bottom: 15px; color: #666;">Tracking your business milestones</p>
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: between; margin-bottom: 5px;">
+                                    <span>Emergency Fund</span>
+                                    <span>75%</span>
+                                </div>
+                                <div style="height: 8px; background: #eee; border-radius: 4px; overflow: hidden;">
+                                    <div style="height: 100%; width: 75%; background: var(--success);"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: between; margin-bottom: 5px;">
+                                    <span>Revenue Target</span>
+                                    <span>60%</span>
+                                </div>
+                                <div style="height: 8px; background: #eee; border-radius: 4px; overflow: hidden;">
+                                    <div style="height: 100%; width: 60%; background: var(--primary);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            demoContent.innerHTML = contentHTML;
+        }
+        
+        // Interactive health score improvement
+        const improveButton = document.querySelector('.health-score button');
+        const scoreCircle = document.querySelector('.score-circle');
+        
+        improveButton.addEventListener('click', function() {
+            // Animate score improvement
+            let currentScore = parseFloat(scoreCircle.textContent);
+            if (currentScore < 9.5) {
+                currentScore += 0.3;
+                scoreCircle.textContent = currentScore.toFixed(1);
+                
+                // Update circle visualization
+                const percentage = (currentScore / 10) * 100;
+                scoreCircle.style.background = `conic-gradient(var(--success) ${percentage}%, #eee 0)`;
+                
+                // Show improvement message
+                this.textContent = 'Great Job!';
+                this.style.background = 'var(--success)';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    this.textContent = 'Improve Score';
+                    this.style.background = 'var(--primary)';
+                }, 2000);
+            }
+        });
+        
+        // Floating elements animation enhancement
+        const floatingElements = document.querySelectorAll('.floating-element');
+        
+        floatingElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 2}s`;
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // CTA button interactions
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        
+        ctaButtons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+            
+            button.addEventListener('click', function() {
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    // In a real app, this would trigger signup flow
+                    alert('Welcome to ScaleWise! Redirecting to signup...');
+                }, 150);
+            });
+        });
+        
+        // Feature card hover effects
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.feature-icon');
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+                icon.style.background = 'rgba(67, 97, 238, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.feature-icon');
+                icon.style.transform = 'scale(1) rotate(0)';
+                icon.style.background = 'rgba(67, 97, 238, 0.1)';
+            });
+        });
+        
+        // Problem card interactions
+        const problemCards = document.querySelectorAll('.problem-card');
+        
+        problemCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Toggle expanded state
+                this.classList.toggle('expanded');
+                
+                const icon = this.querySelector('.problem-icon');
+                icon.style.transform = this.classList.contains('expanded') ? 'scale(1.1)' : 'scale(1)';
+            });
+        });
+        
+        // Journey step animations
+        const journeySteps = document.querySelectorAll('.journey-step');
+        
+        journeySteps.forEach(step => {
+            step.addEventListener('mouseenter', function() {
+                const marker = this.querySelector('.step-marker');
+                marker.style.transform = 'scale(1.2)';
+                marker.style.background = 'var(--primary)';
+                marker.style.color = 'white';
+            });
+            
+            step.addEventListener('mouseleave', function() {
+                const marker = this.querySelector('.step-marker');
+                marker.style.transform = 'scale(1)';
+                marker.style.background = 'white';
+                marker.style.color = 'var(--primary)';
+            });
+        });
+        
+        // Auto-rotate demo tabs for presentation
+        let currentTabIndex = 0;
+        
+        function rotateTabs() {
+            demoTabs[currentTabIndex].classList.remove('active');
+            currentTabIndex = (currentTabIndex + 1) % demoTabs.length;
+            demoTabs[currentTabIndex].classList.add('active');
+            updateDemoContent(demoTabs[currentTabIndex].textContent);
+        }
+        
+        // Start auto-rotation (every 4 seconds)
+        setInterval(rotateTabs, 4000);
+        
+        // Add some visual feedback for interactive elements
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON' || e.target.classList.contains('demo-tab')) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: rgba(67, 97, 238, 0.3);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: ripple 0.6s ease-out;
+                    z-index: 9999;
+                `;
+                
+                ripple.style.left = e.clientX - 10 + 'px';
+                ripple.style.top = e.clientY - 10 + 'px';
+                
+                document.body.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(10);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            floatingElements.forEach((element, index) => {
+                const rate = scrolled * -0.5;
+                element.style.transform = `translateY(${rate}px) rotate(${rate * 0.1}deg)`;
+            });
+        });
+        
+        console.log('ScaleWise Presentation Loaded! 🚀');
+    </script>
+</body>
+</html>
