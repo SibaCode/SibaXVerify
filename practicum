@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oakword Property Management - Unified System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Poppins', sans-serif; background:#f0f4f8; color:#1a1a1a; }
+.sidebar { position:fixed; left:0; top:0; width:220px; height:100%; background:#1a3c6b; display:flex; flex-direction:column; padding-top:30px; transition:0.3s; z-index:100; }
+.sidebar a { color:white; padding:15px 20px; text-decoration:none; font-weight:500; display:block; transition:0.3s; cursor:pointer; }
+.sidebar a:hover, .sidebar a.active { background:#0f2a50; }
+.content { margin-left:220px; padding:30px; transition:0.3s; }
+header { font-size:24px; font-weight:700; color:#1a3c6b; margin-bottom:20px; text-align:center; }
+h1,h2,h3 { color:#1a3c6b; margin-bottom:15px; }
+
+/* Module styles */
+.module { display:none; }
+.activeModule { display:block; }
+
+/* Buttons */
+button { padding:8px 15px; border:none; border-radius:6px; cursor:pointer; font-weight:500; transition:0.3s; margin-top:5px; }
+button.primary { background:#1a3c6b; color:white; }
+button.primary:hover { background:#0f2a50; }
+
+/* Form styles */
+form { background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:30px; }
+input, select, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; margin-bottom:10px; width:100%; }
+textarea { resize:vertical; }
+
+/* Tables */
+table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-top:20px; }
+th, td { padding:12px 15px; border-bottom:1px solid #ddd; text-align:left; }
+th { background:#1a3c6b; color:white; }
+
+/* Status colors */
+.status { padding:5px 10px; border-radius:6px; color:white; font-weight:500; }
+.pending { background:#f0ad4e; }
+.inprogress { background:#5bc0de; }
+.completed { background:#5cb85c; }
+.paid { background:#5cb85c; }
+.dueStatus { background:#f0ad4e; }
+.overdueStatus { background:#d9534f; }
+
+/* Risk Score */
+.score-card { padding:10px 15px; border-radius:8px; font-weight:600; margin:10px 0; color:white; display:inline-block; }
+.approve { background:#5cb85c; }
+.moderate { background:#f0ad4e; }
+.reject { background:#d9534f; }
+
+/* Cards */
+.summary-cards { display:flex; gap:20px; margin-bottom:30px; flex-wrap:wrap; }
+.card { flex:1 1 200px; padding:20px; border-radius:10px; color:white; font-weight:600; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+.collected { background:#5cb85c; }
+.due { background:#f0ad4e; }
+.overdue { background:#d9534f; }
+
+/* Responsive */
+@media(max-width:768px){ .sidebar{ width:60px; } .content{ margin-left:60px; } .sidebar a{ font-size:12px; padding:12px 8px; } }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+<a class="active" onclick="showModule('maintenance')">Maintenance Requests</a>
+<a onclick="showModule('rent')">Rent Tracking</a>
+<a onclick="showModule('lease')">Digital Lease Agreements</a>
+<a onclick="showModule('application')">Tenant Application & Risk Score</a>
+</div>
+
+<div class="content">
+<header>Oakword Property Management</header>
+
+<!-- Maintenance Requests Module -->
+<div id="maintenance" class="module activeModule">
+<h2>Maintenance Requests</h2>
+<form id="maintenanceForm">
+<label>Your Name:</label><input type="text" id="mName" value="Siba" required>
+<label>Complex:</label>
+<select id="mComplex" required>
+<option value="">--Select--</option>
+<option value="Maple Residences" selected>Maple Residences</option>
+<option value="Oakwood Heights">Oakwood Heights</option>
+</select>
+<label>Unit:</label>
+<select id="mUnit" required>
+<option value="">--Select--</option>
+<option value="Apartment 5B" selected>Apartment 5B</option>
+<option value="Apartment 3A">Apartment 3A</option>
+</select>
+<label>Issue:</label><textarea id="mIssue" required>Air conditioner not working</textarea>
+<label>Upload Image:</label><input type="file" id="mImage">
+<button type="submit" class="primary">Submit Request</button>
+</form>
+
+<table id="maintenanceTable">
+<tr><th>Tenant</th><th>Complex</th><th>Unit</th><th>Issue</th><th>Date Created</th><th>Status</th><th>ETA</th><th>Assigned Staff</th></tr>
+<tr><td>Siba</td><td>Maple Residences</td><td>Apartment 5B</td><td>Air conditioner not working</td><td>2025-11-10 09:45</td><td><span class="status pending">Pending</span></td><td>2 days</td><td>Ahmed</td></tr>
+</table>
+</div>
+
+<!-- Rent Tracking Module -->
+<div id="rent" class="module">
+<h2>Rent Tracking Dashboard</h2>
+<div class="summary-cards">
+<div class="card collected" id="totalCollected">Total Collected: AED 0</div>
+<div class="card due" id="totalDue">Total Due: AED 0</div>
+<div class="card overdue" id="totalOverdue">Total Overdue: AED 0</div>
+</div>
+<input type="text" id="searchTenant" placeholder="Search Tenant/Unit">
+<button class="primary" onclick="filterRentTable()">Search</button>
+<table id="rentTable">
+<tr><th>Tenant</th><th>Unit</th><th>Rent Amount (AED)</th><th>Status</th><th>Last Payment Date</th><th>Action</th></tr>
+</table>
+</div>
+
+<!-- Digital Lease Agreements Module -->
+<div id="lease" class="module">
+<h2>Digital Lease Agreements</h2>
+<form id="leaseForm">
+<label>Tenant Name:</label><input type="text" id="lName" placeholder="John Doe" required>
+<label>Upload Lease:</label><input type="file" id="leaseFile" required>
+<label>Notes:</label><textarea id="leaseNotes"></textarea>
+<button type="submit" class="primary">Upload & Save Lease</button>
+</form>
+<table id="leaseTable">
+<tr><th>Tenant</th><th>Lease File</th><th>Notes</th></tr>
+</table>
+</div>
+
+<!-- Tenant Application & Risk Score Module -->
+<div id="application" class="module">
+<h2>Tenant Application & Risk Score</h2>
+<form id="appForm">
+<label>Full Name:</label><input type="text" id="aName" placeholder="John Doe" required>
+<label>Phone Number:</label><input type="text" id="aPhone" placeholder="+971-50-123-4567" required>
+<label>Complex:</label><select id="aComplex" required><option value="">--Select--</option><option value="Maple Residences">Maple Residences</option><option value="Oakwood Heights">Oakwood Heights</option></select>
+<label>Unit:</label><select id="aUnit" required><option value="">--Select--</option><option value="Apartment 5B">Apartment 5B</option><option value="Apartment 3A">Apartment 3A</option></select>
+<label>Emirates/National ID:</label><input type="text" id="aID" placeholder="E123456789" required>
+<label>Monthly Income:</label><input type="text" id="aIncome" placeholder="5000" required>
+<label>Additional Notes:</label><textarea id="aNotes"></textarea>
+<button type="button" id="runRisk" class="primary">Run Risk Score</button>
+<div id="riskScoreDisplay"></div>
+<button type="submit" class="primary">Submit Application</button>
+</form>
+<table id="applicationsTable">
+<tr><th>Tenant</th><th>Complex</th><th>Unit</th><th>Income</th><th>Risk Score</th><th>Recommendation</th></tr>
+</table>
+</div>
+
+</div>
+
+<script>
+// Sidebar switching
+function showModule(id){
+    document.querySelectorAll('.module').forEach(m=>m.classList.remove('activeModule'));
+    document.getElementById(id).classList.add('activeModule');
+    document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+    document.querySelector('.sidebar a[onclick*="'+id+'"]').classList.add('active');
+}
+
+// --- Maintenance Requests ---
+const staffList = ["Ahmed", "Sara", "Maintenance Team", "Ali"];
+const etaOptions = ["2 hours", "5 hours", "1 day", "2 days", "3 days"];
+document.getElementById('maintenanceForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const t=document.getElementById('mName').value.trim();
+    const c=document.getElementById('mComplex').value;
+    const u=document.getElementById('mUnit').value;
+    const i=document.getElementById('mIssue').value.trim();
+    const a=staffList[Math.floor(Math.random()*staffList.length)];
+    const eta=etaOptions[Math.floor(Math.random()*etaOptions.length)];
+    const table=document.getElementById('maintenanceTable');
+    const now=new Date().toLocaleString();
+    const row=table.insertRow(1);
+    row.innerHTML=`<td>${t}</td><td>${c}</td><td>${u}</td><td>${i}</td><td>${now}</td><td><span class="status pending">Pending</span></td><td>${eta}</td><td>${a}</td>`;
+    this.reset();
+});
+
+// --- Rent Tracking ---
+let rentData = [
+    {tenant:"Siba", unit:"Apartment 5B", rent:5000, status:"Due", lastPayment:"2025-10-01"},
+    {tenant:"Jane Smith", unit:"Apartment 3A", rent:6000, status:"Paid", lastPayment:"2025-11-01"},
+    {tenant:"Ali Khan", unit:"Apartment 2C", rent:4500, status:"Overdue", lastPayment:"2025-09-15"},
+    {tenant:"Maryam", unit:"Apartment 1D", rent:5500, status:"Due", lastPayment:"2025-10-05"}
+];
+const rentTable=document.getElementById('rentTable');
+function renderRent(data){
+    rentTable.innerHTML=`<tr><th>Tenant</th><th>Unit</th><th>Rent Amount (AED)</th><th>Status</th><th>Last Payment Date</th><th>Action</th></tr>`;
+    let collected=0,due=0,overdue=0;
+    data.forEach((item,index)=>{
+        const statusClass=item.status==="Paid"?"paid":item.status==="Due"?"dueStatus":"overdueStatus";
+        if(item.status==="Paid") collected+=item.rent;
+        else if(item.status==="Due") due+=item.rent;
+        else overdue+=item.rent;
+        const row=rentTable.insertRow();
+        row.innerHTML=`<td>${item.tenant}</td><td>${item.unit}</td><td>${item.rent}</td><td><span class="status ${statusClass}">${item.status}</span></td><td>${item.lastPayment}</td><td><button onclick="markPaid(${index})">Mark Paid</button></td>`;
+    });
+    document.getElementById('totalCollected').textContent=`Total Collected: AED ${collected}`;
+    document.getElementById('totalDue').textContent=`Total Due: AED ${due}`;
+    document.getElementById('totalOverdue').textContent=`Total Overdue: AED ${overdue}`;
+}
+function markPaid(i){ rentData[i].status="Paid"; rentData[i].lastPayment=new Date().toISOString().split('T')[0]; renderRent(rentData); }
+function filterRentTable(){ const search=document.getElementById('searchTenant').value.toLowerCase(); renderRent(rentData.filter(item=>item.tenant.toLowerCase().includes(search)||item.unit.toLowerCase().includes(search))); }
+renderRent(rentData);
+
+// --- Digital Lease Agreements ---
+const leaseForm=document.getElementById('leaseForm');
+leaseForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    const t=document.getElementById('lName').value.trim();
+    const f=document.getElementById('leaseFile').files[0]?document.getElementById('leaseFile').files[0].name:'N/A';
+    const n=document.getElementById('leaseNotes').value.trim();
+    const table=document.getElementById('leaseTable');
+    const row=table.insertRow(1);
+    row.innerHTML=`<td>${t}</td><td>${f}</td><td>${n}</td>`;
+    this.reset();
+});
+
+// --- Tenant Application & Risk Score ---
+const appForm=document.getElementById('appForm');
+let lastScore=null;
+function getScoreClass(score){ return score>=70?'approve':score>=50?'moderate':'reject'; }
+document.getElementById('runRisk').addEventListener('click',()=>{
+    const name=document.getElementById('aName').value.trim();
+    const id=document.getElementById('aID').value.trim();
+    if(!name||!id){ alert('Enter Name & ID'); return; }
+    lastScore=Math.floor(Math.random()*101);
+    const rec=lastScore>=50?'Approve':'Reject';
+    document.getElementById('riskScoreDisplay').innerHTML=`<div class="score-card ${getScoreClass(lastScore)}">Risk Score: ${lastScore} | Recommendation: ${rec}</div>`;
+});
+appForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(lastScore===null){ alert('Run Risk Score first'); return; }
+    const t=document.getElementById('aName').value.trim();
+    const c=document.getElementById('aComplex').value;
+    const u=document.getElementById('aUnit').value;
+    const income=document.getElementById('aIncome').value.trim();
+    const rec=lastScore>=50?'Approve':'Reject';
+    const row=document.getElementById('applicationsTable').insertRow(1);
+    row.innerHTML=`<td>${t}</td><td>${c}</td><td>${u}</td><td>${income}</td><td><span class="score-card ${getScoreClass(lastScore)}">${lastScore}</span></td><td><span class="score-card ${getScoreClass(lastScore)}">${rec}</span></td>`;
+    appForm.reset();
+    // keep lastScore displayed
+});
+</script>
+
+</body>
+</html>
