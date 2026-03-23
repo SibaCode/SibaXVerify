@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Seed-to-Harvest</title>
+    <!-- Google Fonts & simple styling reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #eaf7e6 0%, #d4e9cf 100%);
+            color: #1a3c1f;
+            padding: 1.5rem;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e5622, #4a934a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .dashboard-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+        }
+
+        .whatsapp-card {
+            flex: 2;
+            min-width: 320px;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 32, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-panel {
+            flex: 1.2;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .wa-header {
+            background: #075e54;
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .wa-header i {
+            font-size: 1.6rem;
+        }
+
+        .wa-header .bot-info {
+            flex-grow: 1;
+        }
+
+        .wa-header .bot-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .wa-header .status {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .wa-header .language-badge {
+            background: #128c7e;
+            padding: 0.25rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .chat-area {
+            background: #e5ddd5;
+            background-image: radial-gradient(circle at 10% 30%, rgba(200, 180, 140, 0.05) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            min-height: 500px;
+            max-height: 550px;
+            overflow-y: auto;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            max-width: 85%;
+            animation: fadeSlideUp 0.2s ease;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            justify-content: flex-end;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .bubble {
+            padding: 0.65rem 1rem;
+            border-radius: 1.2rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message .bubble {
+            background: #dcf8c5;
+            color: #1e3a1a;
+            border-bottom-right-radius: 0.3rem;
+        }
+
+        .bot-message .bubble {
+            background: white;
+            color: #1f2e1c;
+            border-bottom-left-radius: 0.3rem;
+        }
+
+        .bubble-img {
+            margin-top: 8px;
+            border-radius: 16px;
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #cbd5c0;
+            cursor: pointer;
+            object-fit: cover;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem 0.8rem;
+            background: #f9fafc;
+            flex-wrap: wrap;
+            border-top: 1px solid #e2e8e3;
+        }
+
+        .chip {
+            background: #eef2e6;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.1s;
+            color: #1f4f1c;
+        }
+
+        .chip:hover {
+            background: #cfe3c5;
+        }
+
+        .input-area {
+            background: #f0f2f5;
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.6rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 30px;
+            font-family: inherit;
+            outline: none;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .input-area button {
+            background: #25d366;
+            border: none;
+            width: 42px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .input-area button:hover {
+            background: #128c7e;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.2rem;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid #3cac3c;
+            padding-left: 0.6rem;
+        }
+
+        .farm-table {
+            font-size: 0.85rem;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .farm-table th, .farm-table td {
+            padding: 0.5rem 0.2rem;
+            border-bottom: 1px solid #e2e8dd;
+            text-align: left;
+        }
+
+        .alert-badge {
+            background: #fff3e0;
+            border-radius: 20px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .simulation-note {
+            font-size: 0.75rem;
+            color: #5c715a;
+            margin-top: 1rem;
+            border-top: 1px dashed #cbd5c0;
+            padding-top: 0.7rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.75rem;
+            color: #3d6538;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: rgba(255,255,240,0.4); border-radius: 3rem; padding: 2rem 2rem; margin-bottom: 2rem;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <img src="logo.jpg" alt="Logo" style="height: 80px; width: auto; margin-bottom: 0.5rem;" onerror="this.src='https://via.placeholder.com/120x80?text=Your+Logo'">
+            </div>
+            <div>
+                <h1 style="font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #1e5622, #4a934a); background-clip: text; -webkit-background-clip: text; color: transparent; letter-spacing: -0.3px; margin: 0 0 0.5rem 0;">
+                    <i class="fas fa-seedling"></i> Seed-to-Harvest
+                </h1>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="whatsapp-card">
+                <div class="wa-header">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="bot-info">
+                        <div class="bot-name">Seed-to-Harvest Bot</div>
+                        <div class="status">Online</div>
+                    </div>
+                    <div class="language-badge" id="langDisplay">🇬🇧 English</div>
+                </div>
+                <div class="chat-area" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            👋 Welcome to Seed-to-Harvest! 🌾<br /><br />
+                            Please select your preferred language:<br />
+                            🇬🇧 Type "English" for English<br />
+                            🇿🇦 Type "Zulu" for isiZulu
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <div class="chip" data-lang="en">🇬🇧 English</div>
+                    <div class="chip" data-lang="zu">🇿🇦 Zulu</div>
+                    <div class="chip" data-cmd="register my farm" style="display:none;" id="registerChip">📝 Register farm</div>
+                    <div class="chip" data-cmd="check growth stage" style="display:none;" id="checkChip">📊 Check growth stage</div>
+                    <div class="chip" data-cmd="send alert again" style="display:none;" id="alertChip">🔔 Send alert again</div>
+                    <div class="chip" data-cmd="I need help" style="display:none;" id="helpChip">🆘 I need help</div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Type your response..." autocomplete="off">
+                    <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="card">
+                    <h3><i class="fas fa-tractor"></i> Registered Farm</h3>
+                    <div id="farmStatusDisplay">
+                        <p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>
+                    </div>
+                    <div class="simulation-note">
+                        <i class="fas fa-satellite-dish"></i> <strong>Satellite imagery:</strong> Using siba1.png
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Admin Monitor</h3>
+                    <table class="farm-table" id="adminTable">
+                        <thead>
+                            <tr><th>Farm name</th><th>Crop</th><th>Last Alert</th>   </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <tr><td colspan="3" style="text-align:center;">— no farms yet —</td> </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer>
+            🌍 English & isiZulu | Smart farming assistant with siba1.png imagery
+        </footer>
+    </div>
+
+    <script>
+        let currentFarm = null;
+        let lastRecommendation = null;
+        let currentLang = null;
+        let registrationStep = 0;
+        let tempFarmData = {};
+        let languageSelected = false;
+
+        // ALL IMAGES DIRECTED TO siba1.png
+        const realSatelliteImages = {
+            healthy: "siba1.png",
+            stress: "siba2.png",
+            poor: "siba3.png",
+            default: "siba1.png"
+        };
+
+        const recommendationImages = {
+            urea: "siba1.png",
+            compost: "siba4.png",
+            harvest: "siba1.png",
+            planting: "siba1.png"
+        };
+
+        // English translations
+        const enTranslations = {
+            welcome: "👋 Welcome to Seed-to-Harvest! 🌾\n\nPlease select your preferred language:\n🇬🇧 Type 'English' for English\n🇿🇦 Type 'Zulu' for isiZulu",
+            languageConfirmed: (lang) => `✅ Language set to ${lang}. You can now register your farm.\n\nType "Register my farm" to begin 🌱`,
+            regConfirm: (farm, crop, location) => `✅ Registration confirmed!\n\n📍 Farm: ${farm}\n🌽 Crop: ${crop}\n🗺️ Location: ${location}\n\nNow analyzing your satellite view...`,
+            satelliteIntro: "🛰️ Here's your farm from our satellite view:",
+            healthGreen: "✅ Sector A: Healthy crops → No action needed",
+            healthYellow: "⚠️ Sector B: Nitrogen deficiency detected → Apply fertilizer",
+            healthBrown: "🔴 Sector C: Critical vegetation → Immediate action required",
+            recGrowth: (sector, fert) => `🌱 Growth Stage Alert: ${sector} needs ${fert} fertilizer.\n\n📌 Instructions: Apply 50kg per hectare, mix with water, apply evenly around the base of plants.`,
+            recSeed: "🌾 Planting window optimal this week. Prepare land for planting.\n\n📌 Instructions: Clear the land, till soil, and plant seeds 2-3 inches deep.",
+            recPreHarvest: "🚜 Pre-Harvest: Your crop is ready for harvest in Sector C.\n\n📌 Instructions: Harvest when grains are dry. Use proper storage to prevent moisture.",
+            noFarm: "Please register your farm first using: Register my farm",
+            checkStage: (stage, sector) => `Current growth stage: ${stage}. Focus on ${sector} for immediate attention.`,
+            helpMsg: "💡 Available commands:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
+            askLocation: "📍 Please enter your farm location or address:",
+            askCrop: "🌽 Great! Now please enter your crop type (e.g., maize, rice, wheat, cassava):",
+            invalidCrop: "Please enter a valid crop type (e.g., maize, rice, wheat).",
+            selectLanguageFirst: "🌐 Please select your language first by typing 'English' or 'Zulu'."
+        };
+
+        // Zulu translations
+        const zuTranslations = {
+            welcome: "👋 Siyakwemukela ku-Seed-to-Harvest! 🌾\n\nSicela ukhethe ulimi oluthandayo:\n🇬🇧 Thayipha 'English' ngesiNgisi\n🇿🇦 Thayipha 'Zulu' ngesiZulu",
+            languageConfirmed: (lang) => `✅ Ulimi lubekwe ku-${lang}. Manje ungabhalisa ipulazi lakho.\n\nThayipha "Register my farm" ukuze uqale 🌱`,
+            regConfirm: (farm, crop, location) => `✅ Ukubhaliswa kuqinisekisiwe!\n\n📍 Ipulazi: ${farm}\n🌽 Isitshalo: ${crop}\n🗺️ Indawo: ${location}\n\nManje sihlaziya isithombe sesathelayithi...`,
+            satelliteIntro: "🛰️ Nansi ipulazi lakho lisuka esibukweni sesathelayithi:",
+            healthGreen: "✅ Isigaba A: Izitshalo ezinempilo → Akukho okudingayo",
+            healthYellow: "⚠️ Isigaba B: Ukushoda kwe-nitrogen → Faka umanyolo",
+            healthBrown: "🔴 Isigaba C: Izitshalo ezimbi kakhulu → Isenzo esisheshayo",
+            recGrowth: (sector, fert) => `🌱 Isexwayiso sokukhula: ${sector} idinga umanyolo ${fert}.\n\n📌 Imiyalo: Faka 50kg ngehektha, xuba namanzi, faka ngokulinganayo ezimpandeni.`,
+            recSeed: "🌾 Isikhathi sokutshala silungile. Lungisa insimu.\n\n📌 Imiyalo: Sula insimu, hlwitha inhlabathi, utshale imbewu nge-2-3 amayintshi.",
+            recPreHarvest: "🚜 Ngaphambi kokuvuna: Isivuno silungele ukuvuna esigabeni C.\n\n📌 Imiyalo: Vuna lapho okusanhlamvu sezomile. Sebenzisa isitoreji esifanele.",
+            noFarm: "Sicela uqale ubhalise ipulazi: Register my farm",
+            checkStage: (stage, sector) => `Isigaba sokukhula: ${stage}. Gxila ku-${sector}.`,
+            helpMsg: "💡 Imiyalo:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
+            askLocation: "📍 Sicela ufake indawo noma ikheli lepulazi lakho kanye nama hecta:",
+            askCrop: "🌽 Kuhle! Manje sicela ufake uhlobo lwesityalo (isb., ummbila, irayisi, ukolweni):",
+            invalidCrop: "Sicela ufake uhlobo lwesityalo oluvumelekile (isb., ummbila, irayisi).",
+            selectLanguageFirst: "🌐 Sicela ukhethe ulimi lwakho kuqala ngokuthayipha 'English' noma 'Zulu'."
+        };
+
+        function t(key, ...args) {
+            let translations = currentLang === "zu" ? zuTranslations : enTranslations;
+            let str = translations[key] || enTranslations[key] || key;
+            if (typeof str === 'function') str = str(...args);
+            return str;
+        }
+
+        function addMessageToChat(sender, content, imageUrl = null) {
+            const chatDiv = document.getElementById("chatMessages");
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
+            const bubbleDiv = document.createElement("div");
+            bubbleDiv.className = "bubble";
+            
+            if (imageUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                imgElement.className = "bubble-img";
+                imgElement.alt = "farm image";
+                imgElement.onerror = function() {
+                    this.style.display = 'none';
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'image-error';
+                    errorDiv.innerHTML = '⚠️ Image not found. Please check siba1.png file path.';
+                    this.parentNode.appendChild(errorDiv);
+                };
+                
+                const textDiv = document.createElement('div');
+                textDiv.innerHTML = content.replace(/\n/g, '<br>');
+                textDiv.style.marginBottom = '8px';
+                
+                bubbleDiv.appendChild(textDiv);
+                bubbleDiv.appendChild(imgElement);
+            } else {
+                bubbleDiv.innerHTML = content.replace(/\n/g, '<br>');
+            }
+            
+            msgDiv.appendChild(bubbleDiv);
+            chatDiv.appendChild(msgDiv);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            languageSelected = true;
+            
+            const langLabel = document.getElementById("langDisplay");
+            if (lang === "en") {
+                langLabel.innerHTML = "🇬🇧 English";
+            } else {
+                langLabel.innerHTML = "🇿🇦 isiZulu";
+            }
+            
+            // Show registration chips
+            document.getElementById("registerChip").style.display = "inline-block";
+            document.getElementById("checkChip").style.display = "inline-block";
+            document.getElementById("alertChip").style.display = "inline-block";
+            document.getElementById("helpChip").style.display = "inline-block";
+            
+            addMessageToChat("bot", t("languageConfirmed", lang === "en" ? "English" : "isiZulu"));
+        }
+
+        function startRegistration() {
+            if (!languageSelected) {
+                addMessageToChat("bot", t("selectLanguageFirst"));
+                return;
+            }
+            registrationStep = 1;
+            tempFarmData = {};
+            addMessageToChat("bot", t("askLocation"));
+        }
+
+        function processRegistration(userInput) {
+            if (registrationStep === 1) {
+                tempFarmData.location = userInput;
+                registrationStep = 2;
+                addMessageToChat("bot", t("askCrop"));
+            } 
+            else if (registrationStep === 2) {
+                if (userInput.trim().length < 2) {
+                    addMessageToChat("bot", t("invalidCrop"));
+                    return;
+                }
+                tempFarmData.crop = userInput;
+                
+                currentFarm = {
+                    name: tempFarmData.location,
+                    crop: tempFarmData.crop,
+                    language: currentLang === "en" ? "English" : "isiZulu",
+                    location: tempFarmData.location,
+                    stage: "Growth"
+                };
+                
+                updateAdminAndFarmDisplay();
+                addMessageToChat("bot", t("regConfirm", tempFarmData.location, tempFarmData.crop, tempFarmData.location));
+                
+                setTimeout(() => {
+                    addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.default);
+                    
+                    setTimeout(() => {
+                        const analysisText = `${t("healthGreen")}\n${t("healthYellow")}\n${t("healthBrown")}`;
+                        addMessageToChat("bot", analysisText);
+                        
+                        const recText = t("recGrowth", "Sector B", "Urea");
+                        addMessageToChat("bot", recText, recommendationImages.urea);
+                        
+                        lastRecommendation = { text: recText, image: recommendationImages.urea };
+                        registrationStep = 0;
+                        tempFarmData = {};
+                    }, 1000);
+                }, 500);
+            }
+        }
+
+        async function processCommand(cmdRaw) {
+            const cmd = cmdRaw.toLowerCase().trim();
+            
+            // Handle language selection
+            if (!languageSelected) {
+                if (cmd === "english" || cmd === "en") {
+                    setLanguage("en");
+                    return;
+                } else if (cmd === "zulu" || cmd === "zu") {
+                    setLanguage("zu");
+                    return;
+                } else {
+                    addMessageToChat("bot", t("selectLanguageFirst"));
+                    return;
+                }
+            }
+            
+            // Handle active registration flow
+            if (registrationStep > 0) {
+                processRegistration(cmdRaw);
+                return;
+            }
+            
+            if (cmd.includes("register") || cmd.includes("register my farm")) {
+                startRegistration();
+                return;
+            }
+            
+            if (!currentFarm && !cmd.includes("register")) {
+                addMessageToChat("bot", t("noFarm"));
+                return;
+            }
+            
+            if (cmd.includes("check growth stage")) {
+                const stageMsg = t("checkStage", currentFarm.stage, "Sector B and C");
+                addMessageToChat("bot", stageMsg);
+                addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.stress);
+                return;
+            }
+            
+            if (cmd.includes("send alert again")) {
+                if (lastRecommendation) {
+                    addMessageToChat("bot", "🔁 Re-sending last alert:");
+                    addMessageToChat("bot", lastRecommendation.text, lastRecommendation.image);
+                } else {
+                    addMessageToChat("bot", "No previous alerts found.");
+                }
+                return;
+            }
+            
+            if (cmd.includes("i need help")) {
+                addMessageToChat("bot", t("helpMsg"));
+                return;
+            }
+            
+            addMessageToChat("bot", "❓ Command not recognized. Try: 'Register my farm', 'Check growth stage', 'Send alert again', 'I need help'.");
+        }
+        
+        function sendUserMessage(text) {
+            if (!text.trim()) return;
+            addMessageToChat("user", text);
+            processCommand(text);
+        }
+        
+        function updateAdminAndFarmDisplay() {
+            const farmDiv = document.getElementById("farmStatusDisplay");
+            if (currentFarm) {
+                farmDiv.innerHTML = `
+                    <p><strong>🌾 ${currentFarm.name}</strong><br>📍 ${currentFarm.location}<br>🌽 Crop: ${currentFarm.crop}<br>🗣️ Language: ${currentFarm.language}<br>📈 Stage: ${currentFarm.stage}</p>
+                    <div style="margin-top:10px"><i class="fas fa-map-marker-alt"></i> Using siba1.png imagery</div>
+                `;
+            } else {
+                farmDiv.innerHTML = `<p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>`;
+            }
+            
+            const tbody = document.getElementById("adminTableBody");
+            if (currentFarm) {
+                tbody.innerHTML = `
+                    <tr><td>${currentFarm.name}</td><td>${currentFarm.crop}</td><td><span class="alert-badge">Active</span></td></tr>
+                `;
+            } else {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">— no farms yet —</td></tr>`;
+            }
+        }
+        
+        // Event listeners
+        document.getElementById("sendBtn").addEventListener("click", () => {
+            const input = document.getElementById("messageInput");
+            sendUserMessage(input.value);
+            input.value = "";
+        });
+        
+        document.getElementById("messageInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") document.getElementById("sendBtn").click();
+        });
+        
+        // Language selection chips
+        document.querySelectorAll("[data-lang]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                const lang = chip.getAttribute("data-lang");
+                setLanguage(lang);
+            });
+        });
+        
+        // Command chips
+        document.querySelectorAll("[data-cmd]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                const cmd = chip.getAttribute("data-cmd");
+                sendUserMessage(cmd);
+            });
+        });
+    </script>
+</body>
+</html>
