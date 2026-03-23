@@ -40,8 +40,7 @@
                 font-size: 2.2rem;
                 font-weight: 700;
                 background: linear-gradient(135deg, #1e5622, #4a934a);
-                background-clip: text;
-                -webkit-background-clip: text;
+               
                 color: transparent;
                 letter-spacing: -0.3px;
                 margin-bottom: 1rem;
@@ -371,14 +370,24 @@
             font-size: 0.75rem;
             text-align: center;
         }
+
+        .presentation-badge {
+            background: #ff9800;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 <body>
     <div class="demo-container">
         <!-- Hero Section with Solution Description -->
         <div class="hero">
-            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                 <img src="logo.jpg" alt="Logo" style="height: 80px; width: auto;" onerror="this.src='https://via.placeholder.com/120x80?text=Seed-to-Harvest'">
+                <!--<span class="presentation-badge"><i class="fas fa-chalkboard-teacher"></i> Presentation Demo - Pre-loaded Conversation</span>-->
             </div>
             <h1><i class="fas fa-seedling"></i> Seed-to-Harvest</h1>
 
@@ -422,6 +431,7 @@
                     <div class="language-badge" id="langDisplay">🇬🇧 English</div>
                 </div>
                 <div class="chat-area" id="chatMessages">
+                    <!-- Pre-loaded presentation conversation -->
                     <div class="message bot-message">
                         <div class="bubble">
                             🌾 <strong>Welcome to Seed-to-Harvest!</strong><br /><br />
@@ -431,45 +441,153 @@
                             🇿🇦 Type "Zulu" for isiZulu
                         </div>
                     </div>
+
+                    <div class="message user-message">
+                        <div class="bubble">
+                            English
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            ✅ Language set to English.<br /><br />
+                            📍 Please share your GPS location or farm address to begin:<br /><br />
+                            "Register my farm" to start the registration process.
+                        </div>
+                    </div>
+
+                    <div class="message user-message">
+                        <div class="bubble">
+                            Register my farm
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            📍 Please enter your farm GPS coordinates or address (e.g., -26.2041, 28.0473 or 'Green Acres Farm, Limpopo'):
+                        </div>
+                    </div>
+
+                    <div class="message user-message">
+                        <div class="bubble">
+                            Green Acres Farm, Limpopo, South Africa
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            🌽 Great! Now please enter your crop type (e.g., maize, rice, wheat, cassava):
+                        </div>
+                    </div>
+
+                    <div class="message user-message">
+                        <div class="bubble">
+                            Maize
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            ✅ Registration confirmed!<br /><br />
+                            📍 GPS/Farm: Green Acres Farm, Limpopo, South Africa<br />
+                            🌽 Crop: Maize<br />
+                            🗺️ Location: Green Acres Farm, Limpopo, South Africa<br /><br />
+                            🛰️ Analyzing Sentinel-2 & Landsat 8 imagery...<br />
+                            📊 Running NDVI analysis...
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            🛰️ Here's your farm from our satellite view (Sentinel-2/Landsat 8 NDVI analysis):
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            <div>🌾 Satellite Image Analysis:</div>
+                            <img src="siba1.png" class="bubble-img" alt="satellite view" style="max-width: 100%; border-radius: 12px; margin-top: 8px;" onerror="this.style.display='none'">
+                            <div style="font-size: 0.75rem; margin-top: 5px;">NDVI Analysis - Green: Healthy | Yellow: Stress | Brown: Poor Vegetation</div>
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            ✅ Sector A: Healthy vegetation → Optimal conditions. Continue current practices.<br />
+                            ⚠️ Sector B: Moderate vegetation stress → Nitrogen deficiency detected. Apply fertilizer.<br />
+                            🔴 Sector C: Poor vegetation → Immediate action required. Soil moisture low, urgent intervention needed.
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            🌱 Growth Stage Alert (Decision Engine): Sector B requires Urea fertilizer.<br /><br />
+                            📌 Recommendation: Apply 50kg per hectare. Mix with water, apply evenly around plant base.
+                            <img src="siba4.png" class="bubble-img" alt="fertilizer recommendation" style="max-width: 100%; border-radius: 12px; margin-top: 8px;" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+
+                    <div class="message user-message">
+                        <div class="bubble">
+                            Check growth stage
+                        </div>
+                    </div>
+
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            📊 Current Growth Stage: Growth<br /><br />
+                            🔍 NDVI Analysis: Sector B and C requires immediate attention.<br /><br />
+                            🌱 Growth Stage Recommendations:<br />
+                            • Sector A: Maintain current practices<br />
+                            • Sector B: Apply Urea fertilizer (50kg/ha)<br />
+                            • Sector C: Urgent irrigation + compost application needed
+                        </div>
+                    </div>
                 </div>
                 <div class="quick-actions">
                     <div class="chip" data-lang="en">🇬🇧 English</div>
                     <div class="chip" data-lang="zu">🇿🇦 Zulu</div>
-                    <div class="chip" data-cmd="register my farm" style="display:none;" id="registerChip">📝 Register farm</div>
-                    <div class="chip" data-cmd="check growth stage" style="display:none;" id="checkChip">📊 Check growth stage</div>
-                    <div class="chip" data-cmd="send alert again" style="display:none;" id="alertChip">🔔 Send alert again</div>
-                    <div class="chip" data-cmd="I need help" style="display:none;" id="helpChip">🆘 I need help</div>
+                    <div class="chip" data-cmd="register my farm">📝 Register farm</div>
+                    <div class="chip" data-cmd="check growth stage">📊 Check growth stage</div>
+                    <div class="chip" data-cmd="send alert again">🔔 Send alert again</div>
+                    <div class="chip" data-cmd="I need help">🆘 I need help</div>
                 </div>
                 <div class="input-area">
-                    <input type="text" id="messageInput" placeholder="Type your response..." autocomplete="off">
+                    <input type="text" id="messageInput" placeholder="Type a message to continue the demo..." autocomplete="off">
                     <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
 
             <div class="info-panel">
                 <div class="card">
-                    <h3><i class="fas fa-map-marker-alt"></i> Farm Registration</h3>
+                    <h3><i class="fas fa-map-marker-alt"></i> Registered Farm</h3>
                     <div id="farmStatusDisplay">
-                        <p style="color: #6f7e68;">📍 No farm registered yet.<br>Select language, then register your farm.</p>
+                        <p><strong>🌾 Green Acres Farm</strong><br>📍 GPS: Green Acres Farm, Limpopo, South Africa<br>🌽 Crop: Maize<br>🗣️ Language: English<br>📈 Stage: Growth</p>
+                        <div style="margin-top:10px; font-size:0.75rem;">
+                            <i class="fas fa-satellite"></i> Sentinel-2 & Landsat 8 Active<br>
+                            <i class="fas fa-chart-line"></i> NDVI Analysis: Running<br>
+                            <i class="fas fa-chart-simple"></i> Last NDVI: 0.62 (Moderate)
+                        </div>
                     </div>
                     <div class="simulation-note">
                         <i class="fas fa-satellite-dish"></i> <strong>Satellite Data:</strong> Sentinel-2 & Landsat 8<br>
-                        <i class="fas fa-chart-line"></i> <strong>Analysis:</strong> NDVI | Crop Health | Soil Moisture
+                        <i class="fas fa-chart-line"></i> <strong>Analysis:</strong> NDVI | Crop Health | Soil Moisture<br>
+                        <i class="fas fa-calendar"></i> <strong>Last Update:</strong> March 23, 2026
                     </div>
                 </div>
 
                 <div class="card">
                     <h3><i class="fas fa-chart-line"></i> Decision Engine Status</h3>
                     <div id="decisionStatus">
-                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Waiting for registration</p>
-                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> Waiting for registration</p>
-                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Waiting for registration</p>
+                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Completed - Optimal zones identified | Soil suitability: Good</p>
+                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> Active NDVI monitoring | Sector B: Nitrogen deficiency | Sector C: Irrigation needed</p>
+                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Yield prediction: Maize ready in 2-3 weeks | Expected yield: 4.2 tons/ha</p>
                     </div>
                     <div class="benefits">
-                        <p><i class="fas fa-chart-simple"></i> <strong>Expected Benefits:</strong></p>
-                        <p>✓ Higher yields through precision insights</p>
-                        <p>✓ Reduced input waste (water, fertilizer)</p>
-                        <p>✓ Improved farming efficiency</p>
+                        <p><i class="fas fa-chart-simple"></i> <strong>Projected Benefits:</strong></p>
+                        <p>✓ Higher yields: +25% expected increase</p>
+                        <p>✓ Reduced input waste: -30% fertilizer savings</p>
+                        <p>✓ Improved efficiency: Real-time alerts</p>
                     </div>
                 </div>
 
@@ -477,12 +595,17 @@
                     <h3><i class="fas fa-database"></i> Admin Monitor</h3>
                     <table class="farm-table" id="adminTable">
                         <thead>
-                            <tr><th>Farm</th><th>Crop</th><th>Stage</th>   </tr>
+                            <tr><th>Farm</th><th>Crop</th><th>Alert Status</th>    </tr>
                         </thead>
-                        <tbody id="adminTableBody">
-                            <tr><td colspan="3" style="text-align:center;">— no farms yet —</td> </tr>
+                        <tbody>
+                            <tr><td>Green Acres Farm</td><td>Maize</td><td><span class="alert-badge">⚠️ Sector B Alert</span></td> </tr>
+                            <tr><td>Sunrise Fields</td><td>Wheat</td><td><span class="alert-badge">✅ Healthy</span></td> </tr>
+                            <tr><td>River Valley</td><td>Rice</td><td><span class="alert-badge">🔴 Urgent Action</span></td> </tr>
                         </tbody>
                     </table>
+                    <div class="simulation-note">
+                        <i class="fas fa-clock"></i> Last alert sent: 2 hours ago | Next scheduled: Tomorrow 8:00 AM
+                    </div>
                 </div>
             </div>
         </div>
@@ -492,24 +615,32 @@
     </div>
 
     <script>
-        let currentFarm = null;
-        let lastRecommendation = null;
-        let currentLang = null;
+        let currentFarm = {
+            name: "Green Acres Farm",
+            crop: "Maize",
+            language: "English",
+            location: "Green Acres Farm, Limpopo, South Africa",
+            stage: "Growth"
+        };
+        let lastRecommendation = {
+            text: "🌱 Growth Stage Alert: Sector B requires Urea fertilizer.\n\n📌 Recommendation: Apply 50kg per hectare. Mix with water, apply evenly around plant base.",
+            image: "siba1.png"
+        };
+        let currentLang = "en";
         let registrationStep = 0;
-        let tempFarmData = {};
-        let languageSelected = false;
-       
+        let languageSelected = true;
+
         // ALL IMAGES DIRECTED TO siba1.png
         const realSatelliteImages = {
             healthy: "siba1.png",
-            stress: "siba2.png",
-            poor: "siba3.png",
+            stress: "siba1.png",
+            poor: "siba1.png",
             default: "siba1.png"
         };
 
         const recommendationImages = {
             urea: "siba1.png",
-            compost: "siba4.png", they achieve higher yields, reduce inpu
+            compost: "siba1.png",
             harvest: "siba1.png",
             planting: "siba1.png"
         };
@@ -534,7 +665,6 @@
             selectLanguageFirst: "🌐 Please select your language first by typing 'English' or 'Zulu'."
         };
 
-        // Zulu translations
         const zuTranslations = {
             languageConfirmed: (lang) => `✅ Ulimi lubekwe ku-${lang}.\n\n📍 Sicela ufake indawo ye-GPS noma ikheli lepulazi lakho ukuze uqale:\n\n"Register my farm" ukuze uqale inqubo yokubhalisa.`,
             regConfirm: (farm, crop, location) => `✅ Ukubhaliswa kuqinisekisiwe!\n\n📍 GPS/Ipulazi: ${farm}\n🌽 Isitshalo: ${crop}\n🗺️ Indawo: ${location}\n\n🛰️ Sihlaziya izithombe ze-Sentinel-2 ne-Landsat 8...\n📊 Senza ukuhlaziya kwe-NDVI...`,
@@ -598,63 +728,33 @@
 
         function setLanguage(lang) {
             currentLang = lang;
-            languageSelected = true;
-
             const langLabel = document.getElementById("langDisplay");
             if (lang === "en") {
                 langLabel.innerHTML = "🇬🇧 English";
             } else {
                 langLabel.innerHTML = "🇿🇦 isiZulu";
             }
-
-            document.getElementById("registerChip").style.display = "inline-block";
-            document.getElementById("checkChip").style.display = "inline-block";
-            document.getElementById("alertChip").style.display = "inline-block";
-            document.getElementById("helpChip").style.display = "inline-block";
-
             addMessageToChat("bot", t("languageConfirmed", lang === "en" ? "English" : "isiZulu"));
         }
 
-        function updateDecisionEngineDisplay() {
-            const decisionDiv = document.getElementById("decisionStatus");
-            if (currentFarm) {
-                decisionDiv.innerHTML = `
-                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Optimal zones identified | Soil suitability: Good</p>
-                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> NDVI analysis active | Irrigation recommendation available</p>
-                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Yield prediction: ${currentFarm.crop} ready in 2-3 weeks</p>
-                    `;
-            } else {
-                decisionDiv.innerHTML = `
-                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Waiting for registration</p>
-                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> Waiting for registration</p>
-                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Waiting for registration</p>
-                    `;
-            }
-        }
+        async function processCommand(cmdRaw) {
+            const cmd = cmdRaw.toLowerCase().trim();
 
-        function startRegistration() {
-            if (!languageSelected) {
-                addMessageToChat("bot", t("selectLanguageFirst"));
+            if (cmd.includes("register") || cmd.includes("register my farm")) {
+                addMessageToChat("bot", t("askLocation"));
+                registrationStep = 1;
                 return;
             }
-            registrationStep = 1;
-            tempFarmData = {};
-            addMessageToChat("bot", t("askLocation"));
-        }
 
-        function processRegistration(userInput) {
             if (registrationStep === 1) {
-                tempFarmData.location = userInput;
+                tempFarmData = { location: cmdRaw };
                 registrationStep = 2;
                 addMessageToChat("bot", t("askCrop"));
+                return;
             }
-            else if (registrationStep === 2) {
-                if (userInput.trim().length < 2) {
-                    addMessageToChat("bot", t("invalidCrop"));
-                    return;
-                }
-                tempFarmData.crop = userInput;
 
+            if (registrationStep === 2) {
+                tempFarmData.crop = cmdRaw;
                 currentFarm = {
                     name: tempFarmData.location,
                     crop: tempFarmData.crop,
@@ -662,57 +762,17 @@
                     location: tempFarmData.location,
                     stage: "Growth"
                 };
-
+                registrationStep = 0;
                 updateAdminAndFarmDisplay();
-                updateDecisionEngineDisplay();
                 addMessageToChat("bot", t("regConfirm", tempFarmData.location, tempFarmData.crop, tempFarmData.location));
-
                 setTimeout(() => {
                     addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.default);
-
                     setTimeout(() => {
-                        const analysisText = `${t("healthGreen")}\n${t("healthYellow")}\n${t("healthBrown")}`;
-                        addMessageToChat("bot", analysisText);
-
-                        const recText = t("recGrowth", "Sector B", "Urea");
-                        addMessageToChat("bot", recText, recommendationImages.urea);
-
-                        lastRecommendation = { text: recText, image: recommendationImages.urea };
-                        registrationStep = 0;
-                        tempFarmData = {};
+                        addMessageToChat("bot", `${t("healthGreen")}\n${t("healthYellow")}\n${t("healthBrown")}`);
+                        addMessageToChat("bot", t("recGrowth", "Sector B", "Urea"), recommendationImages.urea);
+                        lastRecommendation = { text: t("recGrowth", "Sector B", "Urea"), image: recommendationImages.urea };
                     }, 1000);
                 }, 500);
-            }
-        }
-
-        async function processCommand(cmdRaw) {
-            const cmd = cmdRaw.toLowerCase().trim();
-
-            if (!languageSelected) {
-                if (cmd === "english" || cmd === "en") {
-                    setLanguage("en");
-                    return;
-                } else if (cmd === "zulu" || cmd === "zu") {
-                    setLanguage("zu");
-                    return;
-                } else {
-                    addMessageToChat("bot", t("selectLanguageFirst"));
-                    return;
-                }
-            }
-
-            if (registrationStep > 0) {
-                processRegistration(cmdRaw);
-                return;
-            }
-
-            if (cmd.includes("register") || cmd.includes("register my farm")) {
-                startRegistration();
-                return;
-            }
-
-            if (!currentFarm && !cmd.includes("register")) {
-                addMessageToChat("bot", t("noFarm"));
                 return;
             }
 
@@ -754,22 +814,14 @@
                         <p><strong>🌾 ${currentFarm.name}</strong><br>📍 GPS: ${currentFarm.location}<br>🌽 Crop: ${currentFarm.crop}<br>🗣️ Language: ${currentFarm.language}<br>📈 Stage: ${currentFarm.stage}</p>
                         <div style="margin-top:10px; font-size:0.75rem;">
                             <i class="fas fa-satellite"></i> Sentinel-2 & Landsat 8 Active<br>
-                            <i class="fas fa-chart-line"></i> NDVI Analysis: Running
+                            <i class="fas fa-chart-line"></i> NDVI Analysis: Running<br>
+                            <i class="fas fa-chart-simple"></i> Last NDVI: 0.62 (Moderate)
                         </div>
                     `;
-            } else {
-                farmDiv.innerHTML = `<p style="color: #6f7e68;">📍 No farm registered yet.<br>Select language, then register your farm.</p>`;
-            }
-
-            const tbody = document.getElementById("adminTableBody");
-            if (currentFarm) {
-                tbody.innerHTML = `
-                        <tr><td>${currentFarm.name}</td><td>${currentFarm.crop}</td><td><span class="alert-badge">Active</span></td></tr>
-                    `;
-            } else {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">— no farms yet —</td></tr>`;
             }
         }
+
+        let tempFarmData = {};
 
         document.getElementById("sendBtn").addEventListener("click", () => {
             const input = document.getElementById("messageInput");
@@ -791,7 +843,7 @@
         document.querySelectorAll("[data-cmd]").forEach(chip => {
             chip.addEventListener("click", () => {
                 const cmd = chip.getAttribute("data-cmd");
-                sendUserMessage(cmd);
+                sendUserMessage(cmd);Our solution starts by capturing the farmer's 
             });
         });
     </script>
