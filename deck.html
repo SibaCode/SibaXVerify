@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Seed-to-Harvest</title>
+    <title>Seed-to-Harvest | Smart Farming Solution</title>
     <!-- Google Fonts & simple styling reset -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -26,20 +26,87 @@
             margin: 0 auto;
         }
 
+        /* Hero Section with Description */
         .hero {
             text-align: center;
             margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ec 100%);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1e5622, #4a934a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
+            .hero h1 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, #1e5622, #4a934a);
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                letter-spacing: -0.3px;
+                margin-bottom: 1rem;
+            }
+
+        .solution-description {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            text-align: left;
+            background: rgba(46, 125, 50, 0.05);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border-left: 4px solid #2e7d32;
         }
+
+            .solution-description p {
+                color: #2d5a2a;
+                font-weight: 500;
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+
+        .decision-engine {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+
+            .decision-engine h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .decision-engine p {
+                color: #f5f5f5;
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+        .stages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .stage-card {
+            background: rgba(255,255,255,0.15);
+            border-radius: 0.8rem;
+            padding: 0.8rem;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+            .stage-card i {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
 
         .dashboard-grid {
             display: flex;
@@ -76,30 +143,30 @@
             gap: 0.8rem;
         }
 
-        .wa-header i {
-            font-size: 1.6rem;
-        }
+            .wa-header i {
+                font-size: 1.6rem;
+            }
 
-        .wa-header .bot-info {
-            flex-grow: 1;
-        }
+            .wa-header .bot-info {
+                flex-grow: 1;
+            }
 
-        .wa-header .bot-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
+            .wa-header .bot-name {
+                font-weight: 700;
+                font-size: 1.1rem;
+            }
 
-        .wa-header .status {
-            font-size: 0.75rem;
-            opacity: 0.9;
-        }
+            .wa-header .status {
+                font-size: 0.75rem;
+                opacity: 0.9;
+            }
 
-        .wa-header .language-badge {
-            background: #128c7e;
-            padding: 0.25rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-        }
+            .wa-header .language-badge {
+                background: #128c7e;
+                padding: 0.25rem 0.7rem;
+                border-radius: 30px;
+                font-size: 0.75rem;
+            }
 
         .chat-area {
             background: #e5ddd5;
@@ -181,9 +248,9 @@
             color: #1f4f1c;
         }
 
-        .chip:hover {
-            background: #cfe3c5;
-        }
+            .chip:hover {
+                background: #cfe3c5;
+            }
 
         .input-area {
             background: #f0f2f5;
@@ -193,31 +260,31 @@
             border-top: 1px solid #ddd;
         }
 
-        .input-area input {
-            flex: 1;
-            padding: 0.7rem 1rem;
-            border: none;
-            border-radius: 30px;
-            font-family: inherit;
-            outline: none;
-            font-size: 0.9rem;
-            background: white;
-        }
+            .input-area input {
+                flex: 1;
+                padding: 0.7rem 1rem;
+                border: none;
+                border-radius: 30px;
+                font-family: inherit;
+                outline: none;
+                font-size: 0.9rem;
+                background: white;
+            }
 
-        .input-area button {
-            background: #25d366;
-            border: none;
-            width: 42px;
-            border-radius: 30px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+            .input-area button {
+                background: #25d366;
+                border: none;
+                width: 42px;
+                border-radius: 30px;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: 0.2s;
+            }
 
-        .input-area button:hover {
-            background: #128c7e;
-        }
+                .input-area button:hover {
+                    background: #128c7e;
+                }
 
         .card {
             background: white;
@@ -226,15 +293,15 @@
             box-shadow: 0 8px 18px rgba(0,0,0,0.05);
         }
 
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-left: 4px solid #3cac3c;
-            padding-left: 0.6rem;
-        }
+            .card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                border-left: 4px solid #3cac3c;
+                padding-left: 0.6rem;
+            }
 
         .farm-table {
             font-size: 0.85rem;
@@ -242,11 +309,11 @@
             border-collapse: collapse;
         }
 
-        .farm-table th, .farm-table td {
-            padding: 0.5rem 0.2rem;
-            border-bottom: 1px solid #e2e8dd;
-            text-align: left;
-        }
+            .farm-table th, .farm-table td {
+                padding: 0.5rem 0.2rem;
+                border-bottom: 1px solid #e2e8dd;
+                text-align: left;
+            }
 
         .alert-badge {
             background: #fff3e0;
@@ -264,6 +331,19 @@
             padding-top: 0.7rem;
         }
 
+        .benefits {
+            background: linear-gradient(135deg, #f9f7e8 0%, #f0f2e5 100%);
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin-top: 1rem;
+        }
+
+            .benefits p {
+                font-size: 0.75rem;
+                color: #1f4f1c;
+                margin: 0.3rem 0;
+            }
+
         footer {
             text-align: center;
             margin-top: 2.5rem;
@@ -276,6 +356,7 @@
                 opacity: 0;
                 transform: translateY(8px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -294,16 +375,41 @@
 </head>
 <body>
     <div class="demo-container">
-        <div class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: rgba(255,255,240,0.4); border-radius: 3rem; padding: 2rem 2rem; margin-bottom: 2rem;">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                <img src="logo.jpg" alt="Logo" style="height: 80px; width: auto; margin-bottom: 0.5rem;" onerror="this.src='https://via.placeholder.com/120x80?text=Your+Logo'">
+        <!-- Hero Section with Solution Description -->
+        <!--<div class="hero">
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                <img src="logo.jpg" alt="Logo" style="height: 80px; width: auto;" onerror="this.src='https://via.placeholder.com/120x80?text=Seed-to-Harvest'">
             </div>
-            <div>
-                <h1 style="font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #1e5622, #4a934a); background-clip: text; -webkit-background-clip: text; color: transparent; letter-spacing: -0.3px; margin: 0 0 0.5rem 0;">
-                    <i class="fas fa-seedling"></i> Seed-to-Harvest
-                </h1>
+            <h1><i class="fas fa-seedling"></i> Seed-to-Harvest</h1>
+
+            <div class="solution-description">
+                <p><i class="fas fa-satellite-dish"></i> <strong>Our solution starts by capturing the farmer's GPS location, crop type, and language preference.</strong> Using Sentinel-2 and Landsat 8 satellite imagery, we monitor crop health, soil moisture, and environmental conditions. Then, we apply NDVI analysis to generate actionable insights.</p>
+
+                <div class="decision-engine">
+                    <h3><i class="fas fa-microchip"></i> Seed-to-Harvest Decision Engine</h3>
+                    <p>Provides guidance at every stage:</p>
+                    <div class="stages">
+                        <div class="stage-card">
+                            <i class="fas fa-seedling"></i>
+                            <strong>Planting</strong>
+                            <small>Optimal zones & soil suitability</small>
+                        </div>
+                        <div class="stage-card">
+                            <i class="fas fa-tint"></i>
+                            <strong>Growth</strong>
+                            <small>Irrigation, fertilization & interventions</small>
+                        </div>
+                        <div class="stage-card">
+                            <i class="fas fa-tractor"></i>
+                            <strong>Pre-Harvest</strong>
+                            <small>Yield prediction & harvest readiness</small>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 1rem;"><i class="fab fa-whatsapp"></i> <strong>Farmers receive these insights in real time, in their preferred language, through our WhatsApp chatbot.</strong> By acting on these recommendations, they achieve higher yields, reduce input waste, and improve efficiency.</p>
             </div>
-        </div>
+        </div>-->
 
         <div class="dashboard-grid">
             <div class="whatsapp-card">
@@ -311,14 +417,15 @@
                     <i class="fab fa-whatsapp"></i>
                     <div class="bot-info">
                         <div class="bot-name">Seed-to-Harvest Bot</div>
-                        <div class="status">Online</div>
+                        <div class="status">Online | Powered by Sentinel-2 & Landsat 8</div>
                     </div>
                     <div class="language-badge" id="langDisplay">🇬🇧 English</div>
                 </div>
                 <div class="chat-area" id="chatMessages">
                     <div class="message bot-message">
                         <div class="bubble">
-                            👋 Welcome to Seed-to-Harvest! 🌾<br /><br />
+                            🌾 <strong>Welcome to Seed-to-Harvest!</strong><br /><br />
+                            I'm your AI-powered farming assistant. Using satellite imagery (Sentinel-2 & Landsat 8) and NDVI analysis, I provide real-time crop health insights.<br /><br />
                             Please select your preferred language:<br />
                             🇬🇧 Type "English" for English<br />
                             🇿🇦 Type "Zulu" for isiZulu
@@ -341,19 +448,36 @@
 
             <div class="info-panel">
                 <div class="card">
-                    <h3><i class="fas fa-tractor"></i> Registered Farm</h3>
+                    <h3><i class="fas fa-map-marker-alt"></i> Farm Registration</h3>
                     <div id="farmStatusDisplay">
-                        <p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>
+                        <p style="color: #6f7e68;">📍 No farm registered yet.<br>Select language, then register your farm.</p>
                     </div>
                     <div class="simulation-note">
-                        <i class="fas fa-satellite-dish"></i> <strong>Satellite imagery:</strong> Using siba1.png
+                        <i class="fas fa-satellite-dish"></i> <strong>Satellite Data:</strong> Sentinel-2 & Landsat 8<br>
+                        <i class="fas fa-chart-line"></i> <strong>Analysis:</strong> NDVI | Crop Health | Soil Moisture
                     </div>
                 </div>
+
                 <div class="card">
-                    <h3><i class="fas fa-chart-line"></i> Admin Monitor</h3>
+                    <h3><i class="fas fa-chart-line"></i> Decision Engine Status</h3>
+                    <div id="decisionStatus">
+                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Waiting for registration</p>
+                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> Waiting for registration</p>
+                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Waiting for registration</p>
+                    </div>
+                    <div class="benefits">
+                        <p><i class="fas fa-chart-simple"></i> <strong>Expected Benefits:</strong></p>
+                        <p>✓ Higher yields through precision insights</p>
+                        <p>✓ Reduced input waste (water, fertilizer)</p>
+                        <p>✓ Improved farming efficiency</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-database"></i> Admin Monitor</h3>
                     <table class="farm-table" id="adminTable">
                         <thead>
-                            <tr><th>Farm name</th><th>Crop</th><th>Last Alert</th>   </tr>
+                            <tr><th>Farm</th><th>Crop</th><th>Stage</th>   </tr>
                         </thead>
                         <tbody id="adminTableBody">
                             <tr><td colspan="3" style="text-align:center;">— no farms yet —</td> </tr>
@@ -363,7 +487,7 @@
             </div>
         </div>
         <footer>
-            🌍 English & isiZulu | Smart farming assistant with siba1.png imagery
+            <i class="fas fa-satellite"></i> Powered by Sentinel-2 & Landsat 8 | NDVI Analysis | AI Decision Engine | Real-time WhatsApp Alerts
         </footer>
     </div>
 
@@ -374,7 +498,7 @@
         let registrationStep = 0;
         let tempFarmData = {};
         let languageSelected = false;
-
+       
         // ALL IMAGES DIRECTED TO siba1.png
         const realSatelliteImages = {
             healthy: "siba1.png",
@@ -385,27 +509,26 @@
 
         const recommendationImages = {
             urea: "siba1.png",
-            compost: "siba4.png",
+            compost: "siba4.png", they achieve higher yields, reduce inpu
             harvest: "siba1.png",
             planting: "siba1.png"
         };
 
         // English translations
         const enTranslations = {
-            welcome: "👋 Welcome to Seed-to-Harvest! 🌾\n\nPlease select your preferred language:\n🇬🇧 Type 'English' for English\n🇿🇦 Type 'Zulu' for isiZulu",
-            languageConfirmed: (lang) => `✅ Language set to ${lang}. You can now register your farm.\n\nType "Register my farm" to begin 🌱`,
-            regConfirm: (farm, crop, location) => `✅ Registration confirmed!\n\n📍 Farm: ${farm}\n🌽 Crop: ${crop}\n🗺️ Location: ${location}\n\nNow analyzing your satellite view...`,
-            satelliteIntro: "🛰️ Here's your farm from our satellite view:",
-            healthGreen: "✅ Sector A: Healthy crops → No action needed",
-            healthYellow: "⚠️ Sector B: Nitrogen deficiency detected → Apply fertilizer",
-            healthBrown: "🔴 Sector C: Critical vegetation → Immediate action required",
-            recGrowth: (sector, fert) => `🌱 Growth Stage Alert: ${sector} needs ${fert} fertilizer.\n\n📌 Instructions: Apply 50kg per hectare, mix with water, apply evenly around the base of plants.`,
-            recSeed: "🌾 Planting window optimal this week. Prepare land for planting.\n\n📌 Instructions: Clear the land, till soil, and plant seeds 2-3 inches deep.",
-            recPreHarvest: "🚜 Pre-Harvest: Your crop is ready for harvest in Sector C.\n\n📌 Instructions: Harvest when grains are dry. Use proper storage to prevent moisture.",
+            languageConfirmed: (lang) => `✅ Language set to ${lang}.\n\n📍 Please share your GPS location or farm address to begin:\n\n"Register my farm" to start the registration process.`,
+            regConfirm: (farm, crop, location) => `✅ Registration confirmed!\n\n📍 GPS/Farm: ${farm}\n🌽 Crop: ${crop}\n🗺️ Location: ${location}\n\n🛰️ Analyzing Sentinel-2 & Landsat 8 imagery...\n📊 Running NDVI analysis...`,
+            satelliteIntro: "🛰️ Here's your farm from our satellite view (Sentinel-2/Landsat 8 NDVI analysis):",
+            healthGreen: "✅ Sector A: Healthy vegetation → Optimal conditions. Continue current practices.",
+            healthYellow: "⚠️ Sector B: Moderate vegetation stress → Nitrogen deficiency detected. Apply fertilizer.",
+            healthBrown: "🔴 Sector C: Poor vegetation → Immediate action required. Soil moisture low, urgent intervention needed.",
+            recGrowth: (sector, fert) => `🌱 Growth Stage Alert (Decision Engine): ${sector} requires ${fert} fertilizer.\n\n📌 Recommendation: Apply 50kg per hectare. Mix with water, apply evenly around plant base.`,
+            recSeed: "🌾 Planting Stage: Optimal zones identified. Soil suitability confirmed. Planting window optimal this week.",
+            recPreHarvest: "🚜 Pre-Harvest Stage: Yield prediction indicates ready for harvest in Sector C. Expected yield: Above average.",
             noFarm: "Please register your farm first using: Register my farm",
-            checkStage: (stage, sector) => `Current growth stage: ${stage}. Focus on ${sector} for immediate attention.`,
+            checkStage: (stage, sector) => `📊 Current Growth Stage: ${stage}\n\n🔍 NDVI Analysis: ${sector} requires immediate attention.`,
             helpMsg: "💡 Available commands:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
-            askLocation: "📍 Please enter your farm location or address:",
+            askLocation: "📍 Please enter your farm GPS coordinates or address (e.g., -26.2041, 28.0473 or 'Green Acres Farm, Limpopo'):",
             askCrop: "🌽 Great! Now please enter your crop type (e.g., maize, rice, wheat, cassava):",
             invalidCrop: "Please enter a valid crop type (e.g., maize, rice, wheat).",
             selectLanguageFirst: "🌐 Please select your language first by typing 'English' or 'Zulu'."
@@ -413,20 +536,19 @@
 
         // Zulu translations
         const zuTranslations = {
-            welcome: "👋 Siyakwemukela ku-Seed-to-Harvest! 🌾\n\nSicela ukhethe ulimi oluthandayo:\n🇬🇧 Thayipha 'English' ngesiNgisi\n🇿🇦 Thayipha 'Zulu' ngesiZulu",
-            languageConfirmed: (lang) => `✅ Ulimi lubekwe ku-${lang}. Manje ungabhalisa ipulazi lakho.\n\nThayipha "Register my farm" ukuze uqale 🌱`,
-            regConfirm: (farm, crop, location) => `✅ Ukubhaliswa kuqinisekisiwe!\n\n📍 Ipulazi: ${farm}\n🌽 Isitshalo: ${crop}\n🗺️ Indawo: ${location}\n\nManje sihlaziya isithombe sesathelayithi...`,
-            satelliteIntro: "🛰️ Nansi ipulazi lakho lisuka esibukweni sesathelayithi:",
-            healthGreen: "✅ Isigaba A: Izitshalo ezinempilo → Akukho okudingayo",
-            healthYellow: "⚠️ Isigaba B: Ukushoda kwe-nitrogen → Faka umanyolo",
-            healthBrown: "🔴 Isigaba C: Izitshalo ezimbi kakhulu → Isenzo esisheshayo",
-            recGrowth: (sector, fert) => `🌱 Isexwayiso sokukhula: ${sector} idinga umanyolo ${fert}.\n\n📌 Imiyalo: Faka 50kg ngehektha, xuba namanzi, faka ngokulinganayo ezimpandeni.`,
-            recSeed: "🌾 Isikhathi sokutshala silungile. Lungisa insimu.\n\n📌 Imiyalo: Sula insimu, hlwitha inhlabathi, utshale imbewu nge-2-3 amayintshi.",
-            recPreHarvest: "🚜 Ngaphambi kokuvuna: Isivuno silungele ukuvuna esigabeni C.\n\n📌 Imiyalo: Vuna lapho okusanhlamvu sezomile. Sebenzisa isitoreji esifanele.",
-            noFarm: "Sicela uqale ubhalise ipulazi: Register my farm",
-            checkStage: (stage, sector) => `Isigaba sokukhula: ${stage}. Gxila ku-${sector}.`,
-            helpMsg: "💡 Imiyalo:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
-            askLocation: "📍 Sicela ufake indawo noma ikheli lepulazi lakho kanye nama hecta:",
+            languageConfirmed: (lang) => `✅ Ulimi lubekwe ku-${lang}.\n\n📍 Sicela ufake indawo ye-GPS noma ikheli lepulazi lakho ukuze uqale:\n\n"Register my farm" ukuze uqale inqubo yokubhalisa.`,
+            regConfirm: (farm, crop, location) => `✅ Ukubhaliswa kuqinisekisiwe!\n\n📍 GPS/Ipulazi: ${farm}\n🌽 Isitshalo: ${crop}\n🗺️ Indawo: ${location}\n\n🛰️ Sihlaziya izithombe ze-Sentinel-2 ne-Landsat 8...\n📊 Senza ukuhlaziya kwe-NDVI...`,
+            satelliteIntro: "🛰️ Nansi ipulazi lakho lisuka esibukweni sesathelayithi (Ukuhlaziya kwe-NDVI kwe-Sentinel-2/Landsat 8):",
+            healthGreen: "✅ Isigaba A: Izitshalo ezinempilo → Izimo ezilungile. Qhubeka ngezinqubo ezikhona.",
+            healthYellow: "⚠️ Isigaba B: Ukucindezeleka okumaphakathi → Ukushoda kwe-nitrogen kutholakele. Faka umanyolo.",
+            healthBrown: "🔴 Isigaba C: Izitshalo ezimbi → Isenzo esisheshayo siyadingeka. Umswakama wenhlabathi uphansi, kudingeka ukungenelela okusheshayo.",
+            recGrowth: (sector, fert) => `🌱 Isexwayiso Sesigaba Sokukhula (I-Decision Engine): ${sector} idinga umanyolo ${fert}.\n\n📌 Isincomo: Faka 50kg ngehektha. Xuba namanzi, faka ngokulinganayo ezimpandeni zezitshalo.`,
+            recSeed: "🌾 Isigaba Sokutshala: Izindawo ezilungile zikhonjiwe. Ukufaneleka kwenhlabathi kuqinisekisiwe. Isikhathi sokutshala silungile kuleli sonto.",
+            recPreHarvest: "🚜 Isigaba Ngaphambi Kokuvuna: Isibikezelo sesivuno sikhombisa ukuthi silungele ukuvuna esigabeni C. Isivuno esilindelekile: Ngaphezulu kwesilinganiso.",
+            noFarm: "Sicela uqale ubhalise ipulazi lakho using: Register my farm",
+            checkStage: (stage, sector) => `📊 Isigaba Sokukhula Samanje: ${stage}\n\n🔍 Ukuhlaziya kwe-NDVI: ${sector} kudinga ukunakwa ngokushesha.`,
+            helpMsg: "💡 Imiyalo etholakalayo:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
+            askLocation: "📍 Sicela ufake izixhumanisi ze-GPS noma ikheli lepulazi lakho (isb., -26.2041, 28.0473 noma 'Green Acres Farm, Limpopo'):",
             askCrop: "🌽 Kuhle! Manje sicela ufake uhlobo lwesityalo (isb., ummbila, irayisi, ukolweni):",
             invalidCrop: "Sicela ufake uhlobo lwesityalo oluvumelekile (isb., ummbila, irayisi).",
             selectLanguageFirst: "🌐 Sicela ukhethe ulimi lwakho kuqala ngokuthayipha 'English' noma 'Zulu'."
@@ -445,30 +567,30 @@
             msgDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
             const bubbleDiv = document.createElement("div");
             bubbleDiv.className = "bubble";
-            
+
             if (imageUrl) {
                 const imgElement = document.createElement('img');
                 imgElement.src = imageUrl;
                 imgElement.className = "bubble-img";
                 imgElement.alt = "farm image";
-                imgElement.onerror = function() {
+                imgElement.onerror = function () {
                     this.style.display = 'none';
                     const errorDiv = document.createElement('div');
                     errorDiv.className = 'image-error';
                     errorDiv.innerHTML = '⚠️ Image not found. Please check siba1.png file path.';
                     this.parentNode.appendChild(errorDiv);
                 };
-                
+
                 const textDiv = document.createElement('div');
                 textDiv.innerHTML = content.replace(/\n/g, '<br>');
                 textDiv.style.marginBottom = '8px';
-                
+
                 bubbleDiv.appendChild(textDiv);
                 bubbleDiv.appendChild(imgElement);
             } else {
                 bubbleDiv.innerHTML = content.replace(/\n/g, '<br>');
             }
-            
+
             msgDiv.appendChild(bubbleDiv);
             chatDiv.appendChild(msgDiv);
             chatDiv.scrollTop = chatDiv.scrollHeight;
@@ -477,21 +599,37 @@
         function setLanguage(lang) {
             currentLang = lang;
             languageSelected = true;
-            
+
             const langLabel = document.getElementById("langDisplay");
             if (lang === "en") {
                 langLabel.innerHTML = "🇬🇧 English";
             } else {
                 langLabel.innerHTML = "🇿🇦 isiZulu";
             }
-            
-            // Show registration chips
+
             document.getElementById("registerChip").style.display = "inline-block";
             document.getElementById("checkChip").style.display = "inline-block";
             document.getElementById("alertChip").style.display = "inline-block";
             document.getElementById("helpChip").style.display = "inline-block";
-            
+
             addMessageToChat("bot", t("languageConfirmed", lang === "en" ? "English" : "isiZulu"));
+        }
+
+        function updateDecisionEngineDisplay() {
+            const decisionDiv = document.getElementById("decisionStatus");
+            if (currentFarm) {
+                decisionDiv.innerHTML = `
+                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Optimal zones identified | Soil suitability: Good</p>
+                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> NDVI analysis active | Irrigation recommendation available</p>
+                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Yield prediction: ${currentFarm.crop} ready in 2-3 weeks</p>
+                    `;
+            } else {
+                decisionDiv.innerHTML = `
+                        <p style="font-size: 0.85rem;">🌱 <strong>Planting:</strong> Waiting for registration</p>
+                        <p style="font-size: 0.85rem;">💧 <strong>Growth:</strong> Waiting for registration</p>
+                        <p style="font-size: 0.85rem;">🚜 <strong>Pre-Harvest:</strong> Waiting for registration</p>
+                    `;
+            }
         }
 
         function startRegistration() {
@@ -509,14 +647,14 @@
                 tempFarmData.location = userInput;
                 registrationStep = 2;
                 addMessageToChat("bot", t("askCrop"));
-            } 
+            }
             else if (registrationStep === 2) {
                 if (userInput.trim().length < 2) {
                     addMessageToChat("bot", t("invalidCrop"));
                     return;
                 }
                 tempFarmData.crop = userInput;
-                
+
                 currentFarm = {
                     name: tempFarmData.location,
                     crop: tempFarmData.crop,
@@ -524,20 +662,21 @@
                     location: tempFarmData.location,
                     stage: "Growth"
                 };
-                
+
                 updateAdminAndFarmDisplay();
+                updateDecisionEngineDisplay();
                 addMessageToChat("bot", t("regConfirm", tempFarmData.location, tempFarmData.crop, tempFarmData.location));
-                
+
                 setTimeout(() => {
                     addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.default);
-                    
+
                     setTimeout(() => {
                         const analysisText = `${t("healthGreen")}\n${t("healthYellow")}\n${t("healthBrown")}`;
                         addMessageToChat("bot", analysisText);
-                        
+
                         const recText = t("recGrowth", "Sector B", "Urea");
                         addMessageToChat("bot", recText, recommendationImages.urea);
-                        
+
                         lastRecommendation = { text: recText, image: recommendationImages.urea };
                         registrationStep = 0;
                         tempFarmData = {};
@@ -548,8 +687,7 @@
 
         async function processCommand(cmdRaw) {
             const cmd = cmdRaw.toLowerCase().trim();
-            
-            // Handle language selection
+
             if (!languageSelected) {
                 if (cmd === "english" || cmd === "en") {
                     setLanguage("en");
@@ -562,30 +700,29 @@
                     return;
                 }
             }
-            
-            // Handle active registration flow
+
             if (registrationStep > 0) {
                 processRegistration(cmdRaw);
                 return;
             }
-            
+
             if (cmd.includes("register") || cmd.includes("register my farm")) {
                 startRegistration();
                 return;
             }
-            
+
             if (!currentFarm && !cmd.includes("register")) {
                 addMessageToChat("bot", t("noFarm"));
                 return;
             }
-            
+
             if (cmd.includes("check growth stage")) {
                 const stageMsg = t("checkStage", currentFarm.stage, "Sector B and C");
                 addMessageToChat("bot", stageMsg);
                 addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.stress);
                 return;
             }
-            
+
             if (cmd.includes("send alert again")) {
                 if (lastRecommendation) {
                     addMessageToChat("bot", "🔁 Re-sending last alert:");
@@ -595,62 +732,62 @@
                 }
                 return;
             }
-            
+
             if (cmd.includes("i need help")) {
                 addMessageToChat("bot", t("helpMsg"));
                 return;
             }
-            
+
             addMessageToChat("bot", "❓ Command not recognized. Try: 'Register my farm', 'Check growth stage', 'Send alert again', 'I need help'.");
         }
-        
+
         function sendUserMessage(text) {
             if (!text.trim()) return;
             addMessageToChat("user", text);
             processCommand(text);
         }
-        
+
         function updateAdminAndFarmDisplay() {
             const farmDiv = document.getElementById("farmStatusDisplay");
             if (currentFarm) {
                 farmDiv.innerHTML = `
-                    <p><strong>🌾 ${currentFarm.name}</strong><br>📍 ${currentFarm.location}<br>🌽 Crop: ${currentFarm.crop}<br>🗣️ Language: ${currentFarm.language}<br>📈 Stage: ${currentFarm.stage}</p>
-                    <div style="margin-top:10px"><i class="fas fa-map-marker-alt"></i> Using siba1.png imagery</div>
-                `;
+                        <p><strong>🌾 ${currentFarm.name}</strong><br>📍 GPS: ${currentFarm.location}<br>🌽 Crop: ${currentFarm.crop}<br>🗣️ Language: ${currentFarm.language}<br>📈 Stage: ${currentFarm.stage}</p>
+                        <div style="margin-top:10px; font-size:0.75rem;">
+                            <i class="fas fa-satellite"></i> Sentinel-2 & Landsat 8 Active<br>
+                            <i class="fas fa-chart-line"></i> NDVI Analysis: Running
+                        </div>
+                    `;
             } else {
-                farmDiv.innerHTML = `<p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>`;
+                farmDiv.innerHTML = `<p style="color: #6f7e68;">📍 No farm registered yet.<br>Select language, then register your farm.</p>`;
             }
-            
+
             const tbody = document.getElementById("adminTableBody");
             if (currentFarm) {
                 tbody.innerHTML = `
-                    <tr><td>${currentFarm.name}</td><td>${currentFarm.crop}</td><td><span class="alert-badge">Active</span></td></tr>
-                `;
+                        <tr><td>${currentFarm.name}</td><td>${currentFarm.crop}</td><td><span class="alert-badge">Active</span></td></tr>
+                    `;
             } else {
                 tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">— no farms yet —</td></tr>`;
             }
         }
-        
-        // Event listeners
+
         document.getElementById("sendBtn").addEventListener("click", () => {
             const input = document.getElementById("messageInput");
             sendUserMessage(input.value);
             input.value = "";
         });
-        
+
         document.getElementById("messageInput").addEventListener("keypress", (e) => {
             if (e.key === "Enter") document.getElementById("sendBtn").click();
         });
-        
-        // Language selection chips
+
         document.querySelectorAll("[data-lang]").forEach(chip => {
             chip.addEventListener("click", () => {
                 const lang = chip.getAttribute("data-lang");
                 setLanguage(lang);
             });
         });
-        
-        // Command chips
+
         document.querySelectorAll("[data-cmd]").forEach(chip => {
             chip.addEventListener("click", () => {
                 const cmd = chip.getAttribute("data-cmd");
