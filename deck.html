@@ -2,991 +2,659 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VerifyX - Automated Payment Verification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Seed-to-Harvest</title>
+    <!-- Google Fonts & simple styling reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
+
         body {
-            background: #f8fbff;
-            color: #333;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #eaf7e6 0%, #d4e9cf 100%);
+            color: #1a3c1f;
+            padding: 1.5rem;
         }
-        
-        .slide {
-            width: 100%;
-            min-height: 100vh;
-            padding: 80px 5%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            background: white;
-        }
-        
-        .slide:nth-child(even) {
-            background: #f8fbff;
-        }
-        
-        .title-slide {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .title-slide::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 102, 204, 0.05) 0%, transparent 50%),
-                linear-gradient(135deg, transparent 0%, rgba(0, 102, 204, 0.03) 100%);
-            z-index: 0;
-        }
-        
-        .slide-content {
-            max-width: 1200px;
+
+        .demo-container {
+            max-width: 1400px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
-        
-        h1 {
-            font-size: 4.5em;
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #005687;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            background: linear-gradient(135deg, #1e5622, #4a934a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
         }
-        
-        h2 {
-            font-size: 2.8em;
-            font-weight: 600;
-            color: #005687;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        
-        h3 {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #005687;
-            margin-bottom: 20px;
-        }
-        
-        .subtitle {
-            font-size: 1.5em;
-            color: #666;
-            font-weight: 400;
-            max-width: 700px;
-            margin: 0 auto 50px;
-            line-height: 1.6;
-        }
-        
-        .payment-icon {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            width: 70px;
-            height: 70px;
-            background: #005687;
-            border-radius: 50%;
+
+        .dashboard-grid {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8em;
-            box-shadow: 0 5px 15px rgba(0, 86, 135, 0.3);
-        }
-        
-        .problem-points {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .problem-point {
-            display: flex;
-            align-items: center;
-            padding: 25px;
-            border-left: 5px solid #ff6b6b;
-            background: #fff9f9;
-            border-radius: 0 10px 10px 0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .problem-point:hover {
-            transform: translateX(10px);
-        }
-        
-        .problem-icon {
-            font-size: 2.2em;
-            margin-right: 25px;
-            color: #ff6b6b;
-            min-width: 60px;
-            text-align: center;
-        }
-        
-        .problem-text {
-            font-size: 1.2em;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .solution-flow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 40px 0;
-            background: #f8fbff;
-            padding: 30px;
-            border-radius: 15px;
-            position: relative;
-        }
-        
-        .flow-step {
-            text-align: center;
-            padding: 20px;
-            flex: 1;
-            position: relative;
-        }
-        
-        .flow-icon {
-            width: 80px;
-            height: 80px;
-            background: #005687;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            color: white;
-            font-size: 1.8em;
-            box-shadow: 0 5px 15px rgba(0, 86, 135, 0.2);
-        }
-        
-        .flow-arrow {
-            font-size: 2em;
-            color: #005687;
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .flow-step:last-child .flow-arrow {
-            display: none;
-        }
-        
-        .benefits-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-        }
-        
-        .benefit {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-            padding: 15px;
-            background: #f0f7ff;
-            border-radius: 8px;
-            width: 100%;
-        }
-        
-        .checkmark {
-            color: #00a896;
-            margin-right: 15px;
-            font-size: 1.5em;
-        }
-        
-        .process-steps {
-            display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-            gap: 20px;
-        }
-        
-        .step {
-            flex: 1;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            background: #005687;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px auto;
-            font-weight: 600;
-            font-size: 1.3em;
-            box-shadow: 0 5px 15px rgba(0, 86, 135, 0.3);
-        }
-        
-        .step-content {
-            background: #f8fbff;
-            padding: 20px;
-            border-radius: 10px;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 1.8rem;
             justify-content: center;
         }
-        
-        .dashboard-mockup {
-            background: #f5f9ff;
-            border: 2px solid #e1e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 30px;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .dashboard-header {
-            height: 20px;
-            background: #e1e8f0;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            width: 60%;
-        }
-        
-        .dashboard-stats {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .stat-box {
-            height: 60px;
-            background: #e1e8f0;
-            border-radius: 5px;
-            flex: 1;
-        }
-        
-        .dashboard-content {
-            display: flex;
-            gap: 15px;
-            height: 80px;
-        }
-        
-        .content-left {
+
+        .whatsapp-card {
             flex: 2;
-            background: #e1e8f0;
-            border-radius: 5px;
-        }
-        
-        .content-right {
-            flex: 1;
-            background: #e1e8f0;
-            border-radius: 5px;
-        }
-        
-        .tech-pillars {
+            min-width: 320px;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 32, 0, 0.3);
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-            gap: 20px;
+            flex-direction: column;
         }
-        
-        .pillar {
-            flex: 1;
-            padding: 30px;
-            text-align: center;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-top: 5px solid #005687;
-            transition: transform 0.3s ease;
+
+        .info-panel {
+            flex: 1.2;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
-        
-        .pillar:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pillar-icon {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #005687;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .feature-card {
-            padding: 25px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+
+        .wa-header {
+            background: #075e54;
+            color: white;
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
-            border-left: 5px solid #005687;
-            transition: transform 0.3s ease;
+            gap: 0.8rem;
         }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
+
+        .wa-header i {
+            font-size: 1.6rem;
         }
-        
-        .feature-icon {
-            font-size: 1.8em;
-            margin-right: 20px;
-            color: #005687;
+
+        .wa-header .bot-info {
+            flex-grow: 1;
         }
-        
-        .customer-segments {
-            display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-            gap: 20px;
-        }
-        
-        .segment {
-            flex: 1;
-            padding: 25px;
-            text-align: center;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .segment:hover {
-            transform: translateY(-5px);
-        }
-        
-        .segment-icon {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #005687;
-        }
-        
-        .metrics {
-            display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-            gap: 20px;
-        }
-        
-        .metric {
-            flex: 1;
-            text-align: center;
-            padding: 25px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .metric-value {
-            font-size: 3em;
+
+        .wa-header .bot-name {
             font-weight: 700;
-            color: #00a896;
-            margin: 15px 0;
+            font-size: 1.1rem;
         }
-        
-        .metric-bar {
-            height: 10px;
-            background: #e1e8f0;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
+
+        .wa-header .status {
+            font-size: 0.75rem;
+            opacity: 0.9;
         }
-        
-        .metric-fill {
-            height: 100%;
-            background: #00a896;
-            border-radius: 5px;
+
+        .wa-header .language-badge {
+            background: #128c7e;
+            padding: 0.25rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
         }
-        
-        .comparison-table {
+
+        .chat-area {
+            background: #e5ddd5;
+            background-image: radial-gradient(circle at 10% 30%, rgba(200, 180, 140, 0.05) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            min-height: 500px;
+            max-height: 550px;
+            overflow-y: auto;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            max-width: 85%;
+            animation: fadeSlideUp 0.2s ease;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            justify-content: flex-end;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .bubble {
+            padding: 0.65rem 1rem;
+            border-radius: 1.2rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message .bubble {
+            background: #dcf8c5;
+            color: #1e3a1a;
+            border-bottom-right-radius: 0.3rem;
+        }
+
+        .bot-message .bubble {
+            background: white;
+            color: #1f2e1c;
+            border-bottom-left-radius: 0.3rem;
+        }
+
+        .bubble-img {
+            margin-top: 8px;
+            border-radius: 16px;
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #cbd5c0;
+            cursor: pointer;
+            object-fit: cover;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem 0.8rem;
+            background: #f9fafc;
+            flex-wrap: wrap;
+            border-top: 1px solid #e2e8e3;
+        }
+
+        .chip {
+            background: #eef2e6;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.1s;
+            color: #1f4f1c;
+        }
+
+        .chip:hover {
+            background: #cfe3c5;
+        }
+
+        .input-area {
+            background: #f0f2f5;
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.6rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 30px;
+            font-family: inherit;
+            outline: none;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .input-area button {
+            background: #25d366;
+            border: none;
+            width: 42px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .input-area button:hover {
+            background: #128c7e;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.2rem;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid #3cac3c;
+            padding-left: 0.6rem;
+        }
+
+        .farm-table {
+            font-size: 0.85rem;
             width: 100%;
             border-collapse: collapse;
-            margin: 40px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 10px;
-            overflow: hidden;
         }
-        
-        .comparison-table th, .comparison-table td {
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #e1e8f0;
+
+        .farm-table th, .farm-table td {
+            padding: 0.5rem 0.2rem;
+            border-bottom: 1px solid #e2e8dd;
+            text-align: left;
         }
-        
-        .comparison-table th {
-            background: #f8fbff;
+
+        .alert-badge {
+            background: #fff3e0;
+            border-radius: 20px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            color: #005687;
         }
-        
-        .check-cell {
-            color: #00a896;
-            font-size: 1.5em;
+
+        .simulation-note {
+            font-size: 0.75rem;
+            color: #5c715a;
+            margin-top: 1rem;
+            border-top: 1px dashed #cbd5c0;
+            padding-top: 0.7rem;
         }
-        
-        .cross-cell {
-            color: #ff6b6b;
-            font-size: 1.5em;
-        }
-        
-        .warning-cell {
-            color: #ffa726;
-            font-size: 1.5em;
-        }
-        
-        .demo-preview {
-            display: flex;
-            gap: 30px;
-            margin: 40px 0;
-            height: 350px;
-        }
-        
-        .demo-panel {
-            flex: 1;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .demo-header {
-            height: 20px;
-            background: #e1e8f0;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .demo-content {
-            flex: 1;
-            background: #f8fbff;
-            border-radius: 5px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .demo-line {
-            height: 10px;
-            background: #e1e8f0;
-            border-radius: 5px;
-        }
-        
-        .demo-line.short {
-            width: 60%;
-        }
-        
-        .demo-line.medium {
-            width: 80%;
-        }
-        
-        .demo-button {
-            height: 40px;
-            background: #005687;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .cta-button {
-            padding: 15px 30px;
-            background: #005687;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 86, 135, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 86, 135, 0.4);
-            background: #004670;
-        }
-        
-        .contact-info {
+
+        footer {
             text-align: center;
-            margin-top: 40px;
-            color: #666;
-            line-height: 1.8;
+            margin-top: 2.5rem;
+            font-size: 0.75rem;
+            color: #3d6538;
         }
-        
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #005687;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: #005687;
-        }
-        
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #005687;
-            font-weight: 500;
-            z-index: 100;
-        }
-        
-        .scroll-arrow {
-            margin-top: 5px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
         }
-        
-        .slide-counter {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            color: #666;
-            font-size: 0.9em;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 8px 15px;
-            border-radius: 20px;
-            z-index: 100;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3em;
-            }
-            
-            h2 {
-                font-size: 2.2em;
-            }
-            
-            .process-steps, .tech-pillars, .customer-segments, .metrics {
-                flex-direction: column;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .demo-preview {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .solution-flow {
-                flex-direction: column;
-            }
-            
-            .flow-arrow {
-                display: none;
-            }
+
+        .image-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">VerifyX</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#problem">Problem</a>
-            <a href="#solution">Solution</a>
-            <a href="#features">Features</a>
-            <a href="#demo">Demo</a>
-            <a href="#contact">Get Started</a>
+    <div class="demo-container">
+        <div class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: rgba(255,255,240,0.4); border-radius: 3rem; padding: 2rem 2rem; margin-bottom: 2rem;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <img src="logo.jpg" alt="Logo" style="height: 80px; width: auto; margin-bottom: 0.5rem;" onerror="this.src='https://via.placeholder.com/120x80?text=Your+Logo'">
+            </div>
+            <div>
+                <h1 style="font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #1e5622, #4a934a); background-clip: text; -webkit-background-clip: text; color: transparent; letter-spacing: -0.3px; margin: 0 0 0.5rem 0;">
+                    <i class="fas fa-seedling"></i> Seed-to-Harvest
+                </h1>
+            </div>
         </div>
-    </nav>
 
-    <!-- Slide 1: Title Slide -->
-    <section id="home" class="slide title-slide">
-        <div class="slide-content">
-            <h1>VerifyX</h1>
-            <p class="subtitle">Automated Payment Verification for Informal Businesses</p>
-            <div class="cta-buttons">
-                <button class="cta-button">Start Free Trial</button>
-                <button class="cta-button">Schedule Demo</button>
-            </div>
-        </div>
-        <div class="payment-icon">
-            <i class="fas fa-shield-check"></i>
-        </div>
-        <div class="scroll-indicator">
-            Scroll to explore
-            <div class="scroll-arrow">↓</div>
-        </div>
-    </section>
-    
-    <!-- Slide 2: Problem Statement -->
-    <section id="problem" class="slide">
-        <div class="slide-content">
-            <h2>The Payment Verification Challenge</h2>
-            
-            <div class="problem-points">
-                <div class="problem-point">
-                    <div class="problem-icon"><i class="fas fa-clock"></i></div>
-                    <div class="problem-text">Time-consuming manual checks that take hours instead of minutes</div>
-                </div>
-                
-                <div class="problem-point">
-                    <div class="problem-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                    <div class="problem-text">High risk of fraudulent payments with no protection mechanisms</div>
-                </div>
-                
-                <div class="problem-point">
-                    <div class="problem-icon"><i class="fas fa-frown"></i></div>
-                    <div class="problem-text">Poor customer experience with confusing payment processes</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 3: Solution -->
-    <section id="solution" class="slide">
-        <div class="slide-content">
-            <h2>How VerifyX Solves This</h2>
-            
-            <div class="solution-flow">
-                <div class="flow-step">
-                    <div class="flow-icon"><i class="fas fa-building"></i></div>
-                    <div class="flow-label">Business</div>
-                    <div class="flow-arrow">→</div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="flow-icon"><i class="fas fa-link"></i></div>
-                    <div class="flow-label">Payment Link</div>
-                    <div class="flow-arrow">→</div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="flow-icon"><i class="fas fa-user"></i></div>
-                    <div class="flow-label">Customer</div>
-                    <div class="flow-arrow">→</div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="flow-icon"><i class="fas fa-robot"></i></div>
-                    <div class="flow-label">Automated Verification</div>
-                    <div class="flow-arrow">→</div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="flow-icon"><i class="fas fa-check-circle"></i></div>
-                    <div class="flow-label">Confirmation</div>
-                </div>
-            </div>
-            
-            <div class="benefits-container">
-                <div style="width: 100%;">
-                    <div class="benefit">
-                        <div class="checkmark"><i class="fas fa-check"></i></div>
-                        <div>Automated verification technology that eliminates manual work</div>
+        <div class="dashboard-grid">
+            <div class="whatsapp-card">
+                <div class="wa-header">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="bot-info">
+                        <div class="bot-name">Seed-to-Harvest Bot</div>
+                        <div class="status">Online</div>
                     </div>
-                    
-                    <div class="benefit">
-                        <div class="checkmark"><i class="fas fa-check"></i></div>
-                        <div>Real-time fraud prevention with advanced algorithms</div>
-                    </div>
-                    
-                    <div class="benefit">
-                        <div class="checkmark"><i class="fas fa-check"></i></div>
-                        <div>Seamless customer experience from payment to confirmation</div>
-                    </div>
+                    <div class="language-badge" id="langDisplay">🇬🇧 English</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 4: Process Flow -->
-    <section class="slide">
-        <div class="slide-content">
-            <h2>For Business Owners: Simple & Fast</h2>
-            
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Create payment link</h3>
-                        <p>Generate unique payment links in your dashboard in seconds</p>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Share with customer</h3>
-                        <p>Send via WhatsApp, Instagram, or other preferred platforms</p>
-                    </div>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Get notifications</h3>
-                        <p>Receive automatic verification alerts when payments are confirmed</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-mockup">
-                <div class="dashboard-header"></div>
-                <div class="dashboard-stats">
-                    <div class="stat-box"></div>
-                    <div class="stat-box"></div>
-                    <div class="stat-box"></div>
-                </div>
-                <div class="dashboard-content">
-                    <div class="content-left"></div>
-                    <div class="content-right"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 5: Features -->
-    <section id="features" class="slide">
-        <div class="slide-content">
-            <h2>Key Features That Matter</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <div>
-                        <h3>Instant Verification</h3>
-                        <p>Real-time payment confirmation with automated processing</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                    <div>
-                        <h3>Fraud Detection</h3>
-                        <p>Advanced duplicate payment checking and suspicious activity alerts</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <div>
-                        <h3>Mobile-First Design</h3>
-                        <p>Works perfectly on all devices with responsive interface</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    <div>
-                        <h3>Simple Dashboard</h3>
-                        <p>Easy-to-use business interface with clear analytics</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
-                    <div>
-                        <h3>Easy Integration</h3>
-                        <p>No technical skills required to set up and start using</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
-                    <div>
-                        <h3>Cost Effective</h3>
-                        <p>Affordable pricing designed for small businesses</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 6: Demo -->
-    <section id="demo" class="slide">
-        <div class="slide-content">
-            <h2>See It In Action</h2>
-            
-            <div class="demo-preview">
-                <div class="demo-panel">
-                    <div class="demo-header"></div>
-                    <div class="demo-content">
-                        <div class="demo-line short"></div>
-                        <div class="demo-line medium"></div>
-                        <div class="demo-line"></div>
-                        <div class="demo-line short"></div>
-                        <div class="demo-line"></div>
-                        <div class="demo-button"></div>
-                    </div>
-                    <div style="text-align: center; margin-top: 15px; color: #005687; font-weight: 500;">Business Dashboard</div>
-                </div>
-                
-                <div class="demo-panel">
-                    <div class="demo-header"></div>
-                    <div class="demo-content">
-                        <div class="demo-line short"></div>
-                        <div class="demo-line"></div>
-                        <div style="height: 100px; background: #e1e8f0; border-radius: 5px; margin: 10px 0; display: flex; align-items: center; justify-content: center; color: #005687; font-weight: 500;">
-                            <i class="fas fa-upload"></i> Upload Payment Proof
+                <div class="chat-area" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="bubble">
+                            👋 Welcome to Seed-to-Harvest! 🌾<br /><br />
+                            Please select your preferred language:<br />
+                            🇬🇧 Type "English" for English<br />
+                            🇿🇦 Type "Zulu" for isiZulu
                         </div>
-                        <div class="demo-line short"></div>
-                        <div class="demo-button"></div>
                     </div>
-                    <div style="text-align: center; margin-top: 15px; color: #005687; font-weight: 500;">Customer Payment Page</div>
+                </div>
+                <div class="quick-actions">
+                    <div class="chip" data-lang="en">🇬🇧 English</div>
+                    <div class="chip" data-lang="zu">🇿🇦 Zulu</div>
+                    <div class="chip" data-cmd="register my farm" style="display:none;" id="registerChip">📝 Register farm</div>
+                    <div class="chip" data-cmd="check growth stage" style="display:none;" id="checkChip">📊 Check growth stage</div>
+                    <div class="chip" data-cmd="send alert again" style="display:none;" id="alertChip">🔔 Send alert again</div>
+                    <div class="chip" data-cmd="I need help" style="display:none;" id="helpChip">🆘 I need help</div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Type your response..." autocomplete="off">
+                    <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 20px; color: #666;">
-                <p>Click to interact with live demo</p>
+
+            <div class="info-panel">
+                <div class="card">
+                    <h3><i class="fas fa-tractor"></i> Registered Farm</h3>
+                    <div id="farmStatusDisplay">
+                        <p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>
+                    </div>
+                    <div class="simulation-note">
+                        <i class="fas fa-satellite-dish"></i> <strong>Satellite imagery:</strong> Using siba1.png
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Admin Monitor</h3>
+                    <table class="farm-table" id="adminTable">
+                        <thead>
+                            <tr><th>Farm name</th><th>Crop</th><th>Last Alert</th>   </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <tr><td colspan="3" style="text-align:center;">— no farms yet —</td> </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </section>
-    
-    <!-- Slide 7: Contact -->
-    <section id="contact" class="slide title-slide">
-        <div class="slide-content">
-            <h1>Ready to Automate Your Payments?</h1>
-            <p class="subtitle">Join thousands of businesses already using VerifyX to streamline their payment processes</p>
-            
-            <div class="cta-buttons">
-                <button class="cta-button">Start Free Trial</button>
-                <button class="cta-button">Schedule Demo</button>
-                <button class="cta-button">Contact Sales</button>
-            </div>
-            
-            <div class="contact-info">
-                <p><strong>www.verifyxpay.com | hello@verifyxpay.com | +1 (555) 123-4567</strong></p>
-                <p>@VerifyXPay on all social platforms</p>
-            </div>
-        </div>
-    </section>
+        <footer>
+            🌍 English & isiZulu | Smart farming assistant with siba1.png imagery
+        </footer>
+    </div>
 
     <script>
-        // Update active nav link on scroll
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.slide');
-            const navLinks = document.querySelectorAll('.nav-links a');
+        let currentFarm = null;
+        let lastRecommendation = null;
+        let currentLang = null;
+        let registrationStep = 0;
+        let tempFarmData = {};
+        let languageSelected = false;
+
+        // ALL IMAGES DIRECTED TO siba1.png
+        const realSatelliteImages = {
+            healthy: "siba1.png",
+            stress: "siba2.png",
+            poor: "siba3.png",
+            default: "siba1.png"
+        };
+
+        const recommendationImages = {
+            urea: "siba1.png",
+            compost: "siba4.png",
+            harvest: "siba1.png",
+            planting: "siba1.png"
+        };
+
+        // English translations
+        const enTranslations = {
+            welcome: "👋 Welcome to Seed-to-Harvest! 🌾\n\nPlease select your preferred language:\n🇬🇧 Type 'English' for English\n🇿🇦 Type 'Zulu' for isiZulu",
+            languageConfirmed: (lang) => `✅ Language set to ${lang}. You can now register your farm.\n\nType "Register my farm" to begin 🌱`,
+            regConfirm: (farm, crop, location) => `✅ Registration confirmed!\n\n📍 Farm: ${farm}\n🌽 Crop: ${crop}\n🗺️ Location: ${location}\n\nNow analyzing your satellite view...`,
+            satelliteIntro: "🛰️ Here's your farm from our satellite view:",
+            healthGreen: "✅ Sector A: Healthy crops → No action needed",
+            healthYellow: "⚠️ Sector B: Nitrogen deficiency detected → Apply fertilizer",
+            healthBrown: "🔴 Sector C: Critical vegetation → Immediate action required",
+            recGrowth: (sector, fert) => `🌱 Growth Stage Alert: ${sector} needs ${fert} fertilizer.\n\n📌 Instructions: Apply 50kg per hectare, mix with water, apply evenly around the base of plants.`,
+            recSeed: "🌾 Planting window optimal this week. Prepare land for planting.\n\n📌 Instructions: Clear the land, till soil, and plant seeds 2-3 inches deep.",
+            recPreHarvest: "🚜 Pre-Harvest: Your crop is ready for harvest in Sector C.\n\n📌 Instructions: Harvest when grains are dry. Use proper storage to prevent moisture.",
+            noFarm: "Please register your farm first using: Register my farm",
+            checkStage: (stage, sector) => `Current growth stage: ${stage}. Focus on ${sector} for immediate attention.`,
+            helpMsg: "💡 Available commands:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
+            askLocation: "📍 Please enter your farm location or address:",
+            askCrop: "🌽 Great! Now please enter your crop type (e.g., maize, rice, wheat, cassava):",
+            invalidCrop: "Please enter a valid crop type (e.g., maize, rice, wheat).",
+            selectLanguageFirst: "🌐 Please select your language first by typing 'English' or 'Zulu'."
+        };
+
+        // Zulu translations
+        const zuTranslations = {
+            welcome: "👋 Siyakwemukela ku-Seed-to-Harvest! 🌾\n\nSicela ukhethe ulimi oluthandayo:\n🇬🇧 Thayipha 'English' ngesiNgisi\n🇿🇦 Thayipha 'Zulu' ngesiZulu",
+            languageConfirmed: (lang) => `✅ Ulimi lubekwe ku-${lang}. Manje ungabhalisa ipulazi lakho.\n\nThayipha "Register my farm" ukuze uqale 🌱`,
+            regConfirm: (farm, crop, location) => `✅ Ukubhaliswa kuqinisekisiwe!\n\n📍 Ipulazi: ${farm}\n🌽 Isitshalo: ${crop}\n🗺️ Indawo: ${location}\n\nManje sihlaziya isithombe sesathelayithi...`,
+            satelliteIntro: "🛰️ Nansi ipulazi lakho lisuka esibukweni sesathelayithi:",
+            healthGreen: "✅ Isigaba A: Izitshalo ezinempilo → Akukho okudingayo",
+            healthYellow: "⚠️ Isigaba B: Ukushoda kwe-nitrogen → Faka umanyolo",
+            healthBrown: "🔴 Isigaba C: Izitshalo ezimbi kakhulu → Isenzo esisheshayo",
+            recGrowth: (sector, fert) => `🌱 Isexwayiso sokukhula: ${sector} idinga umanyolo ${fert}.\n\n📌 Imiyalo: Faka 50kg ngehektha, xuba namanzi, faka ngokulinganayo ezimpandeni.`,
+            recSeed: "🌾 Isikhathi sokutshala silungile. Lungisa insimu.\n\n📌 Imiyalo: Sula insimu, hlwitha inhlabathi, utshale imbewu nge-2-3 amayintshi.",
+            recPreHarvest: "🚜 Ngaphambi kokuvuna: Isivuno silungele ukuvuna esigabeni C.\n\n📌 Imiyalo: Vuna lapho okusanhlamvu sezomile. Sebenzisa isitoreji esifanele.",
+            noFarm: "Sicela uqale ubhalise ipulazi: Register my farm",
+            checkStage: (stage, sector) => `Isigaba sokukhula: ${stage}. Gxila ku-${sector}.`,
+            helpMsg: "💡 Imiyalo:\n• Register my farm\n• Check growth stage\n• Send alert again\n• I need help",
+            askLocation: "📍 Sicela ufake indawo noma ikheli lepulazi lakho kanye nama hecta:",
+            askCrop: "🌽 Kuhle! Manje sicela ufake uhlobo lwesityalo (isb., ummbila, irayisi, ukolweni):",
+            invalidCrop: "Sicela ufake uhlobo lwesityalo oluvumelekile (isb., ummbila, irayisi).",
+            selectLanguageFirst: "🌐 Sicela ukhethe ulimi lwakho kuqala ngokuthayipha 'English' noma 'Zulu'."
+        };
+
+        function t(key, ...args) {
+            let translations = currentLang === "zu" ? zuTranslations : enTranslations;
+            let str = translations[key] || enTranslations[key] || key;
+            if (typeof str === 'function') str = str(...args);
+            return str;
+        }
+
+        function addMessageToChat(sender, content, imageUrl = null) {
+            const chatDiv = document.getElementById("chatMessages");
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
+            const bubbleDiv = document.createElement("div");
+            bubbleDiv.className = "bubble";
             
-            let current = '';
+            if (imageUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                imgElement.className = "bubble-img";
+                imgElement.alt = "farm image";
+                imgElement.onerror = function() {
+                    this.style.display = 'none';
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'image-error';
+                    errorDiv.innerHTML = '⚠️ Image not found. Please check siba1.png file path.';
+                    this.parentNode.appendChild(errorDiv);
+                };
+                
+                const textDiv = document.createElement('div');
+                textDiv.innerHTML = content.replace(/\n/g, '<br>');
+                textDiv.style.marginBottom = '8px';
+                
+                bubbleDiv.appendChild(textDiv);
+                bubbleDiv.appendChild(imgElement);
+            } else {
+                bubbleDiv.innerHTML = content.replace(/\n/g, '<br>');
+            }
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
+            msgDiv.appendChild(bubbleDiv);
+            chatDiv.appendChild(msgDiv);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            languageSelected = true;
+            
+            const langLabel = document.getElementById("langDisplay");
+            if (lang === "en") {
+                langLabel.innerHTML = "🇬🇧 English";
+            } else {
+                langLabel.innerHTML = "🇿🇦 isiZulu";
+            }
+            
+            // Show registration chips
+            document.getElementById("registerChip").style.display = "inline-block";
+            document.getElementById("checkChip").style.display = "inline-block";
+            document.getElementById("alertChip").style.display = "inline-block";
+            document.getElementById("helpChip").style.display = "inline-block";
+            
+            addMessageToChat("bot", t("languageConfirmed", lang === "en" ? "English" : "isiZulu"));
+        }
+
+        function startRegistration() {
+            if (!languageSelected) {
+                addMessageToChat("bot", t("selectLanguageFirst"));
+                return;
+            }
+            registrationStep = 1;
+            tempFarmData = {};
+            addMessageToChat("bot", t("askLocation"));
+        }
+
+        function processRegistration(userInput) {
+            if (registrationStep === 1) {
+                tempFarmData.location = userInput;
+                registrationStep = 2;
+                addMessageToChat("bot", t("askCrop"));
+            } 
+            else if (registrationStep === 2) {
+                if (userInput.trim().length < 2) {
+                    addMessageToChat("bot", t("invalidCrop"));
+                    return;
                 }
-            });
+                tempFarmData.crop = userInput;
+                
+                currentFarm = {
+                    name: tempFarmData.location,
+                    crop: tempFarmData.crop,
+                    language: currentLang === "en" ? "English" : "isiZulu",
+                    location: tempFarmData.location,
+                    stage: "Growth"
+                };
+                
+                updateAdminAndFarmDisplay();
+                addMessageToChat("bot", t("regConfirm", tempFarmData.location, tempFarmData.crop, tempFarmData.location));
+                
+                setTimeout(() => {
+                    addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.default);
+                    
+                    setTimeout(() => {
+                        const analysisText = `${t("healthGreen")}\n${t("healthYellow")}\n${t("healthBrown")}`;
+                        addMessageToChat("bot", analysisText);
+                        
+                        const recText = t("recGrowth", "Sector B", "Urea");
+                        addMessageToChat("bot", recText, recommendationImages.urea);
+                        
+                        lastRecommendation = { text: recText, image: recommendationImages.urea };
+                        registrationStep = 0;
+                        tempFarmData = {};
+                    }, 1000);
+                }, 500);
+            }
+        }
+
+        async function processCommand(cmdRaw) {
+            const cmd = cmdRaw.toLowerCase().trim();
             
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
+            // Handle language selection
+            if (!languageSelected) {
+                if (cmd === "english" || cmd === "en") {
+                    setLanguage("en");
+                    return;
+                } else if (cmd === "zulu" || cmd === "zu") {
+                    setLanguage("zu");
+                    return;
+                } else {
+                    addMessageToChat("bot", t("selectLanguageFirst"));
+                    return;
                 }
+            }
+            
+            // Handle active registration flow
+            if (registrationStep > 0) {
+                processRegistration(cmdRaw);
+                return;
+            }
+            
+            if (cmd.includes("register") || cmd.includes("register my farm")) {
+                startRegistration();
+                return;
+            }
+            
+            if (!currentFarm && !cmd.includes("register")) {
+                addMessageToChat("bot", t("noFarm"));
+                return;
+            }
+            
+            if (cmd.includes("check growth stage")) {
+                const stageMsg = t("checkStage", currentFarm.stage, "Sector B and C");
+                addMessageToChat("bot", stageMsg);
+                addMessageToChat("bot", t("satelliteIntro"), realSatelliteImages.stress);
+                return;
+            }
+            
+            if (cmd.includes("send alert again")) {
+                if (lastRecommendation) {
+                    addMessageToChat("bot", "🔁 Re-sending last alert:");
+                    addMessageToChat("bot", lastRecommendation.text, lastRecommendation.image);
+                } else {
+                    addMessageToChat("bot", "No previous alerts found.");
+                }
+                return;
+            }
+            
+            if (cmd.includes("i need help")) {
+                addMessageToChat("bot", t("helpMsg"));
+                return;
+            }
+            
+            addMessageToChat("bot", "❓ Command not recognized. Try: 'Register my farm', 'Check growth stage', 'Send alert again', 'I need help'.");
+        }
+        
+        function sendUserMessage(text) {
+            if (!text.trim()) return;
+            addMessageToChat("user", text);
+            processCommand(text);
+        }
+        
+        function updateAdminAndFarmDisplay() {
+            const farmDiv = document.getElementById("farmStatusDisplay");
+            if (currentFarm) {
+                farmDiv.innerHTML = `
+                    <p><strong>🌾 ${currentFarm.name}</strong><br>📍 ${currentFarm.location}<br>🌽 Crop: ${currentFarm.crop}<br>🗣️ Language: ${currentFarm.language}<br>📈 Stage: ${currentFarm.stage}</p>
+                    <div style="margin-top:10px"><i class="fas fa-map-marker-alt"></i> Using siba1.png imagery</div>
+                `;
+            } else {
+                farmDiv.innerHTML = `<p style="color: #6f7e68;">🚜 No farm registered yet.<br>Select language first, then register.</p>`;
+            }
+            
+            const tbody = document.getElementById("adminTableBody");
+            if (currentFarm) {
+                tbody.innerHTML = `
+                    <tr><td>${currentFarm.name}</td><td>${currentFarm.crop}</td><td><span class="alert-badge">Active</span></td></tr>
+                `;
+            } else {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">— no farms yet —</td></tr>`;
+            }
+        }
+        
+        // Event listeners
+        document.getElementById("sendBtn").addEventListener("click", () => {
+            const input = document.getElementById("messageInput");
+            sendUserMessage(input.value);
+            input.value = "";
+        });
+        
+        document.getElementById("messageInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") document.getElementById("sendBtn").click();
+        });
+        
+        // Language selection chips
+        document.querySelectorAll("[data-lang]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                const lang = chip.getAttribute("data-lang");
+                setLanguage(lang);
             });
         });
         
-        // Smooth scroll for navigation links
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetSection.offsetTop,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Add active class to nav links on click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
+        // Command chips
+        document.querySelectorAll("[data-cmd]").forEach(chip => {
+            chip.addEventListener("click", () => {
+                const cmd = chip.getAttribute("data-cmd");
+                sendUserMessage(cmd);
             });
         });
     </script>
