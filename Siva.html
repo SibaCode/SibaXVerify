@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* Your existing styles remain exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -157,6 +158,11 @@
             color: white;
         }
 
+        .errand-card {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+        }
+
         .budget-stats {
             display: flex;
             justify-content: space-between;
@@ -233,31 +239,6 @@
             font-size: 24px;
         }
 
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .category-chip {
-            background: #f1f5f9;
-            padding: 14px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .category-chip.selected {
-            background: #1e3c2c;
-            color: white;
-            border-color: #FFB800;
-        }
-
         .input-field {
             width: 100%;
             padding: 14px 16px;
@@ -287,6 +268,11 @@
 
         .btn-primary {
             background: linear-gradient(135deg, #1e3c2c, #2a5a3a);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
             color: white;
         }
 
@@ -422,11 +408,44 @@
             padding: 20px;
         }
 
-        .error-message {
-            color: #ef4444;
+        .transaction-log {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 10px;
+        }
+
+        .transaction-item {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .error-text {
+            color: #dc2626;
             font-size: 12px;
-            margin-top: -8px;
-            margin-bottom: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .modal-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e3c2c;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 1100;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: fadeInUp 0.3s ease;
         }
     </style>
 </head>
@@ -435,22 +454,20 @@
 
 <script type="module">
     // ============ FIREBASE CONFIGURATION ============
-    // REPLACE WITH YOUR FIREBASE PROJECT CONFIGURATION
     const firebaseConfig = {
-         apiKey: "AIzaSyDOyTB08tOfH3Jq61kIvbHtI9U-l4IxpQc",
-  authDomain: "sibatechx.firebaseapp.com",
-  projectId: "sibatechx",
-  storageBucket: "sibatechx.firebasestorage.app",
-  messagingSenderId: "153536701523",
-  appId: "1:153536701523:web:1de7217ae12bfc382d52a6",
-  measurementId: "G-KVFKM1GQY1"
+        apiKey: "AIzaSyDOyTB08tOfH3Jq61kIvbHtI9U-l4IxpQc",
+        authDomain: "sibatechx.firebaseapp.com",
+        projectId: "sibatechx",
+        storageBucket: "sibatechx.firebasestorage.app",
+        messagingSenderId: "153536701523",
+        appId: "1:153536701523:web:1de7217ae12bfc382d52a6",
+        measurementId: "G-KVFKM1GQY1"
     };
-    
     
     // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
     
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -464,13 +481,25 @@
         groceryLists: [],
         budget: { amount: 5000, spent: 0 },
         loyaltyCards: [],
-        stokvels: []
+        stokvels: [],
+        errandMoney: {
+            active: false,
+            totalWithdrawn: 0,
+            remaining: 0,
+            spent: 0,
+            transactions: [],
+            startedAt: null,
+            completedAt: null
+        },
+        errandHistory: []
     };
+    
     let currentView = 'dashboard';
     let selectedGroceryId = null;
-    let selectedCategory = 'food';
     let showStokvelModal = false;
     let showLoyaltyModal = false;
+    let showErrandStartModal = false;
+    let showErrandSpendModal = false;
     
     // Modal state
     let newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
@@ -478,19 +507,24 @@
     let newLoyalty = { store_name: '', card_number: '', card_type: 'Grocery' };
     
     // ============ HELPER FUNCTIONS ============
+    function showModalMessage(message, isError = false) {
+        const existingMsg = document.querySelector('.modal-message');
+        if (existingMsg) existingMsg.remove();
+        
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'modal-message';
+        msgDiv.style.background = isError ? '#dc2626' : '#1e3c2c';
+        msgDiv.textContent = message;
+        document.body.appendChild(msgDiv);
+        
+        setTimeout(() => {
+            if (msgDiv) msgDiv.remove();
+        }, 3000);
+    }
+    
     function getTodaySpend() {
         const today = new Date().toISOString().slice(0, 10);
         return appData.expenses.filter(e => e.date === today).reduce((s, e) => s + e.amount, 0);
-    }
-    
-    function getCategoryIcon(cat) {
-        const icons = { food: '🍔', transport: '🚕', airtime: '📱', other: '🛍️' };
-        return icons[cat] || '💰';
-    }
-    
-    function getCategoryColor(cat) {
-        const colors = { food: '#f59e0b', transport: '#3b82f6', airtime: '#8b5cf6', other: '#ec489a' };
-        return colors[cat] || '#64748b';
     }
     
     function getLoyaltyGradient(type) {
@@ -509,6 +543,154 @@
         appData.budget.spent = monthly.reduce((sum, e) => sum + e.amount, 0);
     }
     
+    // ============ UPDATED ERRAND MONEY FUNCTIONS WITH MODALS ============
+    function startErrandSession(amount) {
+        if (!amount || amount <= 0) {
+            showModalMessage('Please enter a valid amount', true);
+            return false;
+        }
+        
+        appData.errandMoney = {
+            active: true,
+            totalWithdrawn: amount,
+            remaining: amount,
+            spent: 0,
+            transactions: [],
+            startedAt: new Date().toISOString(),
+            completedAt: null
+        };
+        
+        saveToFirebase();
+        render();
+        showModalMessage(`💰 Errand session started with R${amount}`);
+        return true;
+    }
+    
+    // NEW: Enhanced errand spending with amount, where, and what
+    function addErrandSpending(amount, location, description) {
+        if (!appData.errandMoney.active) {
+            showModalMessage('No active errand session. Start one first!', true);
+            return false;
+        }
+        
+        if (!amount || amount <= 0) {
+            showModalMessage('Please enter a valid amount', true);
+            return false;
+        }
+        
+        if (!location || location.trim() === '') {
+            showModalMessage('Please enter where you spent the money', true);
+            return false;
+        }
+        
+        if (!description || description.trim() === '') {
+            showModalMessage('Please enter what you spent on', true);
+            return false;
+        }
+        
+        if (amount > appData.errandMoney.remaining) {
+            showModalMessage(`Insufficient errand money. Remaining: R${appData.errandMoney.remaining}`, true);
+            return false;
+        }
+        
+        const transaction = {
+            id: Date.now().toString(),
+            name: description.trim(),
+            location: location.trim(),
+            amount: amount,
+            date: new Date().toISOString().slice(0, 10),
+            time: new Date().toLocaleTimeString()
+        };
+        
+        appData.errandMoney.transactions.push(transaction);
+        appData.errandMoney.spent += amount;
+        appData.errandMoney.remaining -= amount;
+        
+        // Also add to main expenses with detailed errand info
+        appData.expenses.push({
+            id: 'errand_' + Date.now().toString(),
+            name: `[ERRAND] ${description.trim()}`,
+            amount: amount,
+            note: `At: ${location.trim()}`,
+            date: new Date().toISOString().slice(0, 10),
+            isErrand: true,
+            errandLocation: location.trim()
+        });
+        
+        saveToFirebase();
+        render();
+        showModalMessage(`✅ Added: ${description} at ${location} - R${amount}\nRemaining: R${appData.errandMoney.remaining}`);
+        return true;
+    }
+    
+    function completeErrandSession() {
+        if (!appData.errandMoney.active) {
+            showModalMessage('No active errand session', true);
+            return;
+        }
+        
+        const session = {
+            id: Date.now().toString(),
+            totalWithdrawn: appData.errandMoney.totalWithdrawn,
+            spent: appData.errandMoney.spent,
+            remaining: appData.errandMoney.remaining,
+            transactions: [...appData.errandMoney.transactions],
+            startedAt: appData.errandMoney.startedAt,
+            completedAt: new Date().toISOString()
+        };
+        
+        appData.errandHistory.unshift(session);
+        
+        appData.errandMoney = {
+            active: false,
+            totalWithdrawn: 0,
+            remaining: 0,
+            spent: 0,
+            transactions: [],
+            startedAt: null,
+            completedAt: null
+        };
+        
+        saveToFirebase();
+        render();
+        showModalMessage(`✅ Errand session completed!\nWithdrawn: R${session.totalWithdrawn}\nSpent: R${session.spent}\nRemaining: R${session.remaining}`);
+    }
+    
+    function cancelErrandSession() {
+        if (!appData.errandMoney.active) return;
+        
+        // Using a custom confirm modal instead of browser confirm
+        const confirmModal = document.createElement('div');
+        confirmModal.className = 'modal-overlay';
+        confirmModal.innerHTML = `
+            <div class="modal-container">
+                <h3 style="margin-bottom: 16px;">Cancel Errand Session?</h3>
+                <p style="margin-bottom: 20px; color: #64748B;">You have R${appData.errandMoney.remaining} remaining. This money will be returned to your budget.</p>
+                <div class="flex-between gap-2">
+                    <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">No, Keep</button>
+                    <button class="btn btn-primary" id="confirmCancelBtn">Yes, Cancel</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(confirmModal);
+        
+        document.getElementById('confirmCancelBtn').onclick = () => {
+            appData.errandMoney = {
+                active: false,
+                totalWithdrawn: 0,
+                remaining: 0,
+                spent: 0,
+                transactions: [],
+                startedAt: null,
+                completedAt: null
+            };
+            saveToFirebase();
+            render();
+            confirmModal.remove();
+            showModalMessage('Errand session cancelled');
+        };
+    }
+    
     // ============ FIREBASE SYNC FUNCTIONS ============
     async function saveToFirebase() {
         if (!currentUser) return;
@@ -522,6 +704,8 @@
             budget: appData.budget,
             loyaltyCards: appData.loyaltyCards,
             stokvels: appData.stokvels,
+            errandMoney: appData.errandMoney,
+            errandHistory: appData.errandHistory,
             lastUpdated: new Date().toISOString()
         }, { merge: true });
         console.log("Data saved to Firebase");
@@ -539,18 +723,20 @@
                 groceryLists: data.groceryLists || [],
                 budget: data.budget || { amount: 5000, spent: 0 },
                 loyaltyCards: data.loyaltyCards || [],
-                stokvels: data.stokvels || []
+                stokvels: data.stokvels || [],
+                errandMoney: data.errandMoney || { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null },
+                errandHistory: data.errandHistory || []
             };
             recalcSpent();
             console.log("Data loaded from Firebase");
         } else {
-            // Initialize with demo data for new users
+            // Initialize with demo data
             const today = new Date().toISOString().slice(0, 10);
             appData = {
                 expenses: [
-                    { id: 'e1', amount: 85, category: 'food', store: "Nando's", note: '', date: today },
-                    { id: 'e2', amount: 120, category: 'transport', store: 'Uber', note: '', date: today },
-                    { id: 'e3', amount: 29, category: 'airtime', store: 'Vodacom', note: '', date: today }
+                    { id: 'e1', name: "Nando's", amount: 85, note: 'Lunch', date: today },
+                    { id: 'e2', name: 'Uber', amount: 45, note: 'To work', date: today },
+                    { id: 'e3', name: 'Vodacom Airtime', amount: 29, note: '', date: today }
                 ],
                 groceryLists: [
                     { id: 'gl1', name: 'March 2026', isPinned: true, items: [
@@ -568,7 +754,9 @@
                 ],
                 stokvels: [
                     { id: 'st1', name: 'Family Savings', contribution_amount: 200, frequency: 'monthly', members: [{ id: 'm1', name: 'Thabo' }, { id: 'm2', name: 'Lerato' }], yourBalance: 1200, current_round: 0, start_date: '2026-01-01' }
-                ]
+                ],
+                errandMoney: { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null },
+                errandHistory: []
             };
             recalcSpent();
             await saveToFirebase();
@@ -584,7 +772,7 @@
             await loadFromFirebase();
             render();
         } catch (error) {
-            alert("Login failed: " + error.message);
+            showModalMessage("Login failed: " + error.message, true);
         }
     }
     
@@ -596,7 +784,7 @@
             await loadFromFirebase();
             render();
         } catch (error) {
-            alert("Registration failed: " + error.message);
+            showModalMessage("Registration failed: " + error.message, true);
         }
     }
     
@@ -609,13 +797,13 @@
     async function handleForgotPassword(email) {
         try {
             await sendPasswordResetEmail(auth, email);
-            alert("Password reset email sent! Check your inbox.");
+            showModalMessage("Password reset email sent! Check your inbox.");
         } catch (error) {
-            alert("Error: " + error.message);
+            showModalMessage("Error: " + error.message, true);
         }
     }
     
-    // ============ RENDER AUTH SCREENS ============
+    // ============ RENDER FUNCTIONS ============
     function renderLoginScreen() {
         return `
             <div class="header">
@@ -680,145 +868,202 @@
         `;
     }
     
-    // ============ RENDER MAIN APP ============
-  function renderDashboard() {
-    const remaining = appData.budget.amount - appData.budget.spent;
-    const percent = (appData.budget.spent / appData.budget.amount) * 100;
-    const recent = [...appData.expenses].reverse().slice(0, 4);
+    function renderDashboard() {
+        const remaining = appData.budget.amount - appData.budget.spent;
+        const percent = (appData.budget.spent / appData.budget.amount) * 100;
+        const recent = [...appData.expenses].reverse().slice(0, 4);
+        
+        // Errand Money Card HTML - Updated to show location details
+        let errandCard = '';
+        if (appData.errandMoney.active) {
+            const errandPercent = (appData.errandMoney.spent / appData.errandMoney.totalWithdrawn) * 100;
+            errandCard = `
+                <div class="glass-card errand-card">
+                    <div class="flex-between">
+                        <h3 style="color: white;">💰 Errand Money Active</h3>
+                        <button onclick="cancelErrandSession()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 4px 12px; border-radius: 20px; cursor: pointer;">Cancel</button>
+                    </div>
+                    <div class="flex-between mt-2">
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Withdrawn</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.totalWithdrawn}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Remaining</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.remaining}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Spent</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.spent}</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar mt-2" style="background: rgba(255,255,255,0.3);">
+                        <div class="progress-fill" style="width: ${errandPercent}%; background: white;"></div>
+                    </div>
+                    <div class="flex-between mt-2">
+                        <button onclick="showErrandSpendModalFunc()" class="action-btn" style="background: rgba(255,255,255,0.2); color: white; flex: 1; margin-right: 6px;">+ Add Spending</button>
+                        <button onclick="completeErrandSession()" class="action-btn" style="background: rgba(255,255,255,0.2); color: white; flex: 1; margin-left: 6px;">Complete</button>
+                    </div>
+                    ${appData.errandMoney.transactions.length > 0 ? `
+                        <div class="transaction-log">
+                            ${appData.errandMoney.transactions.slice(-3).reverse().map(t => `
+                                <div class="transaction-item">
+                                    <span>📍 ${t.location} · ${t.name}</span>
+                                    <span>R${t.amount}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<div class="mt-2 text-center" style="font-size: 12px; opacity: 0.7;">No spending recorded yet</div>'}
+                </div>
+            `;
+        } else {
+            errandCard = `
+                <div class="glass-card">
+                    <div class="flex-between">
+                        <h3>💰 Errand Money</h3>
+                        <button onclick="showErrandStartModalFunc()" class="action-btn" style="padding: 8px 16px;">Start</button>
+                    </div>
+                    <p style="color: #64748B; font-size: 13px; margin-top: 8px;">Track cash withdrawals and errand spending separately from your main budget.</p>
+                    ${appData.errandHistory.length > 0 ? `
+                        <div class="mt-2" style="border-top: 1px solid #eef2f6; margin-top: 12px; padding-top: 12px;">
+                            <div class="flex-between" style="font-size: 12px; color: #64748B;">
+                                <span>Last errand:</span>
+                                <span>R${appData.errandHistory[0].spent} spent</span>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        return `
+            <div class="header">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo">
+                            <div class="logo-icon">🔍</div>
+                            <div class="logo-text">
+                                <h1>Inkence</h1>
+                                <p>the clue to your money</p>
+                            </div>
+                        </div>
+                        <div class="user-menu" onclick="handleLogout()">
+                            <div class="user-avatar">${currentUser?.email?.charAt(0).toUpperCase() || 'U'}</div>
+                        </div>
+                    </div>
+                    <div class="greeting">
+                        <h2>Sawubona, ${currentUser?.email?.split('@')[0] || 'User'}! 👋</h2>
+                        <p>Here's your financial snapshot</p>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="glass-card budget-card">
+                    <div class="budget-stats">
+                        <div><div style="font-size:12px; opacity:0.7;">Today</div><div class="stat-value">R${getTodaySpend()}</div></div>
+                        <div><div style="font-size:12px; opacity:0.7;">Remaining</div><div class="stat-value" style="color:#FFB800">R${remaining}</div></div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-label flex-between">
+                            <span>Monthly Progress</span>
+                            <span>R${appData.budget.spent} / R${appData.budget.amount}</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${Math.min(percent, 100)}%"></div></div>
+                    </div>
+                </div>
+                
+                ${errandCard}
+                
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 16px;">⚡ Quick Add</h3>
+                    <div class="text-center mt-2">
+                        <button class="action-btn" style="width: 100%; flex-direction: row; justify-content: center; gap: 8px;" onclick="switchView('expense')">
+                            <span>+</span>
+                            <span>Add Custom Expense</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <div class="flex-between" style="margin-bottom: 12px;">
+                        <h3>📋 Recent Expenses</h3>
+                        <button class="action-btn" style="padding: 6px 12px; flex-direction: row; gap: 6px;" onclick="switchView('expense')">+ Add</button>
+                    </div>
+                    ${recent.map(exp => `
+                        <div class="expense-row" onclick="editExpense('${exp.id}')">
+                            <div class="expense-info">
+                                <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); font-size: 20px;">
+                                    ${exp.isErrand ? '💰' : '💵'}
+                                </div>
+                                <div>
+                                    <h4>${exp.name || exp.store || 'Expense'}</h4>
+                                    <p>${exp.date} ${exp.note ? `· ${exp.note}` : ''}</p>
+                                </div>
+                            </div>
+                            <div class="expense-amount">R${exp.amount}</div>
+                        </div>
+                    `).join('')}
+                    ${recent.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No expenses yet. Tap + to add</div>' : ''}
+                </div>
+            </div>
+            ${renderBottomNav()}
+        `;
+    }
     
-    return `
-        <div class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">
-                        <div class="logo-icon">🔍</div>
-                        <div class="logo-text">
-                            <h1>Inkence</h1>
-                            <p>the clue to your money</p>
-                        </div>
+    function renderExpenseForm() {
+        return `
+            <div class="header" style="padding: 20px 24px;">
+                <div class="flex-between">
+                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <h2 style="color: white;">Add Expense</h2>
+                    <div style="width: 32px;"></div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="glass-card">
+                    <div class="input-group">
+                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                            What did you spend on? *
+                        </label>
+                        <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers, Clothing" autocomplete="off">
                     </div>
-                    <div class="user-menu" onclick="handleLogout()">
-                        <div class="user-avatar">${currentUser?.email?.charAt(0).toUpperCase() || 'U'}</div>
+                    
+                    <div class="input-group">
+                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                            Amount (R) *
+                        </label>
+                        <input type="number" id="expAmount" class="input-field" placeholder="0.00">
                     </div>
-                </div>
-                <div class="greeting">
-                    <h2>Sawubona, ${currentUser?.email?.split('@')[0] || 'User'}! 👋</h2>
-                    <p>Here's your financial snapshot</p>
-                </div>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="glass-card budget-card">
-                <div class="budget-stats">
-                    <div><div style="font-size:12px; opacity:0.7;">Today</div><div class="stat-value">R${getTodaySpend()}</div></div>
-                    <div><div style="font-size:12px; opacity:0.7;">Remaining</div><div class="stat-value" style="color:#FFB800">R${remaining}</div></div>
-                </div>
-                <div class="progress-section">
-                    <div class="progress-label flex-between">
-                        <span>Monthly Progress</span>
-                        <span>R${appData.budget.spent} / R${appData.budget.amount}</span>
+                    
+                    <div class="quick-actions" style="grid-template-columns: repeat(5, 1fr); margin: 8px 0 16px;">
+                        <button class="action-btn" onclick="setAmount(10)">R10</button>
+                        <button class="action-btn" onclick="setAmount(20)">R20</button>
+                        <button class="action-btn" onclick="setAmount(50)">R50</button>
+                        <button class="action-btn" onclick="setAmount(100)">R100</button>
+                        <button class="action-btn" onclick="setAmount(200)">R200</button>
                     </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: ${Math.min(percent, 100)}%"></div></div>
-                </div>
-            </div>
-            
-            <!-- Quick Add with Custom Names -->
-            <div class="glass-card">
-                <h3 style="margin-bottom: 16px;">⚡ Quick Add</h3>
-           
-                <div class="text-center mt-2">
-                    <button class="action-btn" style="width: 100%; flex-direction: row; justify-content: center; gap: 8px;" onclick="switchView('expense')">
-                        <span>+</span>
-                        <span>Add Custom Expense</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Recent Expenses -->
-            <div class="glass-card">
-                <div class="flex-between" style="margin-bottom: 12px;">
-                    <h3>📋 Recent Expenses</h3>
-                    <button class="action-btn" style="padding: 6px 12px; flex-direction: row; gap: 6px;" onclick="switchView('expense')">+ Add</button>
-                </div>
-                ${recent.map(exp => `
-                    <div class="expense-row" onclick="editExpense('${exp.id}')">
-                        <div class="expense-info">
-                            <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); font-size: 20px;">
-                                💰
-                            </div>
-                            <div>
-                                <h4>${exp.name || exp.store || 'Expense'}</h4>
-                                <p>${exp.date} ${exp.note ? `· ${exp.note}` : ''}</p>
-                            </div>
-                        </div>
-                        <div class="expense-amount">R${exp.amount}</div>
+                    
+                    <div class="input-group">
+                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                            Note (optional)
+                        </label>
+                        <input type="text" id="expNote" class="input-field" placeholder="Add a note...">
                     </div>
-                `).join('')}
-                ${recent.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No expenses yet. Tap + to add</div>' : ''}
+                    
+                    <div class="input-group">
+                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                            Date
+                        </label>
+                        <input type="date" id="expDate" class="input-field" value="${new Date().toISOString().slice(0, 10)}">
+                    </div>
+                    
+                    <button class="btn btn-primary mt-3" onclick="saveExpense()">Save Expense</button>
+                </div>
             </div>
-        </div>
-        ${renderBottomNav()}
-    `;
-}
-
-function renderExpenseForm() {
-    return `
-        <div class="header" style="padding: 20px 24px;">
-            <div class="flex-between">
-                <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                <h2 style="color: white;">Add Expense</h2>
-                <div style="width: 32px;"></div>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="glass-card">
-                <!-- Expense Name / Description -->
-                <div class="input-group">
-                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                        What did you spend on? *
-                    </label>
-                    <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers, Clothing" autocomplete="off">
-                </div>
-                
-                <!-- Amount -->
-                <div class="input-group">
-                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                        Amount (R) *
-                    </label>
-                    <input type="number" id="expAmount" class="input-field" placeholder="0.00">
-                </div>
-                
-                <!-- Quick Amount Buttons -->
-                <div class="quick-actions" style="grid-template-columns: repeat(5, 1fr); margin: 8px 0 16px;">
-                    <button class="action-btn" onclick="setAmount(10)">R10</button>
-                    <button class="action-btn" onclick="setAmount(20)">R20</button>
-                    <button class="action-btn" onclick="setAmount(50)">R50</button>
-                    <button class="action-btn" onclick="setAmount(100)">R100</button>
-                    <button class="action-btn" onclick="setAmount(200)">R200</button>
-                </div>
-                
-                <!-- Optional Note -->
-                <div class="input-group">
-                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                        Note (optional)
-                    </label>
-                    <input type="text" id="expNote" class="input-field" placeholder="Add a note...">
-                </div>
-                
-                <!-- Date -->
-                <div class="input-group">
-                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                        Date
-                    </label>
-                    <input type="date" id="expDate" class="input-field" value="${new Date().toISOString().slice(0, 10)}">
-                </div>
-                
-                <button class="btn btn-primary mt-3" onclick="saveExpense()">Save Expense</button>
-            </div>
-        </div>
-        ${renderBottomNav()}
-    `;
-}
+            ${renderBottomNav()}
+        `;
+    }
+    
     function renderGroceryLists() {
         const pinned = appData.groceryLists.filter(l => l.isPinned);
         const others = appData.groceryLists.filter(l => !l.isPinned);
@@ -844,6 +1089,90 @@ function renderExpenseForm() {
                         <i class="fas fa-chevron-right"></i>
                     </div>
                 `).join('')}</div>
+            </div>
+            ${renderBottomNav()}
+        `;
+    }
+    
+    function renderGroceryDetail(listId) {
+        const list = appData.groceryLists.find(l => l.id === listId);
+        if (!list) return renderGroceryLists();
+        const done = list.items.filter(i => i.bought).length;
+        const percent = list.items.length ? (done/list.items.length)*100 : 0;
+        
+        return `
+            <div class="header" style="padding: 20px 24px;">
+                <div class="flex-between">
+                    <button onclick="closeGroceryDetail()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <h2 style="color: white; font-size: 18px;">${list.name}</h2>
+                    <button onclick="copyList('${list.id}')" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 40px;">Copy</button>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="glass-card">
+                    <div class="progress-label flex-between"><span>Progress</span><span>${done}/${list.items.length}</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:${percent}%; background:linear-gradient(90deg,#1e3c2c,#2a5a3a);"></div></div>
+                </div>
+                <div class="glass-card">
+                    ${list.items.map(item => `
+                        <div class="grocery-item" style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eef2f6;">
+                            <input type="checkbox" ${item.bought ? 'checked' : ''} onchange="toggleItem('${list.id}','${item.id}')">
+                            <span style="flex:1; ${item.bought ? 'text-decoration:line-through; color:#94a3b8;' : ''}">${item.name}</span>
+                            ${item.quantity ? `<span style="background:#f1f5f9; padding:4px 10px; border-radius:20px; font-size:12px;">${item.quantity}</span>` : ''}
+                            <button onclick="deleteItem('${list.id}','${item.id}')" style="background:none; border:none; font-size:18px; cursor:pointer; color:#ef4444;">🗑️</button>
+                        </div>
+                    `).join('')}
+                    <div class="flex-between mt-3" style="gap:8px;">
+                        <input type="text" id="newItemName" class="input-field" placeholder="Item name" style="flex:2;">
+                        <input type="text" id="newItemQty" class="input-field" placeholder="Qty" style="flex:1;">
+                        <button class="btn btn-primary" style="padding:12px 20px; width:auto;" onclick="addItem('${list.id}')">Add</button>
+                    </div>
+                </div>
+            </div>
+            ${renderBottomNav()}
+        `;
+    }
+    
+    function renderBudgetScreen() {
+        const percent = (appData.budget.spent / appData.budget.amount) * 100;
+        
+        const expenseMap = {};
+        appData.expenses.forEach(e => {
+            const key = e.name || e.store || 'Other';
+            expenseMap[key] = (expenseMap[key] || 0) + e.amount;
+        });
+        const topExpenses = Object.entries(expenseMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        
+        return `
+            <div class="header" style="padding: 20px 24px;">
+                <div class="flex-between">
+                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <h2 style="color: white;">Budget</h2>
+                    <div style="width: 32px;"></div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="glass-card">
+                    <div class="flex-between"><span>Monthly Budget</span><span style="font-size:28px; font-weight:700;">R${appData.budget.amount}</span></div>
+                    <input type="number" id="budgetInput" class="input-field mt-2" value="${appData.budget.amount}">
+                    <button class="btn btn-primary mt-2" onclick="updateBudget()">Update Budget</button>
+                </div>
+                <div class="glass-card">
+                    <h3>📊 Spending Overview</h3>
+                    <div class="flex-between"><span>Spent: R${appData.budget.spent}</span><span>Remaining: R${appData.budget.amount - appData.budget.spent}</span></div>
+                    <div class="progress-bar mt-2"><div class="progress-fill" style="width:${Math.min(percent,100)}%"></div></div>
+                    <div class="text-center mt-2" style="color:${percent>=90?'#ef4444':percent>=70?'#f59e0b':'#28a745'}">${percent>=90?'⚠️ Over budget!':percent>=70?'🟡 Approaching limit':'✅ On track!'}</div>
+                </div>
+                <div class="glass-card">
+                    <h3>📈 Top Expenses</h3>
+                    ${topExpenses.map(([name, amt]) => `
+                        <div class="flex-between" style="margin-bottom: 10px;">
+                            <span>${name}</span>
+                            <span style="font-weight: 600;">R${amt}</span>
+                        </div>
+                    `).join('')}
+                    ${topExpenses.length === 0 ? '<div class="text-center">No expenses yet</div>' : ''}
+                </div>
             </div>
             ${renderBottomNav()}
         `;
@@ -894,92 +1223,6 @@ function renderExpenseForm() {
         `;
     }
     
-   function renderBudgetScreen() {
-    const percent = (appData.budget.spent / appData.budget.amount) * 100;
-    
-    // Group expenses by name for breakdown
-    const expenseMap = {};
-    appData.expenses.forEach(e => {
-        const key = e.name || e.store || 'Other';
-        expenseMap[key] = (expenseMap[key] || 0) + e.amount;
-    });
-    const topExpenses = Object.entries(expenseMap)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
-    
-    return `
-        <div class="header" style="padding: 20px 24px;">
-            <div class="flex-between">
-                <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                <h2 style="color: white;">Budget</h2>
-                <div style="width: 32px;"></div>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="glass-card">
-                <div class="flex-between"><span>Monthly Budget</span><span style="font-size:28px; font-weight:700;">R${appData.budget.amount}</span></div>
-                <input type="number" id="budgetInput" class="input-field mt-2" value="${appData.budget.amount}">
-                <button class="btn btn-primary mt-2" onclick="updateBudget()">Update Budget</button>
-            </div>
-            <div class="glass-card">
-                <h3>📊 Spending Overview</h3>
-                <div class="flex-between"><span>Spent: R${appData.budget.spent}</span><span>Remaining: R${appData.budget.amount - appData.budget.spent}</span></div>
-                <div class="progress-bar mt-2"><div class="progress-fill" style="width:${Math.min(percent,100)}%"></div></div>
-                <div class="text-center mt-2" style="color:${percent>=90?'#ef4444':percent>=70?'#f59e0b':'#28a745'}">${percent>=90?'⚠️ Over budget!':percent>=70?'🟡 Approaching limit':'✅ On track!'}</div>
-            </div>
-            <div class="glass-card">
-                <h3>📈 Top Expenses</h3>
-                ${topExpenses.map(([name, amt]) => `
-                    <div class="flex-between" style="margin-bottom: 10px;">
-                        <span>${name}</span>
-                        <span style="font-weight: 600;">R${amt}</span>
-                    </div>
-                `).join('')}
-                ${topExpenses.length === 0 ? '<div class="text-center">No expenses yet</div>' : ''}
-            </div>
-        </div>
-        ${renderBottomNav()}
-    `;
-}
-    function renderGroceryDetail(listId) {
-        const list = appData.groceryLists.find(l => l.id === listId);
-        if (!list) return renderGroceryLists();
-        const done = list.items.filter(i => i.bought).length;
-        const percent = list.items.length ? (done/list.items.length)*100 : 0;
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="closeGroceryDetail()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white; font-size: 18px;">${list.name}</h2>
-                    <button onclick="copyList('${list.id}')" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 40px;">Copy</button>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="progress-label flex-between"><span>Progress</span><span>${done}/${list.items.length}</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width:${percent}%; background:linear-gradient(90deg,#1e3c2c,#2a5a3a);"></div></div>
-                </div>
-                <div class="glass-card">
-                    ${list.items.map(item => `
-                        <div class="grocery-item" style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eef2f6;">
-                            <input type="checkbox" ${item.bought ? 'checked' : ''} onchange="toggleItem('${list.id}','${item.id}')">
-                            <span style="flex:1; ${item.bought ? 'text-decoration:line-through; color:#94a3b8;' : ''}">${item.name}</span>
-                            ${item.quantity ? `<span style="background:#f1f5f9; padding:4px 10px; border-radius:20px; font-size:12px;">${item.quantity}</span>` : ''}
-                            <button onclick="deleteItem('${list.id}','${item.id}')" style="background:none; border:none; font-size:18px; cursor:pointer; color:#ef4444;">🗑️</button>
-                        </div>
-                    `).join('')}
-                    <div class="flex-between mt-3" style="gap:8px;">
-                        <input type="text" id="newItemName" class="input-field" placeholder="Item name" style="flex:2;">
-                        <input type="text" id="newItemQty" class="input-field" placeholder="Qty" style="flex:1;">
-                        <button class="btn btn-primary" style="padding:12px 20px; width:auto;" onclick="addItem('${list.id}')">Add</button>
-                    </div>
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
     function renderBottomNav() {
         const navItems = [
             { view: 'dashboard', icon: 'fas fa-home', label: 'Home' },
@@ -991,8 +1234,64 @@ function renderExpenseForm() {
         return `<div class="bottom-nav">${navItems.map(item => `<button class="nav-item ${currentView === item.view ? 'active' : ''}" onclick="switchView('${item.view}')"><i class="${item.icon}"></i><span>${item.label}</span></button>`).join('')}</div>`;
     }
     
+    // UPDATED MODAL: Errand spending modal with Amount, Where, and What fields
     function renderModals() {
         let modalHtml = '';
+        
+        if (showErrandStartModal) {
+            modalHtml = `
+                <div class="modal-overlay" onclick="closeModals()">
+                    <div class="modal-container" onclick="event.stopPropagation()">
+                        <div class="flex-between"><h3>💰 Start Errand Session</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
+                        <p style="font-size: 13px; color: #64748B; margin-bottom: 16px;">Enter the amount of cash you withdrew for errands:</p>
+                        <input type="number" id="errandAmount" class="input-field" placeholder="Amount (R)">
+                        <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr); margin: 12px 0;">
+                            <button class="action-btn" onclick="setErrandAmount(100)">R100</button>
+                            <button class="action-btn" onclick="setErrandAmount(200)">R200</button>
+                            <button class="action-btn" onclick="setErrandAmount(500)">R500</button>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="startErrandSessionFromModal()">Start Session</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // UPDATED: Enhanced Errand Spend Modal with Amount, Where, and What
+        if (showErrandSpendModal) {
+            modalHtml = `
+                <div class="modal-overlay" onclick="closeModals()">
+                    <div class="modal-container" onclick="event.stopPropagation()">
+                        <div class="flex-between"><h3>✍️ Record Errand Spending</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
+                        <p style="font-size: 13px; color: #64748B; margin-bottom: 8px;">Remaining: <strong style="color:#f59e0b;">R${appData.errandMoney.remaining}</strong></p>
+                        
+                        <div class="input-group mt-2">
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">💰 Amount (R) *</label>
+                            <input type="number" id="errandAmountInput" class="input-field" placeholder="e.g., 150">
+                        </div>
+                        <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr); margin: 8px 0 12px;">
+                            <button class="action-btn" onclick="setErrandSpendAmount(50)">R50</button>
+                            <button class="action-btn" onclick="setErrandSpendAmount(100)">R100</button>
+                            <button class="action-btn" onclick="setErrandSpendAmount(200)">R200</button>
+                        </div>
+                        
+                        <div class="input-group mt-2">
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">📍 Where? (Store/Location) *</label>
+                            <input type="text" id="errandLocationInput" class="input-field" placeholder="e.g., Checkers, Sasol, Pick n Pay">
+                        </div>
+                        
+                        <div class="input-group mt-2">
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">🛍️ What did you buy? *</label>
+                            <input type="text" id="errandWhatInput" class="input-field" placeholder="e.g., Groceries, Petrol, Airtime">
+                        </div>
+                        
+                        <div id="errandSpendError" class="error-text" style="color:#dc2626; font-size:12px; margin-top:8px;"></div>
+                        
+                        <button class="btn btn-primary mt-3" onclick="addErrandSpendingFromModal()">✅ Save Spending</button>
+                    </div>
+                </div>
+            `;
+        }
+        
         if (showStokvelModal) {
             modalHtml = `
                 <div class="modal-overlay" onclick="closeModals()">
@@ -1009,6 +1308,7 @@ function renderExpenseForm() {
                 </div>
             `;
         }
+        
         if (showLoyaltyModal) {
             modalHtml = `
                 <div class="modal-overlay" onclick="closeModals()">
@@ -1022,71 +1322,113 @@ function renderExpenseForm() {
                 </div>
             `;
         }
+        
         return modalHtml;
     }
     
     // ============ INTERACTION HANDLERS ============
     window.switchView = (view) => { currentView = view; selectedGroceryId = null; render(); };
-    window.closeModals = () => { showStokvelModal = false; showLoyaltyModal = false; render(); };
+    window.closeModals = () => { showStokvelModal = false; showLoyaltyModal = false; showErrandStartModal = false; showErrandSpendModal = false; render(); };
     window.showStokvelModalFunc = () => { showStokvelModal = true; render(); };
     window.showLoyaltyModalFunc = () => { showLoyaltyModal = true; render(); };
+    window.showErrandStartModalFunc = () => { showErrandStartModal = true; render(); };
+    window.showErrandSpendModalFunc = () => { showErrandSpendModal = true; render(); };
     window.closeGroceryDetail = () => { selectedGroceryId = null; render(); };
     window.openGroceryDetail = (id) => { selectedGroceryId = id; render(); };
-    window.selectCategory = (cat) => { selectedCategory = cat; render(); };
     window.setAmount = (amt) => { const inp = document.getElementById('expAmount'); if(inp) inp.value = amt; };
+    window.setErrandAmount = (amt) => { const inp = document.getElementById('errandAmount'); if(inp) inp.value = amt; };
+    window.setErrandSpendAmount = (amt) => { const inp = document.getElementById('errandAmountInput'); if(inp) inp.value = amt; };
     
-   window.quickAdd = async (name, amt) => {
-    const newExpense = {
-        id: Date.now().toString(),
-        name: name,
-        amount: amt,
-        note: 'Quick add',
-        date: new Date().toISOString().slice(0, 10)
-    };
-    appData.expenses.push(newExpense);
-    recalcSpent();
-    await saveToFirebase();
-    render();
-};
-    
-window.saveExpense = async () => {
-    const expenseName = document.getElementById('expenseName')?.value.trim();
-    const amount = parseFloat(document.getElementById('expAmount')?.value);
-    
-    if (!expenseName) {
-        alert('Please enter what you spent on');
-        return;
-    }
-    if (!amount || amount <= 0) {
-        alert('Please enter a valid amount');
-        return;
-    }
-    
-    const newExpense = {
-        id: Date.now().toString(),
-        name: expenseName,           // Custom expense name
-        amount: amount,
-        note: document.getElementById('expNote')?.value || '',
-        date: document.getElementById('expDate')?.value || new Date().toISOString().slice(0, 10)
+    window.startErrandSessionFromModal = () => {
+        const amount = parseFloat(document.getElementById('errandAmount')?.value);
+        if (startErrandSession(amount)) {
+            showErrandStartModal = false;
+            render();
+        }
     };
     
-    appData.expenses.push(newExpense);
-    recalcSpent();
-    await saveToFirebase();
-    switchView('dashboard');
-};
-    window.editExpense = async (id) => {
-    const exp = appData.expenses.find(e => e.id === id);
-    if (exp) {
-        const newName = prompt('Edit expense name:', exp.name || exp.store);
-        const newAmt = prompt('Edit amount (R):', exp.amount);
-        if (newName && newName.trim()) exp.name = newName.trim();
-        if (newAmt && !isNaN(parseFloat(newAmt))) exp.amount = parseFloat(newAmt);
+    // UPDATED: Enhanced errand spending handler with validation
+    window.addErrandSpendingFromModal = () => {
+        const amount = parseFloat(document.getElementById('errandAmountInput')?.value);
+        const location = document.getElementById('errandLocationInput')?.value.trim();
+        const description = document.getElementById('errandWhatInput')?.value.trim();
+        const errorDiv = document.getElementById('errandSpendError');
+        
+        if (errorDiv) errorDiv.style.display = 'none';
+        
+        if (!amount || amount <= 0) {
+            if (errorDiv) { errorDiv.textContent = 'Please enter a valid amount'; errorDiv.style.display = 'block'; }
+            return;
+        }
+        if (!location) {
+            if (errorDiv) { errorDiv.textContent = 'Please enter where you spent the money'; errorDiv.style.display = 'block'; }
+            return;
+        }
+        if (!description) {
+            if (errorDiv) { errorDiv.textContent = 'Please enter what you spent on'; errorDiv.style.display = 'block'; }
+            return;
+        }
+        
+        if (addErrandSpending(amount, location, description)) {
+            showErrandSpendModal = false;
+            render();
+        }
+    };
+    
+    window.quickAdd = async (name, amt) => {
+        const newExpense = {
+            id: Date.now().toString(),
+            name: name,
+            amount: amt,
+            note: 'Quick add',
+            date: new Date().toISOString().slice(0, 10)
+        };
+        appData.expenses.push(newExpense);
         recalcSpent();
         await saveToFirebase();
         render();
-    }
-};
+    };
+    
+    window.saveExpense = async () => {
+        const expenseName = document.getElementById('expenseName')?.value.trim();
+        const amount = parseFloat(document.getElementById('expAmount')?.value);
+        
+        if (!expenseName) {
+            showModalMessage('Please enter what you spent on', true);
+            return;
+        }
+        if (!amount || amount <= 0) {
+            showModalMessage('Please enter a valid amount', true);
+            return;
+        }
+        
+        const newExpense = {
+            id: Date.now().toString(),
+            name: expenseName,
+            amount: amount,
+            note: document.getElementById('expNote')?.value || '',
+            date: document.getElementById('expDate')?.value || new Date().toISOString().slice(0, 10)
+        };
+        
+        appData.expenses.push(newExpense);
+        recalcSpent();
+        await saveToFirebase();
+        switchView('dashboard');
+    };
+    
+    window.editExpense = async (id) => {
+        const exp = appData.expenses.find(e => e.id === id);
+        if (exp) {
+            const newName = prompt('Edit expense name:', exp.name || exp.store);
+            const newAmt = prompt('Edit amount (R):', exp.amount);
+            if (newName && newName.trim()) exp.name = newName.trim();
+            if (newAmt && !isNaN(parseFloat(newAmt))) exp.amount = parseFloat(newAmt);
+            recalcSpent();
+            await saveToFirebase();
+            render();
+        }
+    };
+    
     window.updateBudget = async () => {
         const newBudget = parseFloat(document.getElementById('budgetInput')?.value);
         if (newBudget && newBudget > 0) {
@@ -1142,10 +1484,10 @@ window.saveExpense = async () => {
         const stokvel = appData.stokvels.find(s => s.id === id);
         if (stokvel) {
             stokvel.yourBalance = (stokvel.yourBalance || 0) + stokvel.contribution_amount;
-            appData.expenses.push({ id: Date.now().toString(), amount: stokvel.contribution_amount, category: 'other', store: stokvel.name, date: new Date().toISOString().slice(0,10) });
+            appData.expenses.push({ id: Date.now().toString(), name: `Stokvel: ${stokvel.name}`, amount: stokvel.contribution_amount, note: 'Stokvel contribution', date: new Date().toISOString().slice(0,10) });
             recalcSpent();
             await saveToFirebase();
-            alert(`Added R${stokvel.contribution_amount} to ${stokvel.name}`);
+            showModalMessage(`Added R${stokvel.contribution_amount} to ${stokvel.name}`);
             render();
         }
     };
@@ -1193,7 +1535,7 @@ window.saveExpense = async () => {
         const startDate = document.getElementById('stokvelStartDate')?.value;
         
         if (!name || !contribution || newStokvel.members.length < 2 || !startDate) {
-            alert('Please fill all fields and add at least 2 members');
+            showModalMessage('Please fill all fields and add at least 2 members', true);
             return;
         }
         
@@ -1213,7 +1555,7 @@ window.saveExpense = async () => {
         const number = document.getElementById('loyaltyNumber')?.value;
         const type = document.getElementById('loyaltyType')?.value;
         
-        if (!store || !number) { alert('Please fill store name and card number'); return; }
+        if (!store || !number) { showModalMessage('Please fill store name and card number', true); return; }
         
         appData.loyaltyCards.push({ id: Date.now().toString(), store_name: store, card_number: number, card_type: type });
         await saveToFirebase();
@@ -1222,29 +1564,46 @@ window.saveExpense = async () => {
     };
     
     window.exportData = () => {
-        let csv = "Category,Amount,Store,Date\n";
-        appData.expenses.forEach(e => { csv += `${e.category},${e.amount},${e.store || ''},${e.date}\n`; });
+        let csv = "Name,Amount,Note,Date\n";
+        appData.expenses.forEach(e => { csv += `${e.name || e.store},${e.amount},${e.note || ''},${e.date}\n`; });
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url; a.download = 'inkence_export.csv'; a.click();
         URL.revokeObjectURL(url);
+        showModalMessage('Data exported successfully!');
     };
     
     window.resetData = async () => {
-        if (confirm('Delete all data? This cannot be undone.')) {
-            appData = { expenses: [], groceryLists: [], budget: { amount: 5000, spent: 0 }, loyaltyCards: [], stokvels: [] };
+        const confirmModal = document.createElement('div');
+        confirmModal.className = 'modal-overlay';
+        confirmModal.innerHTML = `
+            <div class="modal-container">
+                <h3 style="margin-bottom: 16px;">⚠️ Delete All Data?</h3>
+                <p style="margin-bottom: 20px; color: #64748B;">This action cannot be undone. All expenses, lists, and settings will be permanently deleted.</p>
+                <div class="flex-between gap-2">
+                    <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+                    <button class="btn btn-primary" id="confirmResetBtn" style="background:#dc2626;">Yes, Delete All</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(confirmModal);
+        
+        document.getElementById('confirmResetBtn').onclick = () => {
+            appData = { expenses: [], groceryLists: [], budget: { amount: 5000, spent: 0 }, loyaltyCards: [], stokvels: [], errandMoney: { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null }, errandHistory: [] };
             recalcSpent();
-            await saveToFirebase();
+            saveToFirebase();
             render();
-        }
+            confirmModal.remove();
+            showModalMessage('All data has been reset');
+        };
     };
     
     window.handleLoginUI = () => {
         const email = document.getElementById('loginEmail')?.value;
         const password = document.getElementById('loginPassword')?.value;
         if (email && password) handleLogin(email, password);
-        else alert('Please enter email and password');
+        else showModalMessage('Please enter email and password', true);
     };
     
     window.handleRegisterUI = () => {
@@ -1252,7 +1611,7 @@ window.saveExpense = async () => {
         const email = document.getElementById('regEmail')?.value;
         const password = document.getElementById('regPassword')?.value;
         if (name && email && password) handleRegister(email, password, name);
-        else alert('Please fill all fields');
+        else showModalMessage('Please fill all fields', true);
     };
     
     window.handleLogout = handleLogout;
@@ -1260,6 +1619,8 @@ window.saveExpense = async () => {
         const email = prompt('Enter your email address:');
         if (email) handleForgotPassword(email);
     };
+    window.cancelErrandSession = cancelErrandSession;
+    window.completeErrandSession = completeErrandSession;
     
     function showLoginScreen() {
         document.getElementById('appRoot').innerHTML = renderLoginScreen();
