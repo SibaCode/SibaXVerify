@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Inkence — The clue to your money</title>
+    <title>Inkence — Errands & Loyalty</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -103,39 +103,6 @@
             color: white;
         }
 
-        .user-menu {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 8px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #FFB800, #F59E0B);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #1a2c3e;
-        }
-
-        .greeting h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 4px;
-        }
-
-        .greeting p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-        }
-
         .main-content {
             padding: 24px 20px 80px;
             position: relative;
@@ -148,29 +115,12 @@
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .budget-card {
-            background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
-            color: white;
         }
 
         .errand-card {
             background: linear-gradient(135deg, #f59e0b, #f97316);
             color: white;
-        }
-
-        .errand-history-card {
-            background: white;
-            border-left: 4px solid #f59e0b;
-        }
-
-        .budget-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 16px;
         }
 
         .stat-value {
@@ -190,13 +140,6 @@
             height: 100%;
             border-radius: 20px;
             transition: width 0.5s;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 8px;
         }
 
         .action-btn {
@@ -223,7 +166,6 @@
             align-items: center;
             padding: 14px 0;
             border-bottom: 1px solid #eef2f6;
-            cursor: pointer;
         }
 
         .expense-info {
@@ -287,6 +229,11 @@
             color: #f59e0b;
         }
 
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e3c2c;
+        }
+
         .loyalty-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -301,6 +248,53 @@
             color: white;
             cursor: pointer;
             min-height: 130px;
+            transition: transform 0.2s;
+        }
+
+        .loyalty-card-item:active {
+            transform: scale(0.98);
+        }
+
+        .loyalty-delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 4px 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 2;
+        }
+
+        .loyalty-card-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .loyalty-card-type {
+            font-size: 10px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .loyalty-card-store {
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        .loyalty-card-number {
+            margin-top: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .gradient-grocery { background: linear-gradient(135deg, #10b981, #059669); }
@@ -308,26 +302,6 @@
         .gradient-fuel { background: linear-gradient(135deg, #f59e0b, #d97706); }
         .gradient-coffee { background: linear-gradient(135deg, #ec489a, #db2777); }
         .gradient-default { background: linear-gradient(135deg, #6366f1, #4f46e5); }
-
-        .stokvel-card-item {
-            background: linear-gradient(135deg, #f59e0b, #f97316);
-            border-radius: 24px;
-            padding: 18px;
-            color: white;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stokvel-member-badge {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 4px 10px;
-            font-size: 11px;
-            display: inline-block;
-            margin-right: 6px;
-            margin-bottom: 6px;
-        }
 
         .modal-overlay {
             position: fixed;
@@ -399,7 +373,6 @@
 
         .mt-2 { margin-top: 8px; }
         .mt-3 { margin-top: 16px; }
-        .mb-2 { margin-bottom: 8px; }
         .text-center { text-align: center; }
         .gap-2 { gap: 8px; }
 
@@ -410,14 +383,6 @@
 
         .glass-card {
             animation: fadeInUp 0.4s ease-out;
-        }
-
-        .auth-container {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px;
         }
 
         .transaction-log {
@@ -440,18 +405,6 @@
             margin-bottom: 4px;
         }
 
-        .transaction-location {
-            font-size: 11px;
-            opacity: 0.8;
-        }
-
-        .error-text {
-            color: #dc2626;
-            font-size: 12px;
-            margin-top: 4px;
-            display: none;
-        }
-
         .modal-message {
             position: fixed;
             bottom: 80px;
@@ -469,13 +422,6 @@
             animation: fadeInUp 0.3s ease;
         }
 
-        .errand-session-active {
-            background: linear-gradient(135deg, #f59e0b, #f97316);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
-
         .history-item {
             background: #f8fafc;
             border-radius: 16px;
@@ -491,40 +437,21 @@
             font-size: 11px;
             font-weight: 500;
         }
+
+        details summary {
+            cursor: pointer;
+            color: #f59e0b;
+            font-size: 12px;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
 <div class="app" id="appRoot"></div>
 
-<script type="module">
-    // ============ FIREBASE CONFIGURATION ============
-    const firebaseConfig = {
-        apiKey: "AIzaSyDOyTB08tOfH3Jq61kIvbHtI9U-l4IxpQc",
-        authDomain: "sibatechx.firebaseapp.com",
-        projectId: "sibatechx",
-        storageBucket: "sibatechx.firebasestorage.app",
-        messagingSenderId: "153536701523",
-        appId: "1:153536701523:web:1de7217ae12bfc382d52a6",
-        measurementId: "G-KVFKM1GQY1"
-    };
-    
-    // Import Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
-    
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    
-    // ============ APP STATE ============
-    let currentUser = null;
+<script>
+    // App State
     let appData = {
-        expenses: [],
-        groceryLists: [],
-        budget: { amount: 5000, spent: 0 },
-        loyaltyCards: [],
-        stokvels: [],
         errandMoney: {
             active: false,
             totalWithdrawn: 0,
@@ -534,19 +461,16 @@
             startedAt: null,
             completedAt: null
         },
-        errandHistory: []
+        errandHistory: [],
+        loyaltyCards: []
     };
     
-    let currentView = 'dashboard';
-    let selectedGroceryId = null;
-    let showStokvelModal = false;
-    let showLoyaltyModal = false;
+    let currentView = 'errands';
     let showErrandStartModal = false;
     let showErrandSpendModal = false;
+    let showLoyaltyModal = false;
     
-    let newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
-    
-    // ============ HELPER FUNCTIONS ============
+    // Helper Functions
     function showModalMessage(message, isError = false) {
         const existingMsg = document.querySelector('.modal-message');
         if (existingMsg) existingMsg.remove();
@@ -562,11 +486,6 @@
         }, 3000);
     }
     
-    function getTodaySpend() {
-        const today = new Date().toISOString().slice(0, 10);
-        return appData.expenses.filter(e => e.date === today).reduce((s, e) => s + e.amount, 0);
-    }
-    
     function getLoyaltyGradient(type) {
         const gradients = { Grocery: 'gradient-grocery', Retail: 'gradient-retail', Fuel: 'gradient-fuel', Coffee: 'gradient-coffee' };
         return gradients[type] || 'gradient-default';
@@ -577,13 +496,7 @@
         return emojis[type] || '💳';
     }
     
-    function recalcSpent() {
-        const currentMonth = new Date().toISOString().slice(0, 7);
-        const monthly = appData.expenses.filter(e => e.date.startsWith(currentMonth));
-        appData.budget.spent = monthly.reduce((sum, e) => sum + e.amount, 0);
-    }
-    
-    // ============ ERRAND MONEY FUNCTIONS ============
+    // Errand Functions
     function startErrandSession(amount) {
         if (!amount || amount <= 0) {
             showModalMessage('Please enter a valid amount', true);
@@ -600,7 +513,6 @@
             completedAt: null
         };
         
-        saveToFirebase();
         render();
         showModalMessage(`💰 Errand session started with R${amount}`);
         return true;
@@ -645,17 +557,6 @@
         appData.errandMoney.spent += amount;
         appData.errandMoney.remaining -= amount;
         
-        appData.expenses.push({
-            id: 'errand_' + Date.now().toString(),
-            name: `[ERRAND] ${description.trim()}`,
-            amount: amount,
-            note: `At: ${location.trim()}`,
-            date: new Date().toISOString().slice(0, 10),
-            isErrand: true,
-            errandLocation: location.trim()
-        });
-        
-        saveToFirebase();
         render();
         showModalMessage(`✅ Added: ${description} at ${location} - R${amount}\nRemaining: R${appData.errandMoney.remaining}`);
         return true;
@@ -689,7 +590,6 @@
             completedAt: null
         };
         
-        saveToFirebase();
         render();
         showModalMessage(`✅ Errand session completed!\nWithdrawn: R${session.totalWithdrawn}\nSpent: R${session.spent}\nRemaining: R${session.remaining}`);
     }
@@ -721,277 +621,38 @@
                 startedAt: null,
                 completedAt: null
             };
-            saveToFirebase();
             render();
             confirmModal.remove();
             showModalMessage('Errand session cancelled');
         };
     }
     
-    // ============ FIREBASE SYNC FUNCTIONS ============
-    async function saveToFirebase() {
-        if (!currentUser) return;
-        recalcSpent();
-        const userRef = doc(db, "users", currentUser.uid);
-        await setDoc(userRef, {
-            email: currentUser.email,
-            displayName: currentUser.displayName || currentUser.email.split('@')[0],
-            expenses: appData.expenses,
-            groceryLists: appData.groceryLists,
-            budget: appData.budget,
-            loyaltyCards: appData.loyaltyCards,
-            stokvels: appData.stokvels,
-            errandMoney: appData.errandMoney,
-            errandHistory: appData.errandHistory,
-            lastUpdated: new Date().toISOString()
-        }, { merge: true });
-    }
-    
-    async function loadFromFirebase() {
-        if (!currentUser) return;
-        const userRef = doc(db, "users", currentUser.uid);
-        const docSnap = await getDoc(userRef);
-        
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            appData = {
-                expenses: data.expenses || [],
-                groceryLists: data.groceryLists || [],
-                budget: data.budget || { amount: 5000, spent: 0 },
-                loyaltyCards: data.loyaltyCards || [],
-                stokvels: data.stokvels || [],
-                errandMoney: data.errandMoney || { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null },
-                errandHistory: data.errandHistory || []
-            };
-            recalcSpent();
-        } else {
-            const today = new Date().toISOString().slice(0, 10);
-            appData = {
-                expenses: [
-                    { id: 'e1', name: "Nando's", amount: 85, note: 'Lunch', date: today },
-                    { id: 'e2', name: 'Uber', amount: 45, note: 'To work', date: today },
-                    { id: 'e3', name: 'Vodacom Airtime', amount: 29, note: '', date: today }
-                ],
-                groceryLists: [
-                    { id: 'gl1', name: 'March 2026', isPinned: true, items: [
-                        { id: 'i1', name: 'Milk', quantity: '2L', bought: false },
-                        { id: 'i2', name: 'Bread', quantity: '', bought: true }
-                    ]},
-                    { id: 'gl2', name: 'Weekly Shop', isPinned: true, items: [
-                        { id: 'i3', name: 'Vegetables', quantity: '', bought: false }
-                    ]}
-                ],
-                budget: { amount: 5000, spent: 0 },
-                loyaltyCards: [
-                    { id: 'lc1', store_name: 'Checkers', card_number: '**** 3456', card_type: 'Grocery' },
-                    { id: 'lc2', store_name: 'Clicks', card_number: '**** 7654', card_type: 'Retail' }
-                ],
-                stokvels: [
-                    { id: 'st1', name: 'Family Savings', contribution_amount: 200, frequency: 'monthly', members: [{ id: 'm1', name: 'Thabo' }, { id: 'm2', name: 'Lerato' }], yourBalance: 1200, current_round: 0, start_date: '2026-01-01' }
-                ],
-                errandMoney: { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null },
-                errandHistory: []
-            };
-            recalcSpent();
-            await saveToFirebase();
+    // Loyalty Card Functions
+    function addLoyaltyCard(store, number, type) {
+        if (!store || !number) {
+            showModalMessage('Please fill store name and card number', true);
+            return false;
         }
+        
+        appData.loyaltyCards.push({
+            id: Date.now().toString(),
+            store_name: store,
+            card_number: number,
+            card_type: type
+        });
+        
         render();
+        showModalMessage(`✅ Added ${store} loyalty card`);
+        return true;
     }
     
-    // ============ AUTH FUNCTIONS ============
-    async function handleLogin(email, password) {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            currentUser = userCredential.user;
-            await loadFromFirebase();
-            render();
-        } catch (error) {
-            showModalMessage("Login failed: " + error.message, true);
-        }
+    function deleteLoyaltyCard(id) {
+        appData.loyaltyCards = appData.loyaltyCards.filter(c => c.id !== id);
+        render();
+        showModalMessage('Loyalty card removed');
     }
     
-    async function handleRegister(email, password, name) {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            currentUser = userCredential.user;
-            await saveToFirebase();
-            await loadFromFirebase();
-            render();
-        } catch (error) {
-            showModalMessage("Registration failed: " + error.message, true);
-        }
-    }
-    
-    async function handleLogout() {
-        await signOut(auth);
-        currentUser = null;
-        showLoginScreen();
-    }
-    
-    async function handleForgotPassword(email) {
-        try {
-            await sendPasswordResetEmail(auth, email);
-            showModalMessage("Password reset email sent! Check your inbox.");
-        } catch (error) {
-            showModalMessage("Error: " + error.message, true);
-        }
-    }
-    
-    // ============ RENDER FUNCTIONS ============
-    function renderLoginScreen() {
-        return `
-            <div class="header">
-                <div class="header-content">
-                    <div class="logo-section">
-                        <div class="logo">
-                            <div class="logo-icon">🔍</div>
-                            <div class="logo-text">
-                                <h1>Inkence</h1>
-                                <p>the clue to your money</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="auth-container">
-                <div class="glass-card">
-                    <h2 style="text-align: center; margin-bottom: 24px;">Welcome Back</h2>
-                    <input type="email" id="loginEmail" class="input-field" placeholder="Email address">
-                    <input type="password" id="loginPassword" class="input-field mt-2" placeholder="Password">
-                    <button class="btn btn-primary mt-3" onclick="window.handleLoginUI()">Login</button>
-                    <div class="text-center mt-3">
-                        <span style="color: #64748B;">Don't have an account?</span>
-                        <button onclick="showRegisterScreen()" style="background: none; border: none; color: #1e3c2c; font-weight: 600; cursor: pointer;">Sign Up</button>
-                    </div>
-                    <div class="text-center mt-2">
-                        <button onclick="showForgotPassword()" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 12px;">Forgot Password?</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderRegisterScreen() {
-        return `
-            <div class="header">
-                <div class="header-content">
-                    <div class="logo-section">
-                        <div class="logo">
-                            <div class="logo-icon">🔍</div>
-                            <div class="logo-text">
-                                <h1>Inkence</h1>
-                                <p>start your journey</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="auth-container">
-                <div class="glass-card">
-                    <h2 style="text-align: center; margin-bottom: 24px;">Create Account</h2>
-                    <input type="text" id="regName" class="input-field" placeholder="Full Name">
-                    <input type="email" id="regEmail" class="input-field mt-2" placeholder="Email address">
-                    <input type="password" id="regPassword" class="input-field mt-2" placeholder="Password (min 6 characters)">
-                    <button class="btn btn-primary mt-3" onclick="window.handleRegisterUI()">Sign Up</button>
-                    <div class="text-center mt-3">
-                        <span style="color: #64748B;">Already have an account?</span>
-                        <button onclick="showLoginScreen()" style="background: none; border: none; color: #1e3c2c; font-weight: 600; cursor: pointer;">Login</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderDashboard() {
-        const remaining = appData.budget.amount - appData.budget.spent;
-        const percent = (appData.budget.spent / appData.budget.amount) * 100;
-        const recent = [...appData.expenses].reverse().slice(0, 4);
-        
-        // Show active errand summary if any
-        let activeErrandSummary = '';
-        if (appData.errandMoney.active) {
-            activeErrandSummary = `
-                <div class="errand-session-active" onclick="switchView('errands')" style="cursor: pointer;">
-                    <div class="flex-between">
-                        <span>💰 Active Errand Session</span>
-                        <span class="badge" style="background: rgba(255,255,255,0.2);">Tap to manage →</span>
-                    </div>
-                    <div class="flex-between mt-2">
-                        <div>Remaining: <strong>R${appData.errandMoney.remaining}</strong></div>
-                        <div>Spent: R${appData.errandMoney.spent}</div>
-                    </div>
-                    <div class="progress-bar mt-2" style="background: rgba(255,255,255,0.3);">
-                        <div class="progress-fill" style="width: ${(appData.errandMoney.spent / appData.errandMoney.totalWithdrawn) * 100}%; background: white;"></div>
-                    </div>
-                </div>
-            `;
-        }
-        
-        return `
-            <div class="header">
-                <div class="header-content">
-                    <div class="logo-section">
-                        <div class="logo">
-                            <div class="logo-icon">🔍</div>
-                            <div class="logo-text">
-                                <h1>Inkence</h1>
-                                <p>the clue to your money</p>
-                            </div>
-                        </div>
-                        <div class="user-menu" onclick="handleLogout()">
-                            <div class="user-avatar">${currentUser?.email?.charAt(0).toUpperCase() || 'U'}</div>
-                        </div>
-                    </div>
-                    <div class="greeting">
-                        <h2>Sawubona, ${currentUser?.email?.split('@')[0] || 'User'}! 👋</h2>
-                        <p>Here's your financial snapshot</p>
-                    </div>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card budget-card">
-                    <div class="budget-stats">
-                        <div><div style="font-size:12px; opacity:0.7;">Today</div><div class="stat-value">R${getTodaySpend()}</div></div>
-                        <div><div style="font-size:12px; opacity:0.7;">Remaining</div><div class="stat-value" style="color:#FFB800">R${remaining}</div></div>
-                    </div>
-                    <div class="progress-section">
-                        <div class="progress-label flex-between">
-                            <span>Monthly Progress</span>
-                            <span>R${appData.budget.spent} / R${appData.budget.amount}</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: ${Math.min(percent, 100)}%"></div></div>
-                    </div>
-                </div>
-                
-                ${activeErrandSummary}
-                
-                <div class="glass-card">
-                    <div class="flex-between" style="margin-bottom: 12px;">
-                        <h3>📋 Recent Expenses</h3>
-                        <button class="action-btn" style="padding: 6px 12px; flex-direction: row; gap: 6px;" onclick="switchView('expense')">+ Add</button>
-                    </div>
-                    ${recent.map(exp => `
-                        <div class="expense-row" onclick="editExpense('${exp.id}')">
-                            <div class="expense-info">
-                                <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); font-size: 20px;">
-                                    ${exp.isErrand ? '💰' : '💵'}
-                                </div>
-                                <div>
-                                    <h4>${exp.name || exp.store || 'Expense'}</h4>
-                                    <p>${exp.date} ${exp.note ? `· ${exp.note}` : ''}</p>
-                                </div>
-                            </div>
-                            <div class="expense-amount">R${exp.amount}</div>
-                        </div>
-                    `).join('')}
-                    ${recent.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No expenses yet. Tap + to add</div>' : ''}
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    // NEW: Errands Tab - Full management of errand sessions and history
+    // RENDER FUNCTIONS
     function renderErrandsScreen() {
         let activeSessionHtml = '';
         
@@ -1000,21 +661,21 @@
             activeSessionHtml = `
                 <div class="glass-card errand-card">
                     <div class="flex-between">
-                        <h3 style="color: white;">💰 Active Errand Session</h3>
+                        <h3>💰 Active Errand Session</h3>
                         <button onclick="cancelErrandSession()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 4px 12px; border-radius: 20px; cursor: pointer;">Cancel</button>
                     </div>
                     <div class="flex-between mt-2">
                         <div>
                             <div style="font-size: 12px; opacity: 0.8;">Withdrawn</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.totalWithdrawn}</div>
+                            <div class="stat-value">R${appData.errandMoney.totalWithdrawn}</div>
                         </div>
                         <div>
                             <div style="font-size: 12px; opacity: 0.8;">Remaining</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.remaining}</div>
+                            <div class="stat-value">R${appData.errandMoney.remaining}</div>
                         </div>
                         <div>
                             <div style="font-size: 12px; opacity: 0.8;">Spent</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.spent}</div>
+                            <div class="stat-value">R${appData.errandMoney.spent}</div>
                         </div>
                     </div>
                     <div class="progress-bar mt-2" style="background: rgba(255,255,255,0.3);">
@@ -1028,12 +689,12 @@
                     <div class="glass-card">
                         <h3>📝 Transaction Log</h3>
                         ${appData.errandMoney.transactions.slice().reverse().map(t => `
-                            <div class="expense-row" style="cursor: default;">
+                            <div class="expense-row">
                                 <div class="expense-info">
-                                    <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">💰</div>
+                                    <div class="expense-icon">💰</div>
                                     <div>
                                         <h4>${t.name}</h4>
-                                        <p>📍 ${t.location} · ${t.date} ${t.time}</p>
+                                        <p>📍 ${t.location} · ${t.date}</p>
                                     </div>
                                 </div>
                                 <div style="font-weight: 600;">R${t.amount}</div>
@@ -1044,13 +705,11 @@
             `;
         } else {
             activeSessionHtml = `
-                <div class="glass-card">
-                    <div class="text-center" style="padding: 20px;">
-                        <i class="fas fa-walking" style="font-size: 48px; color: #f59e0b; margin-bottom: 16px; display: block;"></i>
-                        <h3>No Active Errand Session</h3>
-                        <p style="color: #64748B; margin: 12px 0;">Start a new errand session to track your cash spending</p>
-                        <button class="btn btn-warning mt-2" onclick="showErrandStartModalFunc()">Start New Session</button>
-                    </div>
+                <div class="glass-card text-center" style="padding: 40px;">
+                    <i class="fas fa-walking" style="font-size: 48px; color: #f59e0b; margin-bottom: 16px; display: block;"></i>
+                    <h3>No Active Errand Session</h3>
+                    <p style="color: #64748B; margin: 12px 0;">Start a new errand session to track your cash spending</p>
+                    <button class="btn btn-warning" onclick="showErrandStartModalFunc()">Start New Session</button>
                 </div>
             `;
         }
@@ -1061,7 +720,7 @@
                 ${appData.errandHistory.map(session => `
                     <div class="history-item">
                         <div class="flex-between mb-2">
-                            <span class="badge" style="background: #fef3c7;">${new Date(session.startedAt).toLocaleDateString()}</span>
+                            <span class="badge">${new Date(session.startedAt).toLocaleDateString()}</span>
                             <span style="font-weight: 600;">R${session.spent} spent</span>
                         </div>
                         <div class="flex-between" style="font-size: 13px; color: #64748B;">
@@ -1070,7 +729,7 @@
                         </div>
                         ${session.transactions.length > 0 ? `
                             <details class="mt-2">
-                                <summary style="font-size: 12px; color: #f59e0b; cursor: pointer;">View ${session.transactions.length} transactions</summary>
+                                <summary>View ${session.transactions.length} transactions</summary>
                                 ${session.transactions.map(t => `
                                     <div style="font-size: 12px; padding: 6px 0; border-bottom: 1px solid #eef2f6;">
                                         <div><strong>${t.name}</strong> - R${t.amount}</div>
@@ -1082,12 +741,12 @@
                     </div>
                 `).join('')}
             </div>
-        ` : '<div class="glass-card text-center" style="color: #94a3b8;">No errand history yet. Start your first session!</div>';
+        ` : '';
         
         return `
             <div class="header" style="padding: 20px 24px;">
                 <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <div></div>
                     <h2 style="color: white;">Errands</h2>
                     <div style="width: 32px;"></div>
                 </div>
@@ -1100,192 +759,20 @@
         `;
     }
     
-    function renderExpenseForm() {
+    function renderLoyaltyScreen() {
         return `
             <div class="header" style="padding: 20px 24px;">
                 <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">Add Expense</h2>
-                    <div style="width: 32px;"></div>
+                    <div></div>
+                    <h2 style="color: white;">Loyalty Cards</h2>
+                    <button onclick="showLoyaltyModalFunc()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 40px; cursor: pointer;">+ Add</button>
                 </div>
             </div>
             <div class="main-content">
                 <div class="glass-card">
-                    <div class="input-group">
-                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                            What did you spend on? *
-                        </label>
-                        <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers" autocomplete="off">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                            Amount (R) *
-                        </label>
-                        <input type="number" id="expAmount" class="input-field" placeholder="0.00">
-                    </div>
-                    
-                    <div class="quick-actions" style="grid-template-columns: repeat(5, 1fr); margin: 8px 0 16px;">
-                        <button class="action-btn" onclick="setAmount(10)">R10</button>
-                        <button class="action-btn" onclick="setAmount(20)">R20</button>
-                        <button class="action-btn" onclick="setAmount(50)">R50</button>
-                        <button class="action-btn" onclick="setAmount(100)">R100</button>
-                        <button class="action-btn" onclick="setAmount(200)">R200</button>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                            Note (optional)
-                        </label>
-                        <input type="text" id="expNote" class="input-field" placeholder="Add a note...">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
-                            Date
-                        </label>
-                        <input type="date" id="expDate" class="input-field" value="${new Date().toISOString().slice(0, 10)}">
-                    </div>
-                    
-                    <button class="btn btn-primary mt-3" onclick="saveExpense()">Save Expense</button>
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderGroceryLists() {
-        const pinned = appData.groceryLists.filter(l => l.isPinned);
-        const others = appData.groceryLists.filter(l => !l.isPinned);
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">Grocery Lists</h2>
-                    <button onclick="createNewList()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 40px;">+ New</button>
-                </div>
-            </div>
-            <div class="main-content">
-                ${pinned.length ? `<div class="glass-card"><h3>📌 Pinned Lists</h3>${pinned.map(list => `
-                    <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
-                        <div><strong>${list.name}</strong><div style="font-size:12px">${list.items.filter(i=>i.bought).length}/${list.items.length} items</div></div>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                `).join('')}</div>` : ''}
-                <div class="glass-card"><h3>📂 All Lists</h3>${others.map(list => `
-                    <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
-                        <div><strong>${list.name}</strong><div style="font-size:12px">${list.items.length} items</div></div>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                `).join('')}</div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderGroceryDetail(listId) {
-        const list = appData.groceryLists.find(l => l.id === listId);
-        if (!list) return renderGroceryLists();
-        const done = list.items.filter(i => i.bought).length;
-        const percent = list.items.length ? (done/list.items.length)*100 : 0;
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="closeGroceryDetail()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white; font-size: 18px;">${list.name}</h2>
-                    <button onclick="copyList('${list.id}')" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 40px;">Copy</button>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="progress-label flex-between"><span>Progress</span><span>${done}/${list.items.length}</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width:${percent}%; background:linear-gradient(90deg,#1e3c2c,#2a5a3a);"></div></div>
-                </div>
-                <div class="glass-card">
-                    ${list.items.map(item => `
-                        <div class="grocery-item" style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eef2f6;">
-                            <input type="checkbox" ${item.bought ? 'checked' : ''} onchange="toggleItem('${list.id}','${item.id}')">
-                            <span style="flex:1; ${item.bought ? 'text-decoration:line-through; color:#94a3b8;' : ''}">${item.name}</span>
-                            ${item.quantity ? `<span style="background:#f1f5f9; padding:4px 10px; border-radius:20px; font-size:12px;">${item.quantity}</span>` : ''}
-                            <button onclick="deleteItem('${list.id}','${item.id}')" style="background:none; border:none; font-size:18px; cursor:pointer; color:#ef4444;">🗑️</button>
-                        </div>
-                    `).join('')}
-                    <div class="flex-between mt-3" style="gap:8px;">
-                        <input type="text" id="newItemName" class="input-field" placeholder="Item name" style="flex:2;">
-                        <input type="text" id="newItemQty" class="input-field" placeholder="Qty" style="flex:1;">
-                        <button class="btn btn-primary" style="padding:12px 20px; width:auto;" onclick="addItem('${list.id}')">Add</button>
-                    </div>
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderBudgetScreen() {
-        const percent = (appData.budget.spent / appData.budget.amount) * 100;
-        
-        const expenseMap = {};
-        appData.expenses.forEach(e => {
-            const key = e.name || e.store || 'Other';
-            expenseMap[key] = (expenseMap[key] || 0) + e.amount;
-        });
-        const topExpenses = Object.entries(expenseMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">Budget</h2>
-                    <div style="width: 32px;"></div>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="flex-between"><span>Monthly Budget</span><span style="font-size:28px; font-weight:700;">R${appData.budget.amount}</span></div>
-                    <input type="number" id="budgetInput" class="input-field mt-2" value="${appData.budget.amount}">
-                    <button class="btn btn-primary mt-2" onclick="updateBudget()">Update Budget</button>
-                </div>
-                <div class="glass-card">
-                    <h3>📊 Spending Overview</h3>
-                    <div class="flex-between"><span>Spent: R${appData.budget.spent}</span><span>Remaining: R${appData.budget.amount - appData.budget.spent}</span></div>
-                    <div class="progress-bar mt-2"><div class="progress-fill" style="width:${Math.min(percent,100)}%"></div></div>
-                    <div class="text-center mt-2" style="color:${percent>=90?'#ef4444':percent>=70?'#f59e0b':'#28a745'}">${percent>=90?'⚠️ Over budget!':percent>=70?'🟡 Approaching limit':'✅ On track!'}</div>
-                </div>
-                <div class="glass-card">
-                    <h3>📈 Top Expenses</h3>
-                    ${topExpenses.map(([name, amt]) => `
-                        <div class="flex-between" style="margin-bottom: 10px;">
-                            <span>${name}</span>
-                            <span style="font-weight: 600;">R${amt}</span>
-                        </div>
-                    `).join('')}
-                    ${topExpenses.length === 0 ? '<div class="text-center">No expenses yet</div>' : ''}
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    function renderMoreScreen() {
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">More</h2>
-                    <div style="width: 32px;"></div>
-                </div>
-            </div>
-            <div class="main-content">
-                <!-- Loyalty Cards Section - Merged from your component -->
-                <div class="glass-card">
-                    <div class="flex-between">
-                        <h3>💳 Loyalty Cards</h3>
-                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showLoyaltyModalFunc()">+ Add</button>
-                    </div>
-                    <div class="loyalty-grid mt-2">
+                    <div class="loyalty-grid">
                         ${appData.loyaltyCards.map(card => `
-                            <div class="loyalty-card-item ${getLoyaltyGradient(card.card_type)}" onclick="alert('Scan: ${card.card_number}')">
+                            <div class="loyalty-card-item ${getLoyaltyGradient(card.card_type)}" onclick="alert('Card: ${card.card_number}')">
                                 <button class="loyalty-delete-btn" onclick="event.stopPropagation(); deleteLoyaltyCard('${card.id}')">🗑️</button>
                                 <div class="loyalty-card-content">
                                     <div class="loyalty-card-type">${card.card_type}</div>
@@ -1297,39 +784,8 @@
                                 </div>
                             </div>
                         `).join('')}
-                        ${appData.loyaltyCards.length === 0 ? '<div class="text-center" style="padding: 24px;">No cards yet</div>' : ''}
+                        ${appData.loyaltyCards.length === 0 ? '<div class="text-center" style="padding: 40px; color: #94a3b8;">No loyalty cards yet. Tap + Add to add one</div>' : ''}
                     </div>
-                </div>
-                
-                <!-- Stokvel Section - Merged from your component -->
-                <div class="glass-card">
-                    <div class="flex-between">
-                        <h3>👥 Stokvel</h3>
-                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showStokvelModalFunc()">+ Create</button>
-                    </div>
-                    ${appData.stokvels.map(s => `
-                        <div class="stokvel-card-item">
-                            <div class="stokvel-name">${s.name}</div>
-                            <div class="stokvel-detail">
-                                <span>R${s.contribution_amount}/${s.frequency}</span>
-                                <span>Your balance: R${s.yourBalance || 0}</span>
-                            </div>
-                            <div class="stokvel-members">
-                                ${s.members.slice(0, 4).map(m => `<span class="stokvel-member-badge">${m.name}</span>`).join('')}
-                                ${s.members.length > 4 ? `<span class="stokvel-member-badge">+${s.members.length - 4}</span>` : ''}
-                            </div>
-                            <button class="btn btn-primary" style="background: rgba(255,255,255,0.2); margin-top: 8px;" onclick="logStokvelContribution('${s.id}')">
-                                Log Contribution (R${s.contribution_amount})
-                            </button>
-                        </div>
-                    `).join('')}
-                    ${appData.stokvels.length === 0 ? '<div class="text-center" style="padding: 24px;">No stokvels yet</div>' : ''}
-                </div>
-                
-                <div class="glass-card">
-                    <h3>⚙️ Settings</h3>
-                    <button class="btn btn-secondary mt-2" onclick="exportData()">📤 Export Data (CSV)</button>
-                    <button class="btn btn-danger mt-2" style="background: #fee2e2; color: #dc2626;" onclick="resetData()">🗑️ Reset All Data</button>
                 </div>
             </div>
             ${renderBottomNav()}
@@ -1338,12 +794,8 @@
     
     function renderBottomNav() {
         const navItems = [
-            { view: 'dashboard', icon: 'fas fa-home', label: 'Home' },
-            { view: 'expense', icon: 'fas fa-plus-circle', label: 'Add' },
             { view: 'errands', icon: 'fas fa-walking', label: 'Errands' },
-            { view: 'grocery', icon: 'fas fa-shopping-cart', label: 'Lists' },
-            { view: 'budget', icon: 'fas fa-chart-line', label: 'Budget' },
-            { view: 'more', icon: 'fas fa-user', label: 'More' }
+            { view: 'loyalty', icon: 'fas fa-credit-card', label: 'Loyalty' }
         ];
         return `<div class="bottom-nav">${navItems.map(item => `<button class="nav-item ${currentView === item.view ? 'active' : ''}" onclick="switchView('${item.view}')"><i class="${item.icon}"></i><span>${item.label}</span></button>`).join('')}</div>`;
     }
@@ -1358,10 +810,10 @@
                         <div class="flex-between"><h3>💰 Start Errand Session</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
                         <p style="font-size: 13px; color: #64748B; margin-bottom: 16px;">Enter the amount of cash you withdrew for errands:</p>
                         <input type="number" id="errandAmount" class="input-field" placeholder="Amount (R)">
-                        <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr); margin: 12px 0;">
-                            <button class="action-btn" onclick="setErrandAmount(100)">R100</button>
-                            <button class="action-btn" onclick="setErrandAmount(200)">R200</button>
-                            <button class="action-btn" onclick="setErrandAmount(500)">R500</button>
+                        <div class="quick-actions" style="display: flex; gap: 8px; margin: 12px 0;">
+                            <button class="action-btn" onclick="setErrandAmount(100)" style="flex:1;">R100</button>
+                            <button class="action-btn" onclick="setErrandAmount(200)" style="flex:1;">R200</button>
+                            <button class="action-btn" onclick="setErrandAmount(500)" style="flex:1;">R500</button>
                         </div>
                         <button class="btn btn-primary mt-2" onclick="startErrandSessionFromModal()">Start Session</button>
                     </div>
@@ -1374,48 +826,31 @@
                 <div class="modal-overlay" onclick="closeModals()">
                     <div class="modal-container" onclick="event.stopPropagation()">
                         <div class="flex-between"><h3>✍️ Record Errand Spending</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
-                        <p style="font-size: 13px; color: #64748B; margin-bottom: 8px;">Remaining: <strong style="color:#f59e0b;">R${appData.errandMoney.remaining}</strong></p>
+                        <p style="font-size: 13px; margin-bottom: 12px;">Remaining: <strong style="color:#f59e0b;">R${appData.errandMoney.remaining}</strong></p>
                         
                         <div class="input-group mt-2">
-                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">💰 Amount (R) *</label>
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px;">💰 Amount (R) *</label>
                             <input type="number" id="errandAmountInput" class="input-field" placeholder="e.g., 150">
                         </div>
-                        <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr); margin: 8px 0 12px;">
-                            <button class="action-btn" onclick="setErrandSpendAmount(50)">R50</button>
-                            <button class="action-btn" onclick="setErrandSpendAmount(100)">R100</button>
-                            <button class="action-btn" onclick="setErrandSpendAmount(200)">R200</button>
+                        <div class="quick-actions" style="display: flex; gap: 8px; margin: 8px 0 12px;">
+                            <button class="action-btn" onclick="setErrandSpendAmount(50)" style="flex:1;">R50</button>
+                            <button class="action-btn" onclick="setErrandSpendAmount(100)" style="flex:1;">R100</button>
+                            <button class="action-btn" onclick="setErrandSpendAmount(200)" style="flex:1;">R200</button>
                         </div>
                         
                         <div class="input-group mt-2">
-                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">📍 Where? (Store/Location) *</label>
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px;">📍 Where? (Store/Location) *</label>
                             <input type="text" id="errandLocationInput" class="input-field" placeholder="e.g., Checkers, Sasol, Pick n Pay">
                         </div>
                         
                         <div class="input-group mt-2">
-                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #475569;">🛍️ What did you buy? *</label>
+                            <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px;">🛍️ What did you buy? *</label>
                             <input type="text" id="errandWhatInput" class="input-field" placeholder="e.g., Groceries, Petrol, Airtime">
                         </div>
                         
-                        <div id="errandSpendError" class="error-text" style="color:#dc2626; font-size:12px; margin-top:8px;"></div>
+                        <div id="errandSpendError" style="color:#dc2626; font-size:12px; margin-top:8px;"></div>
                         
                         <button class="btn btn-primary mt-3" onclick="addErrandSpendingFromModal()">✅ Save Spending</button>
-                    </div>
-                </div>
-            `;
-        }
-        
-        if (showStokvelModal) {
-            modalHtml = `
-                <div class="modal-overlay" onclick="closeModals()">
-                    <div class="modal-container" onclick="event.stopPropagation()">
-                        <div class="flex-between"><h3>Create Stokvel</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
-                        <input type="text" id="stokvelName" class="input-field mt-2" placeholder="Group Name">
-                        <input type="number" id="stokvelContribution" class="input-field mt-2" placeholder="Contribution (R)">
-                        <select id="stokvelFrequency" class="input-field mt-2"><option value="monthly">Monthly</option><option value="weekly">Weekly</option></select>
-                        <input type="date" id="stokvelStartDate" class="input-field mt-2">
-                        <div class="flex-between gap-2 mt-2"><input type="text" id="memberInput" class="input-field" placeholder="Member name" style="flex:1;"><button class="btn btn-primary" style="width:auto; padding:14px 20px;" onclick="addMemberToNewStokvel()">+ Add</button></div>
-                        <div id="memberList"></div>
-                        <button class="btn btn-primary mt-3" onclick="createStokvel()">Create Stokvel</button>
                     </div>
                 </div>
             `;
@@ -1428,8 +863,13 @@
                         <div class="flex-between"><h3>Add Loyalty Card</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
                         <input type="text" id="loyaltyStore" class="input-field mt-2" placeholder="Store Name">
                         <input type="text" id="loyaltyNumber" class="input-field mt-2" placeholder="Card Number">
-                        <select id="loyaltyType" class="input-field mt-2"><option value="Grocery">🛒 Grocery</option><option value="Retail">🏬 Retail</option><option value="Fuel">⛽ Fuel</option><option value="Coffee">☕ Coffee</option></select>
-                        <button class="btn btn-primary mt-3" onclick="createLoyaltyCard()">Save Card</button>
+                        <select id="loyaltyType" class="input-field mt-2">
+                            <option value="Grocery">🛒 Grocery</option>
+                            <option value="Retail">🏬 Retail</option>
+                            <option value="Fuel">⛽ Fuel</option>
+                            <option value="Coffee">☕ Coffee</option>
+                        </select>
+                        <button class="btn btn-primary mt-3" onclick="addLoyaltyCardFromModal()">Save Card</button>
                     </div>
                 </div>
             `;
@@ -1438,16 +878,13 @@
         return modalHtml;
     }
     
-    // ============ INTERACTION HANDLERS ============
-    window.switchView = (view) => { currentView = view; selectedGroceryId = null; render(); };
-    window.closeModals = () => { showStokvelModal = false; showLoyaltyModal = false; showErrandStartModal = false; showErrandSpendModal = false; render(); };
-    window.showStokvelModalFunc = () => { showStokvelModal = true; render(); };
-    window.showLoyaltyModalFunc = () => { showLoyaltyModal = true; render(); };
+    // INTERACTION HANDLERS
+    window.switchView = (view) => { currentView = view; render(); };
+    window.closeModals = () => { showErrandStartModal = false; showErrandSpendModal = false; showLoyaltyModal = false; render(); };
     window.showErrandStartModalFunc = () => { showErrandStartModal = true; render(); };
     window.showErrandSpendModalFunc = () => { showErrandSpendModal = true; render(); };
-    window.closeGroceryDetail = () => { selectedGroceryId = null; render(); };
-    window.openGroceryDetail = (id) => { selectedGroceryId = id; render(); };
-    window.setAmount = (amt) => { const inp = document.getElementById('expAmount'); if(inp) inp.value = amt; };
+    window.showLoyaltyModalFunc = () => { showLoyaltyModal = true; render(); };
+    
     window.setErrandAmount = (amt) => { const inp = document.getElementById('errandAmount'); if(inp) inp.value = amt; };
     window.setErrandSpendAmount = (amt) => { const inp = document.getElementById('errandAmountInput'); if(inp) inp.value = amt; };
     
@@ -1486,284 +923,41 @@
         }
     };
     
-    window.saveExpense = async () => {
-        const expenseName = document.getElementById('expenseName')?.value.trim();
-        const amount = parseFloat(document.getElementById('expAmount')?.value);
-        
-        if (!expenseName) {
-            showModalMessage('Please enter what you spent on', true);
-            return;
-        }
-        if (!amount || amount <= 0) {
-            showModalMessage('Please enter a valid amount', true);
-            return;
-        }
-        
-        const newExpense = {
-            id: Date.now().toString(),
-            name: expenseName,
-            amount: amount,
-            note: document.getElementById('expNote')?.value || '',
-            date: document.getElementById('expDate')?.value || new Date().toISOString().slice(0, 10)
-        };
-        
-        appData.expenses.push(newExpense);
-        recalcSpent();
-        await saveToFirebase();
-        switchView('dashboard');
-    };
-    
-    window.editExpense = async (id) => {
-        const exp = appData.expenses.find(e => e.id === id);
-        if (exp) {
-            const newName = prompt('Edit expense name:', exp.name || exp.store);
-            const newAmt = prompt('Edit amount (R):', exp.amount);
-            if (newName && newName.trim()) exp.name = newName.trim();
-            if (newAmt && !isNaN(parseFloat(newAmt))) exp.amount = parseFloat(newAmt);
-            recalcSpent();
-            await saveToFirebase();
-            render();
-        }
-    };
-    
-    window.updateBudget = async () => {
-        const newBudget = parseFloat(document.getElementById('budgetInput')?.value);
-        if (newBudget && newBudget > 0) {
-            appData.budget.amount = newBudget;
-            await saveToFirebase();
-            render();
-        }
-    };
-    
-    window.createNewList = async () => {
-        const name = prompt('List name:');
-        if (name) {
-            appData.groceryLists.push({ id: Date.now().toString(), name, isPinned: false, items: [] });
-            await saveToFirebase();
-            render();
-        }
-    };
-    
-    window.toggleItem = async (listId, itemId) => {
-        const list = appData.groceryLists.find(l => l.id === listId);
-        const item = list?.items.find(i => i.id === itemId);
-        if (item) { item.bought = !item.bought; await saveToFirebase(); render(); }
-    };
-    
-    window.deleteItem = async (listId, itemId) => {
-        const list = appData.groceryLists.find(l => l.id === listId);
-        if (list) { list.items = list.items.filter(i => i.id !== itemId); await saveToFirebase(); render(); }
-    };
-    
-    window.addItem = async (listId) => {
-        const name = document.getElementById('newItemName')?.value;
-        const qty = document.getElementById('newItemQty')?.value;
-        if (!name) return;
-        const list = appData.groceryLists.find(l => l.id === listId);
-        if (list) {
-            list.items.push({ id: Date.now().toString(), name, quantity: qty, bought: false });
-            await saveToFirebase();
-            render();
-        }
-    };
-    
-    window.copyList = async (listId) => {
-        const original = appData.groceryLists.find(l => l.id === listId);
-        const newName = prompt('New list name:', original.name + ' (Copy)');
-        if (newName) {
-            appData.groceryLists.push({ id: Date.now().toString(), name: newName, isPinned: false, items: original.items.map(i => ({ ...i, id: Date.now()+Math.random(), bought: false })) });
-            await saveToFirebase();
-            render();
-        }
-    };
-    
-    window.logStokvelContribution = async (id) => {
-        const stokvel = appData.stokvels.find(s => s.id === id);
-        if (stokvel) {
-            stokvel.yourBalance = (stokvel.yourBalance || 0) + stokvel.contribution_amount;
-            appData.expenses.push({ id: Date.now().toString(), name: `Stokvel: ${stokvel.name}`, amount: stokvel.contribution_amount, note: 'Stokvel contribution', date: new Date().toISOString().slice(0,10) });
-            recalcSpent();
-            await saveToFirebase();
-            showModalMessage(`Added R${stokvel.contribution_amount} to ${stokvel.name}`);
-            render();
-        }
-    };
-    
-    window.deleteLoyaltyCard = async (id) => {
-        appData.loyaltyCards = appData.loyaltyCards.filter(c => c.id !== id);
-        await saveToFirebase();
-        render();
-    };
-    
-    window.addMemberToNewStokvel = () => {
-        const input = document.getElementById('memberInput');
-        if (input && input.value.trim()) {
-            newStokvel.members.push({ id: Date.now().toString(), name: input.value.trim() });
-            input.value = '';
-            const memberList = document.getElementById('memberList');
-            if (memberList) {
-                memberList.innerHTML = newStokvel.members.map((m, i) => `
-                    <div class="flex-between" style="background:#f1f5f9; padding:8px 12px; border-radius:12px; margin-bottom:6px;">
-                        <span><span style="background:#1e3c2c; color:white; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; margin-right:8px;">${i+1}</span>${m.name}</span>
-                        <button onclick="removeMemberFromNewStokvel('${m.id}')" style="background:none; border:none; color:#ef4444;">✕</button>
-                    </div>
-                `).join('');
-            }
-        }
-    };
-    
-    window.removeMemberFromNewStokvel = (id) => {
-        newStokvel.members = newStokvel.members.filter(m => m.id !== id);
-        const memberList = document.getElementById('memberList');
-        if (memberList) {
-            memberList.innerHTML = newStokvel.members.map((m, i) => `
-                <div class="flex-between" style="background:#f1f5f9; padding:8px 12px; border-radius:12px; margin-bottom:6px;">
-                    <span><span style="background:#1e3c2c; color:white; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; margin-right:8px;">${i+1}</span>${m.name}</span>
-                    <button onclick="removeMemberFromNewStokvel('${m.id}')" style="background:none; border:none; color:#ef4444;">✕</button>
-                </div>
-            `).join('');
-        }
-    };
-    
-    window.createStokvel = async () => {
-        const name = document.getElementById('stokvelName')?.value;
-        const contribution = parseFloat(document.getElementById('stokvelContribution')?.value);
-        const frequency = document.getElementById('stokvelFrequency')?.value;
-        const startDate = document.getElementById('stokvelStartDate')?.value;
-        
-        if (!name || !contribution || newStokvel.members.length < 2 || !startDate) {
-            showModalMessage('Please fill all fields and add at least 2 members', true);
-            return;
-        }
-        
-        appData.stokvels.push({
-            id: Date.now().toString(), name, contribution_amount: contribution, frequency,
-            start_date: startDate, members: newStokvel.members, yourBalance: 0, current_round: 0
-        });
-        
-        newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
-        await saveToFirebase();
-        showStokvelModal = false;
-        render();
-    };
-    
-    window.createLoyaltyCard = async () => {
+    window.addLoyaltyCardFromModal = () => {
         const store = document.getElementById('loyaltyStore')?.value;
         const number = document.getElementById('loyaltyNumber')?.value;
         const type = document.getElementById('loyaltyType')?.value;
         
-        if (!store || !number) { showModalMessage('Please fill store name and card number', true); return; }
-        
-        appData.loyaltyCards.push({ id: Date.now().toString(), store_name: store, card_number: number, card_type: type });
-        await saveToFirebase();
-        showLoyaltyModal = false;
-        render();
-    };
-    
-    window.exportData = () => {
-        let csv = "Name,Amount,Note,Date\n";
-        appData.expenses.forEach(e => { csv += `${e.name || e.store},${e.amount},${e.note || ''},${e.date}\n`; });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'inkence_export.csv'; a.click();
-        URL.revokeObjectURL(url);
-        showModalMessage('Data exported successfully!');
-    };
-    
-    window.resetData = async () => {
-        const confirmModal = document.createElement('div');
-        confirmModal.className = 'modal-overlay';
-        confirmModal.innerHTML = `
-            <div class="modal-container">
-                <h3 style="margin-bottom: 16px;">⚠️ Delete All Data?</h3>
-                <p style="margin-bottom: 20px; color: #64748B;">This action cannot be undone. All expenses, lists, and settings will be permanently deleted.</p>
-                <div class="flex-between gap-2">
-                    <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
-                    <button class="btn btn-primary" id="confirmResetBtn" style="background:#dc2626;">Yes, Delete All</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(confirmModal);
-        
-        document.getElementById('confirmResetBtn').onclick = () => {
-            appData = { expenses: [], groceryLists: [], budget: { amount: 5000, spent: 0 }, loyaltyCards: [], stokvels: [], errandMoney: { active: false, totalWithdrawn: 0, remaining: 0, spent: 0, transactions: [], startedAt: null, completedAt: null }, errandHistory: [] };
-            recalcSpent();
-            saveToFirebase();
+        if (addLoyaltyCard(store, number, type)) {
+            showLoyaltyModal = false;
             render();
-            confirmModal.remove();
-            showModalMessage('All data has been reset');
-        };
+        }
     };
     
-    window.handleLoginUI = () => {
-        const email = document.getElementById('loginEmail')?.value;
-        const password = document.getElementById('loginPassword')?.value;
-        if (email && password) handleLogin(email, password);
-        else showModalMessage('Please enter email and password', true);
-    };
-    
-    window.handleRegisterUI = () => {
-        const name = document.getElementById('regName')?.value;
-        const email = document.getElementById('regEmail')?.value;
-        const password = document.getElementById('regPassword')?.value;
-        if (name && email && password) handleRegister(email, password, name);
-        else showModalMessage('Please fill all fields', true);
-    };
-    
-    window.handleLogout = handleLogout;
-    window.showForgotPassword = () => {
-        const email = prompt('Enter your email address:');
-        if (email) handleForgotPassword(email);
-    };
+    window.deleteLoyaltyCard = deleteLoyaltyCard;
     window.cancelErrandSession = cancelErrandSession;
     window.completeErrandSession = completeErrandSession;
     
-    function showLoginScreen() {
-        document.getElementById('appRoot').innerHTML = renderLoginScreen();
-    }
-    
-    function showRegisterScreen() {
-        document.getElementById('appRoot').innerHTML = renderRegisterScreen();
-    }
-    
-    window.showLoginScreen = showLoginScreen;
-    window.showRegisterScreen = showRegisterScreen;
-    
     function render() {
-        if (!currentUser) {
-            showLoginScreen();
-            return;
-        }
         const container = document.getElementById('appRoot');
         let mainHtml = '';
-        if (selectedGroceryId) mainHtml = renderGroceryDetail(selectedGroceryId);
-        else {
-            const views = { 
-                dashboard: renderDashboard, 
-                expense: renderExpenseForm, 
-                errands: renderErrandsScreen,
-                grocery: renderGroceryLists, 
-                budget: renderBudgetScreen, 
-                more: renderMoreScreen 
-            };
-            mainHtml = (views[currentView] || renderDashboard)();
+        
+        if (currentView === 'errands') {
+            mainHtml = renderErrandsScreen();
+        } else if (currentView === 'loyalty') {
+            mainHtml = renderLoyaltyScreen();
         }
+        
         container.innerHTML = mainHtml + renderModals();
     }
     
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            currentUser = user;
-            await loadFromFirebase();
-            render();
-        } else {
-            currentUser = null;
-            showLoginScreen();
-        }
-    });
+    // Initial render with demo data
+    appData.loyaltyCards = [
+        { id: 'lc1', store_name: 'Checkers', card_number: '**** 3456', card_type: 'Grocery' },
+        { id: 'lc2', store_name: 'Clicks', card_number: '**** 7654', card_type: 'Retail' }
+    ];
     
-    showLoginScreen();
+    render();
 </script>
 </body>
 </html>
