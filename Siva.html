@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Your existing styles remain exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -163,6 +162,11 @@
             color: white;
         }
 
+        .errand-history-card {
+            background: white;
+            border-left: 4px solid #f59e0b;
+        }
+
         .budget-stats {
             display: flex;
             justify-content: space-between;
@@ -226,6 +230,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex: 1;
         }
 
         .expense-icon {
@@ -274,6 +279,12 @@
         .btn-warning {
             background: linear-gradient(135deg, #f59e0b, #f97316);
             color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f59e0b;
+            color: #f59e0b;
         }
 
         .loyalty-grid {
@@ -388,6 +399,7 @@
 
         .mt-2 { margin-top: 8px; }
         .mt-3 { margin-top: 16px; }
+        .mb-2 { margin-bottom: 8px; }
         .text-center { text-align: center; }
         .gap-2 { gap: 8px; }
 
@@ -409,7 +421,7 @@
         }
 
         .transaction-log {
-            max-height: 150px;
+            max-height: 200px;
             overflow-y: auto;
             margin-top: 12px;
             border-top: 1px solid rgba(255,255,255,0.2);
@@ -417,23 +429,32 @@
         }
 
         .transaction-item {
-            padding: 6px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             font-size: 13px;
+        }
+
+        .transaction-details {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 4px;
         }
-        
+
+        .transaction-location {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
         .error-text {
             color: #dc2626;
             font-size: 12px;
             margin-top: 4px;
             display: none;
         }
-        
+
         .modal-message {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             background: #1e3c2c;
@@ -446,6 +467,29 @@
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             animation: fadeInUp 0.3s ease;
+        }
+
+        .errand-session-active {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .history-item {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid #eef2f6;
+        }
+
+        .badge {
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -467,9 +511,8 @@
     // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
     
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
@@ -501,10 +544,7 @@
     let showErrandStartModal = false;
     let showErrandSpendModal = false;
     
-    // Modal state
     let newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
-    let memberInput = '';
-    let newLoyalty = { store_name: '', card_number: '', card_type: 'Grocery' };
     
     // ============ HELPER FUNCTIONS ============
     function showModalMessage(message, isError = false) {
@@ -543,7 +583,7 @@
         appData.budget.spent = monthly.reduce((sum, e) => sum + e.amount, 0);
     }
     
-    // ============ UPDATED ERRAND MONEY FUNCTIONS WITH MODALS ============
+    // ============ ERRAND MONEY FUNCTIONS ============
     function startErrandSession(amount) {
         if (!amount || amount <= 0) {
             showModalMessage('Please enter a valid amount', true);
@@ -566,7 +606,6 @@
         return true;
     }
     
-    // NEW: Enhanced errand spending with amount, where, and what
     function addErrandSpending(amount, location, description) {
         if (!appData.errandMoney.active) {
             showModalMessage('No active errand session. Start one first!', true);
@@ -606,7 +645,6 @@
         appData.errandMoney.spent += amount;
         appData.errandMoney.remaining -= amount;
         
-        // Also add to main expenses with detailed errand info
         appData.expenses.push({
             id: 'errand_' + Date.now().toString(),
             name: `[ERRAND] ${description.trim()}`,
@@ -659,13 +697,12 @@
     function cancelErrandSession() {
         if (!appData.errandMoney.active) return;
         
-        // Using a custom confirm modal instead of browser confirm
         const confirmModal = document.createElement('div');
         confirmModal.className = 'modal-overlay';
         confirmModal.innerHTML = `
             <div class="modal-container">
                 <h3 style="margin-bottom: 16px;">Cancel Errand Session?</h3>
-                <p style="margin-bottom: 20px; color: #64748B;">You have R${appData.errandMoney.remaining} remaining. This money will be returned to your budget.</p>
+                <p style="margin-bottom: 20px; color: #64748B;">You have R${appData.errandMoney.remaining} remaining.</p>
                 <div class="flex-between gap-2">
                     <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">No, Keep</button>
                     <button class="btn btn-primary" id="confirmCancelBtn">Yes, Cancel</button>
@@ -708,7 +745,6 @@
             errandHistory: appData.errandHistory,
             lastUpdated: new Date().toISOString()
         }, { merge: true });
-        console.log("Data saved to Firebase");
     }
     
     async function loadFromFirebase() {
@@ -728,9 +764,7 @@
                 errandHistory: data.errandHistory || []
             };
             recalcSpent();
-            console.log("Data loaded from Firebase");
         } else {
-            // Initialize with demo data
             const today = new Date().toISOString().slice(0, 10);
             appData = {
                 expenses: [
@@ -873,65 +907,22 @@
         const percent = (appData.budget.spent / appData.budget.amount) * 100;
         const recent = [...appData.expenses].reverse().slice(0, 4);
         
-        // Errand Money Card HTML - Updated to show location details
-        let errandCard = '';
+        // Show active errand summary if any
+        let activeErrandSummary = '';
         if (appData.errandMoney.active) {
-            const errandPercent = (appData.errandMoney.spent / appData.errandMoney.totalWithdrawn) * 100;
-            errandCard = `
-                <div class="glass-card errand-card">
+            activeErrandSummary = `
+                <div class="errand-session-active" onclick="switchView('errands')" style="cursor: pointer;">
                     <div class="flex-between">
-                        <h3 style="color: white;">💰 Errand Money Active</h3>
-                        <button onclick="cancelErrandSession()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 4px 12px; border-radius: 20px; cursor: pointer;">Cancel</button>
+                        <span>💰 Active Errand Session</span>
+                        <span class="badge" style="background: rgba(255,255,255,0.2);">Tap to manage →</span>
                     </div>
                     <div class="flex-between mt-2">
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.8;">Withdrawn</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.totalWithdrawn}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.8;">Remaining</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.remaining}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.8;">Spent</div>
-                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.spent}</div>
-                        </div>
+                        <div>Remaining: <strong>R${appData.errandMoney.remaining}</strong></div>
+                        <div>Spent: R${appData.errandMoney.spent}</div>
                     </div>
                     <div class="progress-bar mt-2" style="background: rgba(255,255,255,0.3);">
-                        <div class="progress-fill" style="width: ${errandPercent}%; background: white;"></div>
+                        <div class="progress-fill" style="width: ${(appData.errandMoney.spent / appData.errandMoney.totalWithdrawn) * 100}%; background: white;"></div>
                     </div>
-                    <div class="flex-between mt-2">
-                        <button onclick="showErrandSpendModalFunc()" class="action-btn" style="background: rgba(255,255,255,0.2); color: white; flex: 1; margin-right: 6px;">+ Add Spending</button>
-                        <button onclick="completeErrandSession()" class="action-btn" style="background: rgba(255,255,255,0.2); color: white; flex: 1; margin-left: 6px;">Complete</button>
-                    </div>
-                    ${appData.errandMoney.transactions.length > 0 ? `
-                        <div class="transaction-log">
-                            ${appData.errandMoney.transactions.slice(-3).reverse().map(t => `
-                                <div class="transaction-item">
-                                    <span>📍 ${t.location} · ${t.name}</span>
-                                    <span>R${t.amount}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    ` : '<div class="mt-2 text-center" style="font-size: 12px; opacity: 0.7;">No spending recorded yet</div>'}
-                </div>
-            `;
-        } else {
-            errandCard = `
-                <div class="glass-card">
-                    <div class="flex-between">
-                        <h3>💰 Errand Money</h3>
-                        <button onclick="showErrandStartModalFunc()" class="action-btn" style="padding: 8px 16px;">Start</button>
-                    </div>
-                    <p style="color: #64748B; font-size: 13px; margin-top: 8px;">Track cash withdrawals and errand spending separately from your main budget.</p>
-                    ${appData.errandHistory.length > 0 ? `
-                        <div class="mt-2" style="border-top: 1px solid #eef2f6; margin-top: 12px; padding-top: 12px;">
-                            <div class="flex-between" style="font-size: 12px; color: #64748B;">
-                                <span>Last errand:</span>
-                                <span>R${appData.errandHistory[0].spent} spent</span>
-                            </div>
-                        </div>
-                    ` : ''}
                 </div>
             `;
         }
@@ -972,17 +963,7 @@
                     </div>
                 </div>
                 
-                ${errandCard}
-                
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 16px;">⚡ Quick Add</h3>
-                    <div class="text-center mt-2">
-                        <button class="action-btn" style="width: 100%; flex-direction: row; justify-content: center; gap: 8px;" onclick="switchView('expense')">
-                            <span>+</span>
-                            <span>Add Custom Expense</span>
-                        </button>
-                    </div>
-                </div>
+                ${activeErrandSummary}
                 
                 <div class="glass-card">
                     <div class="flex-between" style="margin-bottom: 12px;">
@@ -1010,6 +991,115 @@
         `;
     }
     
+    // NEW: Errands Tab - Full management of errand sessions and history
+    function renderErrandsScreen() {
+        let activeSessionHtml = '';
+        
+        if (appData.errandMoney.active) {
+            const errandPercent = (appData.errandMoney.spent / appData.errandMoney.totalWithdrawn) * 100;
+            activeSessionHtml = `
+                <div class="glass-card errand-card">
+                    <div class="flex-between">
+                        <h3 style="color: white;">💰 Active Errand Session</h3>
+                        <button onclick="cancelErrandSession()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 4px 12px; border-radius: 20px; cursor: pointer;">Cancel</button>
+                    </div>
+                    <div class="flex-between mt-2">
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Withdrawn</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.totalWithdrawn}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Remaining</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.remaining}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 12px; opacity: 0.8;">Spent</div>
+                            <div style="font-size: 24px; font-weight: 700;">R${appData.errandMoney.spent}</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar mt-2" style="background: rgba(255,255,255,0.3);">
+                        <div class="progress-fill" style="width: ${errandPercent}%; background: white;"></div>
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="showErrandSpendModalFunc()" style="background: white; color: #f97316; font-weight: 700;">+ Add Spending</button>
+                    <button class="btn btn-outline mt-2" onclick="completeErrandSession()" style="background: transparent; border: 2px solid white; color: white;">Complete Session</button>
+                </div>
+                
+                ${appData.errandMoney.transactions.length > 0 ? `
+                    <div class="glass-card">
+                        <h3>📝 Transaction Log</h3>
+                        ${appData.errandMoney.transactions.slice().reverse().map(t => `
+                            <div class="expense-row" style="cursor: default;">
+                                <div class="expense-info">
+                                    <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">💰</div>
+                                    <div>
+                                        <h4>${t.name}</h4>
+                                        <p>📍 ${t.location} · ${t.date} ${t.time}</p>
+                                    </div>
+                                </div>
+                                <div style="font-weight: 600;">R${t.amount}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        } else {
+            activeSessionHtml = `
+                <div class="glass-card">
+                    <div class="text-center" style="padding: 20px;">
+                        <i class="fas fa-walking" style="font-size: 48px; color: #f59e0b; margin-bottom: 16px; display: block;"></i>
+                        <h3>No Active Errand Session</h3>
+                        <p style="color: #64748B; margin: 12px 0;">Start a new errand session to track your cash spending</p>
+                        <button class="btn btn-warning mt-2" onclick="showErrandStartModalFunc()">Start New Session</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        const historyHtml = appData.errandHistory.length > 0 ? `
+            <div class="glass-card">
+                <h3>📜 Errand History</h3>
+                ${appData.errandHistory.map(session => `
+                    <div class="history-item">
+                        <div class="flex-between mb-2">
+                            <span class="badge" style="background: #fef3c7;">${new Date(session.startedAt).toLocaleDateString()}</span>
+                            <span style="font-weight: 600;">R${session.spent} spent</span>
+                        </div>
+                        <div class="flex-between" style="font-size: 13px; color: #64748B;">
+                            <span>Withdrawn: R${session.totalWithdrawn}</span>
+                            <span>Returned: R${session.remaining}</span>
+                        </div>
+                        ${session.transactions.length > 0 ? `
+                            <details class="mt-2">
+                                <summary style="font-size: 12px; color: #f59e0b; cursor: pointer;">View ${session.transactions.length} transactions</summary>
+                                ${session.transactions.map(t => `
+                                    <div style="font-size: 12px; padding: 6px 0; border-bottom: 1px solid #eef2f6;">
+                                        <div><strong>${t.name}</strong> - R${t.amount}</div>
+                                        <div style="color: #94a3b8;">📍 ${t.location}</div>
+                                    </div>
+                                `).join('')}
+                            </details>
+                        ` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        ` : '<div class="glass-card text-center" style="color: #94a3b8;">No errand history yet. Start your first session!</div>';
+        
+        return `
+            <div class="header" style="padding: 20px 24px;">
+                <div class="flex-between">
+                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <h2 style="color: white;">Errands</h2>
+                    <div style="width: 32px;"></div>
+                </div>
+            </div>
+            <div class="main-content">
+                ${activeSessionHtml}
+                ${historyHtml}
+            </div>
+            ${renderBottomNav()}
+        `;
+    }
+    
     function renderExpenseForm() {
         return `
             <div class="header" style="padding: 20px 24px;">
@@ -1025,7 +1115,7 @@
                         <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
                             What did you spend on? *
                         </label>
-                        <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers, Clothing" autocomplete="off">
+                        <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers" autocomplete="off">
                     </div>
                     
                     <div class="input-group">
@@ -1177,7 +1267,6 @@
             ${renderBottomNav()}
         `;
     }
-    
     function renderMoreScreen() {
         return `
             <div class="header" style="padding: 20px 24px;">
@@ -1188,35 +1277,59 @@
                 </div>
             </div>
             <div class="main-content">
+                <!-- Loyalty Cards Section - Merged from your component -->
                 <div class="glass-card">
-                    <div class="flex-between"><h3>💳 Loyalty Cards</h3><button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showLoyaltyModalFunc()">+ Add</button></div>
+                    <div class="flex-between">
+                        <h3>💳 Loyalty Cards</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showLoyaltyModalFunc()">+ Add</button>
+                    </div>
                     <div class="loyalty-grid mt-2">
                         ${appData.loyaltyCards.map(card => `
                             <div class="loyalty-card-item ${getLoyaltyGradient(card.card_type)}" onclick="alert('Scan: ${card.card_number}')">
-                                <button class="loyalty-delete-btn" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.3); border:none; border-radius:20px; padding:2px 8px; color:white; cursor:pointer;" onclick="event.stopPropagation(); deleteLoyaltyCard('${card.id}')">🗑️</button>
-                                <div><div style="font-size:10px; opacity:0.7;">${card.card_type}</div><div style="font-weight:700;">${card.store_name}</div></div>
-                                <div class="mt-2" style="font-family:monospace; font-size:12px;">${getLoyaltyEmoji(card.card_type)} ${card.card_number}</div>
+                                <button class="loyalty-delete-btn" onclick="event.stopPropagation(); deleteLoyaltyCard('${card.id}')">🗑️</button>
+                                <div class="loyalty-card-content">
+                                    <div class="loyalty-card-type">${card.card_type}</div>
+                                    <div class="loyalty-card-store">${card.store_name}</div>
+                                    <div class="loyalty-card-number">
+                                        <span>${getLoyaltyEmoji(card.card_type)}</span>
+                                        <span>${card.card_number}</span>
+                                    </div>
+                                </div>
                             </div>
                         `).join('')}
+                        ${appData.loyaltyCards.length === 0 ? '<div class="text-center" style="padding: 24px;">No cards yet</div>' : ''}
                     </div>
                 </div>
                 
+                <!-- Stokvel Section - Merged from your component -->
                 <div class="glass-card">
-                    <div class="flex-between"><h3>👥 Stokvel</h3><button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showStokvelModalFunc()">+ Create</button></div>
+                    <div class="flex-between">
+                        <h3>👥 Stokvel</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showStokvelModalFunc()">+ Create</button>
+                    </div>
                     ${appData.stokvels.map(s => `
                         <div class="stokvel-card-item">
-                            <div style="font-weight:700; font-size:18px;">${s.name}</div>
-                            <div class="flex-between mt-2"><span>R${s.contribution_amount}/${s.frequency}</span><span>Balance: R${s.yourBalance || 0}</span></div>
-                            <div class="mt-2">${s.members?.slice(0,3).map(m => `<span class="stokvel-member-badge">${m.name}</span>`).join('')}${s.members?.length > 3 ? `<span class="stokvel-member-badge">+${s.members.length-3}</span>` : ''}</div>
-                            <button class="btn btn-primary mt-2" style="background: rgba(255,255,255,0.2);" onclick="logStokvelContribution('${s.id}')">Log R${s.contribution_amount}</button>
+                            <div class="stokvel-name">${s.name}</div>
+                            <div class="stokvel-detail">
+                                <span>R${s.contribution_amount}/${s.frequency}</span>
+                                <span>Your balance: R${s.yourBalance || 0}</span>
+                            </div>
+                            <div class="stokvel-members">
+                                ${s.members.slice(0, 4).map(m => `<span class="stokvel-member-badge">${m.name}</span>`).join('')}
+                                ${s.members.length > 4 ? `<span class="stokvel-member-badge">+${s.members.length - 4}</span>` : ''}
+                            </div>
+                            <button class="btn btn-primary" style="background: rgba(255,255,255,0.2); margin-top: 8px;" onclick="logStokvelContribution('${s.id}')">
+                                Log Contribution (R${s.contribution_amount})
+                            </button>
                         </div>
                     `).join('')}
+                    ${appData.stokvels.length === 0 ? '<div class="text-center" style="padding: 24px;">No stokvels yet</div>' : ''}
                 </div>
                 
                 <div class="glass-card">
                     <h3>⚙️ Settings</h3>
                     <button class="btn btn-secondary mt-2" onclick="exportData()">📤 Export Data (CSV)</button>
-                    <button class="btn btn-danger mt-2" style="background:#fee2e2; color:#dc2626;" onclick="resetData()">🗑️ Reset All Data</button>
+                    <button class="btn btn-danger mt-2" style="background: #fee2e2; color: #dc2626;" onclick="resetData()">🗑️ Reset All Data</button>
                 </div>
             </div>
             ${renderBottomNav()}
@@ -1227,6 +1340,7 @@
         const navItems = [
             { view: 'dashboard', icon: 'fas fa-home', label: 'Home' },
             { view: 'expense', icon: 'fas fa-plus-circle', label: 'Add' },
+            { view: 'errands', icon: 'fas fa-walking', label: 'Errands' },
             { view: 'grocery', icon: 'fas fa-shopping-cart', label: 'Lists' },
             { view: 'budget', icon: 'fas fa-chart-line', label: 'Budget' },
             { view: 'more', icon: 'fas fa-user', label: 'More' }
@@ -1234,7 +1348,6 @@
         return `<div class="bottom-nav">${navItems.map(item => `<button class="nav-item ${currentView === item.view ? 'active' : ''}" onclick="switchView('${item.view}')"><i class="${item.icon}"></i><span>${item.label}</span></button>`).join('')}</div>`;
     }
     
-    // UPDATED MODAL: Errand spending modal with Amount, Where, and What fields
     function renderModals() {
         let modalHtml = '';
         
@@ -1256,7 +1369,6 @@
             `;
         }
         
-        // UPDATED: Enhanced Errand Spend Modal with Amount, Where, and What
         if (showErrandSpendModal) {
             modalHtml = `
                 <div class="modal-overlay" onclick="closeModals()">
@@ -1347,7 +1459,6 @@
         }
     };
     
-    // UPDATED: Enhanced errand spending handler with validation
     window.addErrandSpendingFromModal = () => {
         const amount = parseFloat(document.getElementById('errandAmountInput')?.value);
         const location = document.getElementById('errandLocationInput')?.value.trim();
@@ -1373,20 +1484,6 @@
             showErrandSpendModal = false;
             render();
         }
-    };
-    
-    window.quickAdd = async (name, amt) => {
-        const newExpense = {
-            id: Date.now().toString(),
-            name: name,
-            amount: amt,
-            note: 'Quick add',
-            date: new Date().toISOString().slice(0, 10)
-        };
-        appData.expenses.push(newExpense);
-        recalcSpent();
-        await saveToFirebase();
-        render();
     };
     
     window.saveExpense = async () => {
@@ -1642,13 +1739,19 @@
         let mainHtml = '';
         if (selectedGroceryId) mainHtml = renderGroceryDetail(selectedGroceryId);
         else {
-            const views = { dashboard: renderDashboard, expense: renderExpenseForm, grocery: renderGroceryLists, budget: renderBudgetScreen, more: renderMoreScreen };
+            const views = { 
+                dashboard: renderDashboard, 
+                expense: renderExpenseForm, 
+                errands: renderErrandsScreen,
+                grocery: renderGroceryLists, 
+                budget: renderBudgetScreen, 
+                more: renderMoreScreen 
+            };
             mainHtml = (views[currentView] || renderDashboard)();
         }
         container.innerHTML = mainHtml + renderModals();
     }
     
-    // Auth state listener
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             currentUser = user;
@@ -1660,7 +1763,6 @@
         }
     });
     
-    // Initial render
     showLoginScreen();
 </script>
 </body>
