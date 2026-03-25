@@ -21,7 +21,6 @@
             min-height: 100vh;
         }
 
-        /* App Container */
         .app {
             max-width: 450px;
             margin: 0 auto;
@@ -31,7 +30,6 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
         }
 
-        /* Modern Header with Wave */
         .header {
             background: linear-gradient(145deg, #0f2b1f 0%, #1e4a2f 100%);
             padding: 32px 24px 48px;
@@ -114,10 +112,6 @@
             transition: all 0.2s;
         }
 
-        .user-menu:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -128,10 +122,6 @@
             justify-content: center;
             font-weight: 600;
             color: #1a2c3e;
-        }
-
-        .greeting {
-            margin-top: 16px;
         }
 
         .greeting h2 {
@@ -146,17 +136,14 @@
             font-size: 14px;
         }
 
-        /* Main Content */
         .main-content {
             padding: 24px 20px 80px;
             position: relative;
             z-index: 5;
         }
 
-        /* Glass Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(0px);
             border-radius: 28px;
             padding: 20px;
             margin-bottom: 20px;
@@ -165,12 +152,6 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        .glass-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Budget Card Special */
         .budget-card {
             background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
             color: white;
@@ -182,30 +163,9 @@
             margin-bottom: 16px;
         }
 
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 4px;
-        }
-
         .stat-value {
             font-size: 28px;
             font-weight: 700;
-        }
-
-        .progress-section {
-            margin-top: 16px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 8px;
         }
 
         .progress-bar {
@@ -219,11 +179,9 @@
             background: linear-gradient(90deg, #FFB800, #F59E0B);
             height: 100%;
             border-radius: 20px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0%;
+            transition: width 0.5s;
         }
 
-        /* Quick Action Buttons */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -247,22 +205,6 @@
 
         .action-btn:active {
             transform: scale(0.95);
-            background: #e2e8f0;
-        }
-
-        .action-btn span:first-child {
-            font-size: 24px;
-        }
-
-        .action-btn span:last-child {
-            font-size: 12px;
-            font-weight: 500;
-            color: #475569;
-        }
-
-        /* Expense Items */
-        .expense-list {
-            margin-top: 8px;
         }
 
         .expense-row {
@@ -272,12 +214,6 @@
             padding: 14px 0;
             border-bottom: 1px solid #eef2f6;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .expense-row:active {
-            background: #f8fafc;
-            transform: translateX(4px);
         }
 
         .expense-info {
@@ -297,24 +233,6 @@
             font-size: 24px;
         }
 
-        .expense-details h4 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .expense-details p {
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        .expense-amount {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1e293b;
-        }
-
-        /* Category Chips */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -340,38 +258,6 @@
             border-color: #FFB800;
         }
 
-        .category-chip.selected .category-icon {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .category-icon {
-            width: 44px;
-            height: 44px;
-            background: white;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .category-name {
-            font-weight: 600;
-        }
-
-        /* Inputs */
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #475569;
-        }
-
         .input-field {
             width: 100%;
             padding: 14px 16px;
@@ -386,10 +272,8 @@
         .input-field:focus {
             outline: none;
             border-color: #1e3c2c;
-            box-shadow: 0 0 0 3px rgba(30, 60, 44, 0.1);
         }
 
-        /* Buttons */
         .btn {
             padding: 14px 24px;
             border-radius: 30px;
@@ -398,7 +282,6 @@
             border: none;
             cursor: pointer;
             transition: all 0.2s;
-            font-family: 'Poppins', sans-serif;
             width: 100%;
         }
 
@@ -407,50 +290,6 @@
             color: white;
         }
 
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
-
-        .btn-secondary {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        /* Grocery Items */
-        .grocery-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid #eef2f6;
-        }
-
-        .grocery-item input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
-            accent-color: #1e3c2c;
-            cursor: pointer;
-        }
-
-        .grocery-name {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .grocery-name.bought {
-            text-decoration: line-through;
-            color: #94a3b8;
-        }
-
-        .grocery-quantity {
-            background: #f1f5f9;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #475569;
-        }
-
-        /* Loyalty Cards - Merged from your component */
         .loyalty-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -464,86 +303,15 @@
             padding: 18px;
             color: white;
             cursor: pointer;
-            transition: transform 0.2s;
             min-height: 130px;
         }
 
-        .loyalty-card-item:active {
-            transform: scale(0.97);
-        }
-
-        .loyalty-card-item::before {
-            content: '';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .loyalty-card-item::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .loyalty-card-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .loyalty-card-type {
-            font-size: 10px;
-            opacity: 0.7;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .loyalty-card-store {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .loyalty-card-number {
-            font-family: monospace;
-            font-size: 13px;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .loyalty-delete-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 20px;
-            padding: 4px 8px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            z-index: 3;
-        }
-
-        /* Gradient backgrounds for loyalty cards */
         .gradient-grocery { background: linear-gradient(135deg, #10b981, #059669); }
         .gradient-retail { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
         .gradient-fuel { background: linear-gradient(135deg, #f59e0b, #d97706); }
         .gradient-coffee { background: linear-gradient(135deg, #ec489a, #db2777); }
         .gradient-default { background: linear-gradient(135deg, #6366f1, #4f46e5); }
 
-        /* Stokvel Cards - Merged from your component */
         .stokvel-card-item {
             background: linear-gradient(135deg, #f59e0b, #f97316);
             border-radius: 24px;
@@ -554,47 +322,16 @@
             overflow: hidden;
         }
 
-        .stokvel-card-item::before {
-            content: '';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .stokvel-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .stokvel-detail {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .stokvel-members {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 8px;
-            margin-bottom: 12px;
-        }
-
         .stokvel-member-badge {
             background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 4px 10px;
             font-size: 11px;
+            display: inline-block;
+            margin-right: 6px;
+            margin-bottom: 6px;
         }
 
-        /* Modal Styles - Merged from your component */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -617,70 +354,8 @@
             max-height: 85vh;
             overflow-y: auto;
             padding: 24px;
-            animation: modalSlideUp 0.3s ease;
         }
 
-        @keyframes modalSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #94a3b8;
-        }
-
-        .member-list {
-            margin-top: 12px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .member-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            background: #f1f5f9;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-
-        .member-number {
-            width: 28px;
-            height: 28px;
-            background: #1e3c2c;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -708,8 +383,6 @@
             cursor: pointer;
             padding: 6px 16px;
             border-radius: 30px;
-            transition: all 0.2s;
-            font-family: 'Poppins', sans-serif;
         }
 
         .nav-item.active {
@@ -721,7 +394,6 @@
             font-size: 22px;
         }
 
-        /* Utilities */
         .flex-between {
             display: flex;
             justify-content: space-between;
@@ -730,116 +402,82 @@
 
         .mt-2 { margin-top: 8px; }
         .mt-3 { margin-top: 16px; }
-        .mb-2 { margin-bottom: 8px; }
         .text-center { text-align: center; }
         .gap-2 { gap: 8px; }
 
-        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .glass-card {
             animation: fadeInUp 0.4s ease-out;
+        }
+
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
 <div class="app" id="appRoot"></div>
 
-<script>
-    // ============ APP DATA ============
-    let currentUser = { name: "Thabo", email: "thabo@example.com" };
-    let appData = {
-        expenses: [
-            { id: '1', amount: 85, category: 'food', store: "Nando's", date: '2026-03-24' },
-            { id: '2', amount: 120, category: 'transport', store: 'Uber', date: '2026-03-24' },
-            { id: '3', amount: 29, category: 'airtime', store: 'Vodacom', date: '2026-03-23' },
-            { id: '4', amount: 350, category: 'other', store: 'Checkers', date: '2026-03-22' }
-        ],
-        groceryLists: [
-            { id: 'gl1', name: 'March 2026', isPinned: true, items: [
-                { id: 'i1', name: 'Milk', quantity: '2L', bought: false },
-                { id: 'i2', name: 'Bread', quantity: '', bought: true },
-                { id: 'i3', name: 'Eggs', quantity: '1 doz', bought: false }
-            ]},
-            { id: 'gl2', name: 'Weekly Shop', isPinned: true, items: [
-                { id: 'i4', name: 'Vegetables', quantity: '', bought: false }
-            ]},
-            { id: 'gl3', name: 'Braai with Friends', isPinned: false, items: [
-                { id: 'i5', name: 'Boerewors', quantity: '2kg', bought: false }
-            ]}
-        ],
-        budget: { amount: 5000, spent: 584 },
-        loyaltyCards: [
-            { id: 'lc1', store_name: 'Checkers', card_number: '**** 3456', card_type: 'Grocery' },
-            { id: 'lc2', store_name: 'Clicks', card_number: '**** 7654', card_type: 'Retail' },
-            { id: 'lc3', store_name: 'Engen', card_number: '**** 8901', card_type: 'Fuel' }
-        ],
-        stokvels: [
-            { 
-                id: 'st1', 
-                name: 'Family Savings', 
-                contribution_amount: 200, 
-                frequency: 'monthly',
-                members: [
-                    { id: 'm1', name: 'Thabo' },
-                    { id: 'm2', name: 'Lerato' },
-                    { id: 'm3', name: 'Sipho' },
-                    { id: 'm4', name: 'Zinhle' }
-                ],
-                yourBalance: 1200,
-                current_round: 2,
-                start_date: '2026-01-01'
-            },
-            { 
-                id: 'st2', 
-                name: 'Church Group', 
-                contribution_amount: 500, 
-                frequency: 'monthly',
-                members: [
-                    { id: 'm5', name: 'Pastor John' },
-                    { id: 'm6', name: 'Mary' },
-                    { id: 'm7', name: 'David' }
-                ],
-                yourBalance: 2500,
-                current_round: 1,
-                start_date: '2026-01-15'
-            }
-        ]
+<script type="module">
+    // ============ FIREBASE CONFIGURATION ============
+    // REPLACE WITH YOUR FIREBASE PROJECT CONFIGURATION
+    const firebaseConfig = {
+         apiKey: "AIzaSyDOyTB08tOfH3Jq61kIvbHtI9U-l4IxpQc",
+  authDomain: "sibatechx.firebaseapp.com",
+  projectId: "sibatechx",
+  storageBucket: "sibatechx.firebasestorage.app",
+  messagingSenderId: "153536701523",
+  appId: "1:153536701523:web:1de7217ae12bfc382d52a6",
+  measurementId: "G-KVFKM1GQY1"
     };
     
+    
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    
+    // ============ APP STATE ============
+    let currentUser = null;
+    let appData = {
+        expenses: [],
+        groceryLists: [],
+        budget: { amount: 5000, spent: 0 },
+        loyaltyCards: [],
+        stokvels: []
+    };
     let currentView = 'dashboard';
     let selectedGroceryId = null;
     let selectedCategory = 'food';
     let showStokvelModal = false;
     let showLoyaltyModal = false;
     
-    // Modal state for new stokvel
-    let newStokvel = {
-        name: '',
-        contribution_amount: '',
-        frequency: 'monthly',
-        start_date: '',
-        members: []
-    };
+    // Modal state
+    let newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
     let memberInput = '';
+    let newLoyalty = { store_name: '', card_number: '', card_type: 'Grocery' };
     
-    // Modal state for new loyalty card
-    let newLoyalty = {
-        store_name: '',
-        card_number: '',
-        card_type: 'Grocery'
-    };
-    
-    // Helper Functions
+    // ============ HELPER FUNCTIONS ============
     function getTodaySpend() {
         const today = new Date().toISOString().slice(0, 10);
         return appData.expenses.filter(e => e.date === today).reduce((s, e) => s + e.amount, 0);
@@ -856,22 +494,12 @@
     }
     
     function getLoyaltyGradient(type) {
-        const gradients = {
-            Grocery: 'gradient-grocery',
-            Retail: 'gradient-retail',
-            Fuel: 'gradient-fuel',
-            Coffee: 'gradient-coffee'
-        };
+        const gradients = { Grocery: 'gradient-grocery', Retail: 'gradient-retail', Fuel: 'gradient-fuel', Coffee: 'gradient-coffee' };
         return gradients[type] || 'gradient-default';
     }
     
     function getLoyaltyEmoji(type) {
-        const emojis = {
-            Grocery: '🛒',
-            Retail: '🏬',
-            Fuel: '⛽',
-            Coffee: '☕'
-        };
+        const emojis = { Grocery: '🛒', Retail: '🏬', Fuel: '⛽', Coffee: '☕' };
         return emojis[type] || '💳';
     }
     
@@ -881,88 +509,114 @@
         appData.budget.spent = monthly.reduce((sum, e) => sum + e.amount, 0);
     }
     
-    function addMemberToNewStokvel() {
-        if (!memberInput.trim()) return;
-        newStokvel.members.push({ id: Date.now().toString(), name: memberInput.trim() });
-        memberInput = '';
-        renderModals();
+    // ============ FIREBASE SYNC FUNCTIONS ============
+    async function saveToFirebase() {
+        if (!currentUser) return;
+        recalcSpent();
+        const userRef = doc(db, "users", currentUser.uid);
+        await setDoc(userRef, {
+            email: currentUser.email,
+            displayName: currentUser.displayName || currentUser.email.split('@')[0],
+            expenses: appData.expenses,
+            groceryLists: appData.groceryLists,
+            budget: appData.budget,
+            loyaltyCards: appData.loyaltyCards,
+            stokvels: appData.stokvels,
+            lastUpdated: new Date().toISOString()
+        }, { merge: true });
+        console.log("Data saved to Firebase");
     }
     
-    function removeMemberFromNewStokvel(id) {
-        newStokvel.members = newStokvel.members.filter(m => m.id !== id);
-        renderModals();
-    }
-    
-    function createStokvel() {
-        if (!newStokvel.name.trim() || !newStokvel.contribution_amount || newStokvel.members.length < 2 || !newStokvel.start_date) {
-            alert('Please fill all fields and add at least 2 members');
-            return;
-        }
+    async function loadFromFirebase() {
+        if (!currentUser) return;
+        const userRef = doc(db, "users", currentUser.uid);
+        const docSnap = await getDoc(userRef);
         
-        appData.stokvels.push({
-            id: Date.now().toString(),
-            name: newStokvel.name.trim(),
-            contribution_amount: Number(newStokvel.contribution_amount),
-            frequency: newStokvel.frequency,
-            start_date: newStokvel.start_date,
-            members: newStokvel.members,
-            yourBalance: 0,
-            current_round: 0
-        });
-        
-        // Reset form
-        newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
-        memberInput = '';
-        showStokvelModal = false;
-        render();
-    }
-    
-    function createLoyaltyCard() {
-        if (!newLoyalty.store_name.trim() || !newLoyalty.card_number.trim()) {
-            alert('Please fill store name and card number');
-            return;
-        }
-        
-        appData.loyaltyCards.push({
-            id: Date.now().toString(),
-            store_name: newLoyalty.store_name.trim(),
-            card_number: newLoyalty.card_number.trim(),
-            card_type: newLoyalty.card_type
-        });
-        
-        newLoyalty = { store_name: '', card_number: '', card_type: 'Grocery' };
-        showLoyaltyModal = false;
-        render();
-    }
-    
-    function logStokvelContribution(id) {
-        const stokvel = appData.stokvels.find(s => s.id === id);
-        if (stokvel) {
-            stokvel.yourBalance = (stokvel.yourBalance || 0) + stokvel.contribution_amount;
-            appData.expenses.push({
-                id: Date.now().toString(),
-                amount: stokvel.contribution_amount,
-                category: 'other',
-                store: stokvel.name,
-                date: new Date().toISOString().slice(0, 10)
-            });
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            appData = {
+                expenses: data.expenses || [],
+                groceryLists: data.groceryLists || [],
+                budget: data.budget || { amount: 5000, spent: 0 },
+                loyaltyCards: data.loyaltyCards || [],
+                stokvels: data.stokvels || []
+            };
             recalcSpent();
-            alert(`Added R${stokvel.contribution_amount} to ${stokvel.name}. New balance: R${stokvel.yourBalance}`);
-            render();
+            console.log("Data loaded from Firebase");
+        } else {
+            // Initialize with demo data for new users
+            const today = new Date().toISOString().slice(0, 10);
+            appData = {
+                expenses: [
+                    { id: 'e1', amount: 85, category: 'food', store: "Nando's", note: '', date: today },
+                    { id: 'e2', amount: 120, category: 'transport', store: 'Uber', note: '', date: today },
+                    { id: 'e3', amount: 29, category: 'airtime', store: 'Vodacom', note: '', date: today }
+                ],
+                groceryLists: [
+                    { id: 'gl1', name: 'March 2026', isPinned: true, items: [
+                        { id: 'i1', name: 'Milk', quantity: '2L', bought: false },
+                        { id: 'i2', name: 'Bread', quantity: '', bought: true }
+                    ]},
+                    { id: 'gl2', name: 'Weekly Shop', isPinned: true, items: [
+                        { id: 'i3', name: 'Vegetables', quantity: '', bought: false }
+                    ]}
+                ],
+                budget: { amount: 5000, spent: 0 },
+                loyaltyCards: [
+                    { id: 'lc1', store_name: 'Checkers', card_number: '**** 3456', card_type: 'Grocery' },
+                    { id: 'lc2', store_name: 'Clicks', card_number: '**** 7654', card_type: 'Retail' }
+                ],
+                stokvels: [
+                    { id: 'st1', name: 'Family Savings', contribution_amount: 200, frequency: 'monthly', members: [{ id: 'm1', name: 'Thabo' }, { id: 'm2', name: 'Lerato' }], yourBalance: 1200, current_round: 0, start_date: '2026-01-01' }
+                ]
+            };
+            recalcSpent();
+            await saveToFirebase();
         }
-    }
-    
-    function deleteLoyaltyCard(id) {
-        appData.loyaltyCards = appData.loyaltyCards.filter(c => c.id !== id);
         render();
     }
     
-    // ============ RENDER FUNCTIONS ============
-    function renderDashboard() {
-        const remaining = appData.budget.amount - appData.budget.spent;
-        const percent = (appData.budget.spent / appData.budget.amount) * 100;
-        const recent = [...appData.expenses].reverse().slice(0, 4);
-        
+    // ============ AUTH FUNCTIONS ============
+    async function handleLogin(email, password) {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            currentUser = userCredential.user;
+            await loadFromFirebase();
+            render();
+        } catch (error) {
+            alert("Login failed: " + error.message);
+        }
+    }
+    
+    async function handleRegister(email, password, name) {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            currentUser = userCredential.user;
+            await saveToFirebase();
+            await loadFromFirebase();
+            render();
+        } catch (error) {
+            alert("Registration failed: " + error.message);
+        }
+    }
+    
+    async function handleLogout() {
+        await signOut(auth);
+        currentUser = null;
+        showLoginScreen();
+    }
+    
+    async function handleForgotPassword(email) {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            alert("Password reset email sent! Check your inbox.");
+        } catch (error) {
+            alert("Error: " + error.message);
+        }
+    }
+    
+    // ============ RENDER AUTH SCREENS ============
+    function renderLoginScreen() {
         return `
             <div class="header">
                 <div class="header-content">
@@ -974,156 +628,197 @@
                                 <p>the clue to your money</p>
                             </div>
                         </div>
-                        <div class="user-menu" onclick="handleLogout()">
-                            <div class="user-avatar">${currentUser.name.charAt(0)}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="glass-card">
+                    <h2 style="text-align: center; margin-bottom: 24px;">Welcome Back</h2>
+                    <input type="email" id="loginEmail" class="input-field" placeholder="Email address">
+                    <input type="password" id="loginPassword" class="input-field mt-2" placeholder="Password">
+                    <button class="btn btn-primary mt-3" onclick="window.handleLoginUI()">Login</button>
+                    <div class="text-center mt-3">
+                        <span style="color: #64748B;">Don't have an account?</span>
+                        <button onclick="showRegisterScreen()" style="background: none; border: none; color: #1e3c2c; font-weight: 600; cursor: pointer;">Sign Up</button>
+                    </div>
+                    <div class="text-center mt-2">
+                        <button onclick="showForgotPassword()" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 12px;">Forgot Password?</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderRegisterScreen() {
+        return `
+            <div class="header">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo">
+                            <div class="logo-icon">🔍</div>
+                            <div class="logo-text">
+                                <h1>Inkence</h1>
+                                <p>start your journey</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="greeting">
-                        <h2>Sawubona, ${currentUser.name}! 👋</h2>
-                        <p>Here's your financial snapshot</p>
+                </div>
+            </div>
+            <div class="auth-container">
+                <div class="glass-card">
+                    <h2 style="text-align: center; margin-bottom: 24px;">Create Account</h2>
+                    <input type="text" id="regName" class="input-field" placeholder="Full Name">
+                    <input type="email" id="regEmail" class="input-field mt-2" placeholder="Email address">
+                    <input type="password" id="regPassword" class="input-field mt-2" placeholder="Password (min 6 characters)">
+                    <button class="btn btn-primary mt-3" onclick="window.handleRegisterUI()">Sign Up</button>
+                    <div class="text-center mt-3">
+                        <span style="color: #64748B;">Already have an account?</span>
+                        <button onclick="showLoginScreen()" style="background: none; border: none; color: #1e3c2c; font-weight: 600; cursor: pointer;">Login</button>
                     </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // ============ RENDER MAIN APP ============
+  function renderDashboard() {
+    const remaining = appData.budget.amount - appData.budget.spent;
+    const percent = (appData.budget.spent / appData.budget.amount) * 100;
+    const recent = [...appData.expenses].reverse().slice(0, 4);
+    
+    return `
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <div class="logo-icon">🔍</div>
+                        <div class="logo-text">
+                            <h1>Inkence</h1>
+                            <p>the clue to your money</p>
+                        </div>
+                    </div>
+                    <div class="user-menu" onclick="handleLogout()">
+                        <div class="user-avatar">${currentUser?.email?.charAt(0).toUpperCase() || 'U'}</div>
+                    </div>
+                </div>
+                <div class="greeting">
+                    <h2>Sawubona, ${currentUser?.email?.split('@')[0] || 'User'}! 👋</h2>
+                    <p>Here's your financial snapshot</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="glass-card budget-card">
+                <div class="budget-stats">
+                    <div><div style="font-size:12px; opacity:0.7;">Today</div><div class="stat-value">R${getTodaySpend()}</div></div>
+                    <div><div style="font-size:12px; opacity:0.7;">Remaining</div><div class="stat-value" style="color:#FFB800">R${remaining}</div></div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-label flex-between">
+                        <span>Monthly Progress</span>
+                        <span>R${appData.budget.spent} / R${appData.budget.amount}</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${Math.min(percent, 100)}%"></div></div>
                 </div>
             </div>
             
-            <div class="main-content">
-                <!-- Budget Card -->
-                <div class="glass-card budget-card">
-                    <div class="budget-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">Today</div>
-                            <div class="stat-value">R${getTodaySpend()}</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Remaining</div>
-                            <div class="stat-value" style="color: #FFB800">R${remaining}</div>
-                        </div>
-                    </div>
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>Monthly Progress</span>
-                            <span>R${appData.budget.spent} / R${appData.budget.amount}</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${Math.min(percent, 100)}%"></div>
-                        </div>
-                    </div>
+            <!-- Quick Add with Custom Names -->
+            <div class="glass-card">
+                <h3 style="margin-bottom: 16px;">⚡ Quick Add</h3>
+           
+                <div class="text-center mt-2">
+                    <button class="action-btn" style="width: 100%; flex-direction: row; justify-content: center; gap: 8px;" onclick="switchView('expense')">
+                        <span>+</span>
+                        <span>Add Custom Expense</span>
+                    </button>
                 </div>
-                
-                <!-- Quick Actions -->
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 16px; font-size: 16px;">⚡ Quick Add</h3>
-                    <div class="quick-actions">
-                        <button class="action-btn" onclick="quickAdd('food', 50)">
-                            <span>🍔</span>
-                            <span>R50</span>
-                        </button>
-                        <button class="action-btn" onclick="quickAdd('transport', 30)">
-                            <span>🚕</span>
-                            <span>R30</span>
-                        </button>
-                        <button class="action-btn" onclick="quickAdd('airtime', 20)">
-                            <span>📱</span>
-                            <span>R20</span>
-                        </button>
-                        <button class="action-btn" onclick="quickAdd('other', 100)">
-                            <span>🛍️</span>
-                            <span>R100</span>
-                        </button>
-                    </div>
+            </div>
+            
+            <!-- Recent Expenses -->
+            <div class="glass-card">
+                <div class="flex-between" style="margin-bottom: 12px;">
+                    <h3>📋 Recent Expenses</h3>
+                    <button class="action-btn" style="padding: 6px 12px; flex-direction: row; gap: 6px;" onclick="switchView('expense')">+ Add</button>
                 </div>
-                
-                <!-- Recent Expenses -->
-                <div class="glass-card">
-                    <div class="flex-between" style="margin-bottom: 12px;">
-                        <h3 style="font-size: 16px;">📋 Recent Expenses</h3>
-                        <button class="action-btn" style="padding: 6px 12px; flex-direction: row; gap: 6px;" onclick="switchView('expense')">
-                            <span>+</span>
-                            <span>Add</span>
-                        </button>
-                    </div>
-                    <div class="expense-list">
-                        ${recent.map(exp => `
-                            <div class="expense-row" onclick="editExpense('${exp.id}')">
-                                <div class="expense-info">
-                                    <div class="expense-icon" style="background: ${getCategoryColor(exp.category)}20">
-                                        ${getCategoryIcon(exp.category)}
-                                    </div>
-                                    <div class="expense-details">
-                                        <h4>${exp.store || exp.category}</h4>
-                                        <p>${exp.date}</p>
-                                    </div>
-                                </div>
-                                <div class="expense-amount">R${exp.amount}</div>
+                ${recent.map(exp => `
+                    <div class="expense-row" onclick="editExpense('${exp.id}')">
+                        <div class="expense-info">
+                            <div class="expense-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); font-size: 20px;">
+                                💰
                             </div>
-                        `).join('')}
-                        ${recent.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No expenses yet</div>' : ''}
+                            <div>
+                                <h4>${exp.name || exp.store || 'Expense'}</h4>
+                                <p>${exp.date} ${exp.note ? `· ${exp.note}` : ''}</p>
+                            </div>
+                        </div>
+                        <div class="expense-amount">R${exp.amount}</div>
                     </div>
-                </div>
+                `).join('')}
+                ${recent.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No expenses yet. Tap + to add</div>' : ''}
             </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderExpenseForm() {
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">Add Expense</h2>
-                    <div style="width: 32px;"></div>
-                </div>
+        </div>
+        ${renderBottomNav()}
+    `;
+}
+
+function renderExpenseForm() {
+    return `
+        <div class="header" style="padding: 20px 24px;">
+            <div class="flex-between">
+                <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                <h2 style="color: white;">Add Expense</h2>
+                <div style="width: 32px;"></div>
             </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="category-grid">
-                        <div class="category-chip ${selectedCategory === 'food' ? 'selected' : ''}" onclick="selectCategory('food')">
-                            <div class="category-icon">🍔</div>
-                            <div class="category-name">Food</div>
-                        </div>
-                        <div class="category-chip ${selectedCategory === 'transport' ? 'selected' : ''}" onclick="selectCategory('transport')">
-                            <div class="category-icon">🚕</div>
-                            <div class="category-name">Transport</div>
-                        </div>
-                        <div class="category-chip ${selectedCategory === 'airtime' ? 'selected' : ''}" onclick="selectCategory('airtime')">
-                            <div class="category-icon">📱</div>
-                            <div class="category-name">Airtime</div>
-                        </div>
-                        <div class="category-chip ${selectedCategory === 'other' ? 'selected' : ''}" onclick="selectCategory('other')">
-                            <div class="category-icon">🛍️</div>
-                            <div class="category-name">Other</div>
-                        </div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Amount (R)</label>
-                        <input type="number" id="expAmount" class="input-field" placeholder="0.00">
-                    </div>
-                    
-                    <div class="quick-actions" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 16px;">
-                        <button class="action-btn" onclick="setAmount(10)">R10</button>
-                        <button class="action-btn" onclick="setAmount(20)">R20</button>
-                        <button class="action-btn" onclick="setAmount(50)">R50</button>
-                        <button class="action-btn" onclick="setAmount(100)">R100</button>
-                        <button class="action-btn" onclick="setAmount(200)">R200</button>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Store (optional)</label>
-                        <input type="text" id="expStore" class="input-field" placeholder="e.g., Checkers, Uber">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Date</label>
-                        <input type="date" id="expDate" class="input-field" value="${new Date().toISOString().slice(0, 10)}">
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="saveExpense()">Save Expense</button>
+        </div>
+        <div class="main-content">
+            <div class="glass-card">
+                <!-- Expense Name / Description -->
+                <div class="input-group">
+                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                        What did you spend on? *
+                    </label>
+                    <input type="text" id="expenseName" class="input-field" placeholder="e.g., Nando's, Uber, Checkers, Clothing" autocomplete="off">
                 </div>
+                
+                <!-- Amount -->
+                <div class="input-group">
+                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                        Amount (R) *
+                    </label>
+                    <input type="number" id="expAmount" class="input-field" placeholder="0.00">
+                </div>
+                
+                <!-- Quick Amount Buttons -->
+                <div class="quick-actions" style="grid-template-columns: repeat(5, 1fr); margin: 8px 0 16px;">
+                    <button class="action-btn" onclick="setAmount(10)">R10</button>
+                    <button class="action-btn" onclick="setAmount(20)">R20</button>
+                    <button class="action-btn" onclick="setAmount(50)">R50</button>
+                    <button class="action-btn" onclick="setAmount(100)">R100</button>
+                    <button class="action-btn" onclick="setAmount(200)">R200</button>
+                </div>
+                
+                <!-- Optional Note -->
+                <div class="input-group">
+                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                        Note (optional)
+                    </label>
+                    <input type="text" id="expNote" class="input-field" placeholder="Add a note...">
+                </div>
+                
+                <!-- Date -->
+                <div class="input-group">
+                    <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: #475569;">
+                        Date
+                    </label>
+                    <input type="date" id="expDate" class="input-field" value="${new Date().toISOString().slice(0, 10)}">
+                </div>
+                
+                <button class="btn btn-primary mt-3" onclick="saveExpense()">Save Expense</button>
             </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
+        </div>
+        ${renderBottomNav()}
+    `;
+}
     function renderGroceryLists() {
         const pinned = appData.groceryLists.filter(l => l.isPinned);
         const others = appData.groceryLists.filter(l => !l.isPinned);
@@ -1133,144 +828,22 @@
                 <div class="flex-between">
                     <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
                     <h2 style="color: white;">Grocery Lists</h2>
-                    <button onclick="createNewList()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 40px; cursor: pointer;">+ New</button>
+                    <button onclick="createNewList()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 40px;">+ New</button>
                 </div>
             </div>
             <div class="main-content">
-                ${pinned.length > 0 ? `
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 12px;">📌 Pinned Lists</h3>
-                    ${pinned.map(list => `
-                        <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
-                            <div class="expense-info">
-                                <div class="expense-icon" style="background: #fef3c7;">🛒</div>
-                                <div class="expense-details">
-                                    <h4>${list.name}</h4>
-                                    <p>${list.items.filter(i => i.bought).length}/${list.items.length} items</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
-                        </div>
-                    `).join('')}
-                </div>
-                ` : ''}
-                
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 12px;">📂 All Lists</h3>
-                    ${others.map(list => `
-                        <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
-                            <div class="expense-info">
-                                <div class="expense-icon" style="background: #e2e8f0;">📋</div>
-                                <div class="expense-details">
-                                    <h4>${list.name}</h4>
-                                    <p>${list.items.length} items</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
-                        </div>
-                    `).join('')}
-                    ${others.length === 0 && pinned.length === 0 ? '<div class="text-center" style="padding: 24px; color: #94a3b8;">No lists yet</div>' : ''}
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderGroceryDetail(listId) {
-        const list = appData.groceryLists.find(l => l.id === listId);
-        if (!list) return renderGroceryLists();
-        
-        const done = list.items.filter(i => i.bought).length;
-        const percent = list.items.length ? (done / list.items.length) * 100 : 0;
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="closeGroceryDetail()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white; font-size: 18px;">${list.name}</h2>
-                    <button onclick="copyList('${list.id}')" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 40px; cursor: pointer; font-size: 12px;">Copy</button>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>Progress</span>
-                            <span>${done}/${list.items.length}</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${percent}%; background: linear-gradient(90deg, #1e3c2c, #2a5a3a);"></div>
-                        </div>
+                ${pinned.length ? `<div class="glass-card"><h3>📌 Pinned Lists</h3>${pinned.map(list => `
+                    <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
+                        <div><strong>${list.name}</strong><div style="font-size:12px">${list.items.filter(i=>i.bought).length}/${list.items.length} items</div></div>
+                        <i class="fas fa-chevron-right"></i>
                     </div>
-                </div>
-                
-                <div class="glass-card">
-                    ${list.items.map(item => `
-                        <div class="grocery-item">
-                            <input type="checkbox" ${item.bought ? 'checked' : ''} onchange="toggleItem('${list.id}', '${item.id}')">
-                            <span class="grocery-name ${item.bought ? 'bought' : ''}">${item.name}</span>
-                            ${item.quantity ? `<span class="grocery-quantity">${item.quantity}</span>` : ''}
-                            <button class="delete-item" onclick="deleteItem('${list.id}', '${item.id}')" style="background: none; border: none; font-size: 18px; cursor: pointer; color: #ef4444;">🗑️</button>
-                        </div>
-                    `).join('')}
-                    
-                    <div class="flex-between mt-3" style="gap: 8px;">
-                        <input type="text" id="newItemName" class="input-field" placeholder="Item name" style="flex: 2;">
-                        <input type="text" id="newItemQty" class="input-field" placeholder="Qty" style="flex: 1;">
-                        <button class="btn btn-primary" style="padding: 12px 20px; width: auto;" onclick="addItem('${list.id}')">Add</button>
+                `).join('')}</div>` : ''}
+                <div class="glass-card"><h3>📂 All Lists</h3>${others.map(list => `
+                    <div class="expense-row" onclick="openGroceryDetail('${list.id}')">
+                        <div><strong>${list.name}</strong><div style="font-size:12px">${list.items.length} items</div></div>
+                        <i class="fas fa-chevron-right"></i>
                     </div>
-                </div>
-            </div>
-            ${renderBottomNav()}
-        `;
-    }
-    
-    function renderBudgetScreen() {
-        const percent = (appData.budget.spent / appData.budget.amount) * 100;
-        const categories = { food: 0, transport: 0, airtime: 0, other: 0 };
-        appData.expenses.forEach(e => { if (categories[e.category] !== undefined) categories[e.category] += e.amount; });
-        
-        return `
-            <div class="header" style="padding: 20px 24px;">
-                <div class="flex-between">
-                    <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
-                    <h2 style="color: white;">Budget</h2>
-                    <div style="width: 32px;"></div>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="glass-card">
-                    <div class="flex-between">
-                        <span style="font-weight: 600;">Monthly Budget</span>
-                        <span style="font-size: 28px; font-weight: 700;">R${appData.budget.amount}</span>
-                    </div>
-                    <input type="number" id="budgetInput" class="input-field mt-2" value="${appData.budget.amount}" placeholder="Set new budget">
-                    <button class="btn btn-primary mt-2" onclick="updateBudget()">Update Budget</button>
-                </div>
-                
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 12px;">📊 Spending Overview</h3>
-                    <div class="flex-between">
-                        <span>Spent: R${appData.budget.spent}</span>
-                        <span>Remaining: R${appData.budget.amount - appData.budget.spent}</span>
-                    </div>
-                    <div class="progress-bar mt-2">
-                        <div class="progress-fill" style="width: ${Math.min(percent, 100)}%; ${percent >= 90 ? 'background: #ef4444' : ''}"></div>
-                    </div>
-                    <div class="text-center mt-2" style="color: ${percent >= 90 ? '#ef4444' : percent >= 70 ? '#f59e0b' : '#28a745'}">
-                        ${percent >= 90 ? '⚠️ Over budget!' : percent >= 70 ? '🟡 Approaching limit' : '✅ On track!'}
-                    </div>
-                </div>
-                
-                <div class="glass-card">
-                    <h3 style="margin-bottom: 12px;">📈 Category Breakdown</h3>
-                    ${Object.entries(categories).map(([cat, amt]) => `
-                        <div class="flex-between" style="margin-bottom: 8px;">
-                            <span>${getCategoryIcon(cat)} ${cat}</span>
-                            <span style="font-weight: 600;">R${amt}</span>
-                        </div>
-                    `).join('')}
-                </div>
+                `).join('')}</div>
             </div>
             ${renderBottomNav()}
         `;
@@ -1286,151 +859,125 @@
                 </div>
             </div>
             <div class="main-content">
-                <!-- Loyalty Cards Section - Merged from your component -->
                 <div class="glass-card">
-                    <div class="flex-between">
-                        <h3>💳 Loyalty Cards</h3>
-                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showLoyaltyModalFunc()">+ Add</button>
-                    </div>
+                    <div class="flex-between"><h3>💳 Loyalty Cards</h3><button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showLoyaltyModalFunc()">+ Add</button></div>
                     <div class="loyalty-grid mt-2">
                         ${appData.loyaltyCards.map(card => `
                             <div class="loyalty-card-item ${getLoyaltyGradient(card.card_type)}" onclick="alert('Scan: ${card.card_number}')">
-                                <button class="loyalty-delete-btn" onclick="event.stopPropagation(); deleteLoyaltyCard('${card.id}')">🗑️</button>
-                                <div class="loyalty-card-content">
-                                    <div class="loyalty-card-type">${card.card_type}</div>
-                                    <div class="loyalty-card-store">${card.store_name}</div>
-                                    <div class="loyalty-card-number">
-                                        <span>${getLoyaltyEmoji(card.card_type)}</span>
-                                        <span>${card.card_number}</span>
-                                    </div>
-                                </div>
+                                <button class="loyalty-delete-btn" style="position:absolute; top:8px; right:8px; background:rgba(0,0,0,0.3); border:none; border-radius:20px; padding:2px 8px; color:white; cursor:pointer;" onclick="event.stopPropagation(); deleteLoyaltyCard('${card.id}')">🗑️</button>
+                                <div><div style="font-size:10px; opacity:0.7;">${card.card_type}</div><div style="font-weight:700;">${card.store_name}</div></div>
+                                <div class="mt-2" style="font-family:monospace; font-size:12px;">${getLoyaltyEmoji(card.card_type)} ${card.card_number}</div>
                             </div>
                         `).join('')}
-                        ${appData.loyaltyCards.length === 0 ? '<div class="text-center" style="padding: 24px;">No cards yet</div>' : ''}
                     </div>
                 </div>
                 
-                <!-- Stokvel Section - Merged from your component -->
                 <div class="glass-card">
-                    <div class="flex-between">
-                        <h3>👥 Stokvel</h3>
-                        <button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showStokvelModalFunc()">+ Create</button>
-                    </div>
+                    <div class="flex-between"><h3>👥 Stokvel</h3><button class="btn btn-secondary" style="padding: 8px 16px; width: auto;" onclick="showStokvelModalFunc()">+ Create</button></div>
                     ${appData.stokvels.map(s => `
                         <div class="stokvel-card-item">
-                            <div class="stokvel-name">${s.name}</div>
-                            <div class="stokvel-detail">
-                                <span>R${s.contribution_amount}/${s.frequency}</span>
-                                <span>Your balance: R${s.yourBalance || 0}</span>
-                            </div>
-                            <div class="stokvel-members">
-                                ${s.members.slice(0, 4).map(m => `<span class="stokvel-member-badge">${m.name}</span>`).join('')}
-                                ${s.members.length > 4 ? `<span class="stokvel-member-badge">+${s.members.length - 4}</span>` : ''}
-                            </div>
-                            <button class="btn btn-primary" style="background: rgba(255,255,255,0.2); margin-top: 8px;" onclick="logStokvelContribution('${s.id}')">
-                                Log Contribution (R${s.contribution_amount})
-                            </button>
+                            <div style="font-weight:700; font-size:18px;">${s.name}</div>
+                            <div class="flex-between mt-2"><span>R${s.contribution_amount}/${s.frequency}</span><span>Balance: R${s.yourBalance || 0}</span></div>
+                            <div class="mt-2">${s.members?.slice(0,3).map(m => `<span class="stokvel-member-badge">${m.name}</span>`).join('')}${s.members?.length > 3 ? `<span class="stokvel-member-badge">+${s.members.length-3}</span>` : ''}</div>
+                            <button class="btn btn-primary mt-2" style="background: rgba(255,255,255,0.2);" onclick="logStokvelContribution('${s.id}')">Log R${s.contribution_amount}</button>
                         </div>
                     `).join('')}
-                    ${appData.stokvels.length === 0 ? '<div class="text-center" style="padding: 24px;">No stokvels yet</div>' : ''}
                 </div>
                 
                 <div class="glass-card">
                     <h3>⚙️ Settings</h3>
                     <button class="btn btn-secondary mt-2" onclick="exportData()">📤 Export Data (CSV)</button>
-                    <button class="btn btn-danger mt-2" style="background: #fee2e2; color: #dc2626;" onclick="resetData()">🗑️ Reset All Data</button>
+                    <button class="btn btn-danger mt-2" style="background:#fee2e2; color:#dc2626;" onclick="resetData()">🗑️ Reset All Data</button>
                 </div>
             </div>
             ${renderBottomNav()}
         `;
     }
     
-    function renderModals() {
-        let modalHtml = '';
+   function renderBudgetScreen() {
+    const percent = (appData.budget.spent / appData.budget.amount) * 100;
+    
+    // Group expenses by name for breakdown
+    const expenseMap = {};
+    appData.expenses.forEach(e => {
+        const key = e.name || e.store || 'Other';
+        expenseMap[key] = (expenseMap[key] || 0) + e.amount;
+    });
+    const topExpenses = Object.entries(expenseMap)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+    
+    return `
+        <div class="header" style="padding: 20px 24px;">
+            <div class="flex-between">
+                <button onclick="switchView('dashboard')" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                <h2 style="color: white;">Budget</h2>
+                <div style="width: 32px;"></div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="glass-card">
+                <div class="flex-between"><span>Monthly Budget</span><span style="font-size:28px; font-weight:700;">R${appData.budget.amount}</span></div>
+                <input type="number" id="budgetInput" class="input-field mt-2" value="${appData.budget.amount}">
+                <button class="btn btn-primary mt-2" onclick="updateBudget()">Update Budget</button>
+            </div>
+            <div class="glass-card">
+                <h3>📊 Spending Overview</h3>
+                <div class="flex-between"><span>Spent: R${appData.budget.spent}</span><span>Remaining: R${appData.budget.amount - appData.budget.spent}</span></div>
+                <div class="progress-bar mt-2"><div class="progress-fill" style="width:${Math.min(percent,100)}%"></div></div>
+                <div class="text-center mt-2" style="color:${percent>=90?'#ef4444':percent>=70?'#f59e0b':'#28a745'}">${percent>=90?'⚠️ Over budget!':percent>=70?'🟡 Approaching limit':'✅ On track!'}</div>
+            </div>
+            <div class="glass-card">
+                <h3>📈 Top Expenses</h3>
+                ${topExpenses.map(([name, amt]) => `
+                    <div class="flex-between" style="margin-bottom: 10px;">
+                        <span>${name}</span>
+                        <span style="font-weight: 600;">R${amt}</span>
+                    </div>
+                `).join('')}
+                ${topExpenses.length === 0 ? '<div class="text-center">No expenses yet</div>' : ''}
+            </div>
+        </div>
+        ${renderBottomNav()}
+    `;
+}
+    function renderGroceryDetail(listId) {
+        const list = appData.groceryLists.find(l => l.id === listId);
+        if (!list) return renderGroceryLists();
+        const done = list.items.filter(i => i.bought).length;
+        const percent = list.items.length ? (done/list.items.length)*100 : 0;
         
-        if (showStokvelModal) {
-            modalHtml = `
-                <div class="modal-overlay" onclick="closeModals()">
-                    <div class="modal-container" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h3>Create Stokvel</h3>
-                            <button class="modal-close" onclick="closeModals()">×</button>
+        return `
+            <div class="header" style="padding: 20px 24px;">
+                <div class="flex-between">
+                    <button onclick="closeGroceryDetail()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">←</button>
+                    <h2 style="color: white; font-size: 18px;">${list.name}</h2>
+                    <button onclick="copyList('${list.id}')" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 40px;">Copy</button>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="glass-card">
+                    <div class="progress-label flex-between"><span>Progress</span><span>${done}/${list.items.length}</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:${percent}%; background:linear-gradient(90deg,#1e3c2c,#2a5a3a);"></div></div>
+                </div>
+                <div class="glass-card">
+                    ${list.items.map(item => `
+                        <div class="grocery-item" style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eef2f6;">
+                            <input type="checkbox" ${item.bought ? 'checked' : ''} onchange="toggleItem('${list.id}','${item.id}')">
+                            <span style="flex:1; ${item.bought ? 'text-decoration:line-through; color:#94a3b8;' : ''}">${item.name}</span>
+                            ${item.quantity ? `<span style="background:#f1f5f9; padding:4px 10px; border-radius:20px; font-size:12px;">${item.quantity}</span>` : ''}
+                            <button onclick="deleteItem('${list.id}','${item.id}')" style="background:none; border:none; font-size:18px; cursor:pointer; color:#ef4444;">🗑️</button>
                         </div>
-                        <div class="input-group">
-                            <label>Group Name</label>
-                            <input type="text" id="stokvelName" class="input-field" placeholder="e.g., Family Stokvel" value="${newStokvel.name.replace(/"/g, '&quot;')}">
-                        </div>
-                        <div class="input-group">
-                            <label>Contribution (ZAR)</label>
-                            <input type="number" id="stokvelContribution" class="input-field" placeholder="500" value="${newStokvel.contribution_amount}">
-                        </div>
-                        <div class="input-group">
-                            <label>Frequency</label>
-                            <select id="stokvelFrequency" class="input-field">
-                                <option value="weekly" ${newStokvel.frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
-                                <option value="monthly" ${newStokvel.frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Start Date</label>
-                            <input type="date" id="stokvelStartDate" class="input-field" value="${newStokvel.start_date}">
-                        </div>
-                        <div class="input-group">
-                            <label>Members</label>
-                            <div class="flex-between gap-2">
-                                <input type="text" id="memberInput" class="input-field" placeholder="Member name" style="flex: 1;" value="${memberInput}">
-                                <button class="btn btn-primary" style="width: auto; padding: 14px 20px;" onclick="addMemberToNewStokvel()">+ Add</button>
-                            </div>
-                            <div class="member-list mt-2">
-                                ${newStokvel.members.map((m, i) => `
-                                    <div class="member-item">
-                                        <div class="flex-between" style="gap: 12px; width: 100%;">
-                                            <div class="member-number">${i + 1}</div>
-                                            <span style="flex: 1;">${m.name}</span>
-                                            <button onclick="removeMemberFromNewStokvel('${m.id}')" style="background: none; border: none; color: #ef4444; cursor: pointer;">✕</button>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        <button class="btn btn-primary" onclick="createStokvel()">Create Stokvel</button>
+                    `).join('')}
+                    <div class="flex-between mt-3" style="gap:8px;">
+                        <input type="text" id="newItemName" class="input-field" placeholder="Item name" style="flex:2;">
+                        <input type="text" id="newItemQty" class="input-field" placeholder="Qty" style="flex:1;">
+                        <button class="btn btn-primary" style="padding:12px 20px; width:auto;" onclick="addItem('${list.id}')">Add</button>
                     </div>
                 </div>
-            `;
-        }
-        
-        if (showLoyaltyModal) {
-            modalHtml = `
-                <div class="modal-overlay" onclick="closeModals()">
-                    <div class="modal-container" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h3>Add Loyalty Card</h3>
-                            <button class="modal-close" onclick="closeModals()">×</button>
-                        </div>
-                        <div class="input-group">
-                            <label>Store Name</label>
-                            <input type="text" id="loyaltyStore" class="input-field" placeholder="e.g., Checkers" value="${newLoyalty.store_name.replace(/"/g, '&quot;')}">
-                        </div>
-                        <div class="input-group">
-                            <label>Card Number</label>
-                            <input type="text" id="loyaltyNumber" class="input-field" placeholder="**** **** **** 1234" value="${newLoyalty.card_number}">
-                        </div>
-                        <div class="input-group">
-                            <label>Card Type</label>
-                            <select id="loyaltyType" class="input-field">
-                                <option value="Grocery" ${newLoyalty.card_type === 'Grocery' ? 'selected' : ''}>🛒 Grocery</option>
-                                <option value="Retail" ${newLoyalty.card_type === 'Retail' ? 'selected' : ''}>🏬 Retail</option>
-                                <option value="Fuel" ${newLoyalty.card_type === 'Fuel' ? 'selected' : ''}>⛽ Fuel</option>
-                                <option value="Coffee" ${newLoyalty.card_type === 'Coffee' ? 'selected' : ''}>☕ Coffee</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" onclick="createLoyaltyCard()">Save Card</button>
-                    </div>
-                </div>
-            `;
-        }
-        
-        return modalHtml;
+            </div>
+            ${renderBottomNav()}
+        `;
     }
     
     function renderBottomNav() {
@@ -1441,281 +988,319 @@
             { view: 'budget', icon: 'fas fa-chart-line', label: 'Budget' },
             { view: 'more', icon: 'fas fa-user', label: 'More' }
         ];
-        
-        return `
-            <div class="bottom-nav">
-                ${navItems.map(item => `
-                    <button class="nav-item ${currentView === item.view ? 'active' : ''}" onclick="switchView('${item.view}')">
-                        <i class="${item.icon}"></i>
-                        <span>${item.label}</span>
-                    </button>
-                `).join('')}
-            </div>
-        `;
+        return `<div class="bottom-nav">${navItems.map(item => `<button class="nav-item ${currentView === item.view ? 'active' : ''}" onclick="switchView('${item.view}')"><i class="${item.icon}"></i><span>${item.label}</span></button>`).join('')}</div>`;
+    }
+    
+    function renderModals() {
+        let modalHtml = '';
+        if (showStokvelModal) {
+            modalHtml = `
+                <div class="modal-overlay" onclick="closeModals()">
+                    <div class="modal-container" onclick="event.stopPropagation()">
+                        <div class="flex-between"><h3>Create Stokvel</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
+                        <input type="text" id="stokvelName" class="input-field mt-2" placeholder="Group Name">
+                        <input type="number" id="stokvelContribution" class="input-field mt-2" placeholder="Contribution (R)">
+                        <select id="stokvelFrequency" class="input-field mt-2"><option value="monthly">Monthly</option><option value="weekly">Weekly</option></select>
+                        <input type="date" id="stokvelStartDate" class="input-field mt-2">
+                        <div class="flex-between gap-2 mt-2"><input type="text" id="memberInput" class="input-field" placeholder="Member name" style="flex:1;"><button class="btn btn-primary" style="width:auto; padding:14px 20px;" onclick="addMemberToNewStokvel()">+ Add</button></div>
+                        <div id="memberList"></div>
+                        <button class="btn btn-primary mt-3" onclick="createStokvel()">Create Stokvel</button>
+                    </div>
+                </div>
+            `;
+        }
+        if (showLoyaltyModal) {
+            modalHtml = `
+                <div class="modal-overlay" onclick="closeModals()">
+                    <div class="modal-container" onclick="event.stopPropagation()">
+                        <div class="flex-between"><h3>Add Loyalty Card</h3><button onclick="closeModals()" style="background:none; border:none; font-size:24px;">×</button></div>
+                        <input type="text" id="loyaltyStore" class="input-field mt-2" placeholder="Store Name">
+                        <input type="text" id="loyaltyNumber" class="input-field mt-2" placeholder="Card Number">
+                        <select id="loyaltyType" class="input-field mt-2"><option value="Grocery">🛒 Grocery</option><option value="Retail">🏬 Retail</option><option value="Fuel">⛽ Fuel</option><option value="Coffee">☕ Coffee</option></select>
+                        <button class="btn btn-primary mt-3" onclick="createLoyaltyCard()">Save Card</button>
+                    </div>
+                </div>
+            `;
+        }
+        return modalHtml;
     }
     
     // ============ INTERACTION HANDLERS ============
-    window.switchView = (view) => {
-        currentView = view;
-        selectedGroceryId = null;
-        render();
+    window.switchView = (view) => { currentView = view; selectedGroceryId = null; render(); };
+    window.closeModals = () => { showStokvelModal = false; showLoyaltyModal = false; render(); };
+    window.showStokvelModalFunc = () => { showStokvelModal = true; render(); };
+    window.showLoyaltyModalFunc = () => { showLoyaltyModal = true; render(); };
+    window.closeGroceryDetail = () => { selectedGroceryId = null; render(); };
+    window.openGroceryDetail = (id) => { selectedGroceryId = id; render(); };
+    window.selectCategory = (cat) => { selectedCategory = cat; render(); };
+    window.setAmount = (amt) => { const inp = document.getElementById('expAmount'); if(inp) inp.value = amt; };
+    
+   window.quickAdd = async (name, amt) => {
+    const newExpense = {
+        id: Date.now().toString(),
+        name: name,
+        amount: amt,
+        note: 'Quick add',
+        date: new Date().toISOString().slice(0, 10)
+    };
+    appData.expenses.push(newExpense);
+    recalcSpent();
+    await saveToFirebase();
+    render();
+};
+    
+window.saveExpense = async () => {
+    const expenseName = document.getElementById('expenseName')?.value.trim();
+    const amount = parseFloat(document.getElementById('expAmount')?.value);
+    
+    if (!expenseName) {
+        alert('Please enter what you spent on');
+        return;
+    }
+    if (!amount || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+    }
+    
+    const newExpense = {
+        id: Date.now().toString(),
+        name: expenseName,           // Custom expense name
+        amount: amount,
+        note: document.getElementById('expNote')?.value || '',
+        date: document.getElementById('expDate')?.value || new Date().toISOString().slice(0, 10)
     };
     
-    window.closeModals = () => {
-        showStokvelModal = false;
-        showLoyaltyModal = false;
-        render();
-    };
-    
-    window.showStokvelModalFunc = () => {
-        showStokvelModal = true;
-        render();
-    };
-    
-    window.showLoyaltyModalFunc = () => {
-        showLoyaltyModal = true;
-        render();
-    };
-    
-    window.closeGroceryDetail = () => {
-        selectedGroceryId = null;
-        render();
-    };
-    
-    window.openGroceryDetail = (id) => {
-        selectedGroceryId = id;
-        render();
-    };
-    
-    window.selectCategory = (cat) => {
-        selectedCategory = cat;
-        render();
-    };
-    
-    window.setAmount = (amt) => {
-        const input = document.getElementById('expAmount');
-        if (input) input.value = amt;
-    };
-    
-    window.quickAdd = (cat, amt) => {
-        const newExp = {
-            id: Date.now().toString(),
-            amount: amt,
-            category: cat,
-            store: 'Quick',
-            date: new Date().toISOString().slice(0, 10)
-        };
-        appData.expenses.push(newExp);
+    appData.expenses.push(newExpense);
+    recalcSpent();
+    await saveToFirebase();
+    switchView('dashboard');
+};
+    window.editExpense = async (id) => {
+    const exp = appData.expenses.find(e => e.id === id);
+    if (exp) {
+        const newName = prompt('Edit expense name:', exp.name || exp.store);
+        const newAmt = prompt('Edit amount (R):', exp.amount);
+        if (newName && newName.trim()) exp.name = newName.trim();
+        if (newAmt && !isNaN(parseFloat(newAmt))) exp.amount = parseFloat(newAmt);
         recalcSpent();
+        await saveToFirebase();
         render();
-    };
-    
-    window.saveExpense = () => {
-        const amount = parseFloat(document.getElementById('expAmount')?.value);
-        if (!amount || amount <= 0) {
-            alert('Please enter a valid amount');
-            return;
-        }
-        const newExp = {
-            id: Date.now().toString(),
-            amount: amount,
-            category: selectedCategory,
-            store: document.getElementById('expStore')?.value || '',
-            date: document.getElementById('expDate')?.value || new Date().toISOString().slice(0, 10)
-        };
-        appData.expenses.push(newExp);
-        recalcSpent();
-        switchView('dashboard');
-    };
-    
-    window.editExpense = (id) => {
-        const exp = appData.expenses.find(e => e.id === id);
-        if (exp) {
-            const newAmt = prompt('Edit amount (R):', exp.amount);
-            if (newAmt && !isNaN(parseFloat(newAmt))) {
-                exp.amount = parseFloat(newAmt);
-                recalcSpent();
-                render();
-            }
-        }
-    };
-    
-    window.updateBudget = () => {
+    }
+};
+    window.updateBudget = async () => {
         const newBudget = parseFloat(document.getElementById('budgetInput')?.value);
         if (newBudget && newBudget > 0) {
             appData.budget.amount = newBudget;
+            await saveToFirebase();
             render();
         }
     };
     
-    window.createNewList = () => {
+    window.createNewList = async () => {
         const name = prompt('List name:');
         if (name) {
-            appData.groceryLists.push({
-                id: Date.now().toString(),
-                name: name,
-                isPinned: false,
-                items: []
-            });
+            appData.groceryLists.push({ id: Date.now().toString(), name, isPinned: false, items: [] });
+            await saveToFirebase();
             render();
         }
     };
     
-    window.toggleItem = (listId, itemId) => {
+    window.toggleItem = async (listId, itemId) => {
         const list = appData.groceryLists.find(l => l.id === listId);
         const item = list?.items.find(i => i.id === itemId);
-        if (item) {
-            item.bought = !item.bought;
-            render();
-        }
+        if (item) { item.bought = !item.bought; await saveToFirebase(); render(); }
     };
     
-    window.deleteItem = (listId, itemId) => {
+    window.deleteItem = async (listId, itemId) => {
         const list = appData.groceryLists.find(l => l.id === listId);
-        if (list) {
-            list.items = list.items.filter(i => i.id !== itemId);
-            render();
-        }
+        if (list) { list.items = list.items.filter(i => i.id !== itemId); await saveToFirebase(); render(); }
     };
     
-    window.addItem = (listId) => {
+    window.addItem = async (listId) => {
         const name = document.getElementById('newItemName')?.value;
         const qty = document.getElementById('newItemQty')?.value;
         if (!name) return;
         const list = appData.groceryLists.find(l => l.id === listId);
         if (list) {
-            list.items.push({
-                id: Date.now().toString(),
-                name: name,
-                quantity: qty,
-                bought: false
-            });
+            list.items.push({ id: Date.now().toString(), name, quantity: qty, bought: false });
+            await saveToFirebase();
             render();
         }
     };
     
-    window.copyList = (listId) => {
+    window.copyList = async (listId) => {
         const original = appData.groceryLists.find(l => l.id === listId);
         const newName = prompt('New list name:', original.name + ' (Copy)');
         if (newName) {
-            appData.groceryLists.push({
-                id: Date.now().toString(),
-                name: newName,
-                isPinned: false,
-                items: original.items.map(i => ({ ...i, id: Date.now() + Math.random(), bought: false }))
-            });
+            appData.groceryLists.push({ id: Date.now().toString(), name: newName, isPinned: false, items: original.items.map(i => ({ ...i, id: Date.now()+Math.random(), bought: false })) });
+            await saveToFirebase();
             render();
         }
     };
     
-    window.logStokvelContribution = logStokvelContribution;
-    window.deleteLoyaltyCard = deleteLoyaltyCard;
-    window.addMemberToNewStokvel = addMemberToNewStokvel;
-    window.removeMemberFromNewStokvel = removeMemberFromNewStokvel;
-    window.createStokvel = createStokvel;
-    window.createLoyaltyCard = createLoyaltyCard;
+    window.logStokvelContribution = async (id) => {
+        const stokvel = appData.stokvels.find(s => s.id === id);
+        if (stokvel) {
+            stokvel.yourBalance = (stokvel.yourBalance || 0) + stokvel.contribution_amount;
+            appData.expenses.push({ id: Date.now().toString(), amount: stokvel.contribution_amount, category: 'other', store: stokvel.name, date: new Date().toISOString().slice(0,10) });
+            recalcSpent();
+            await saveToFirebase();
+            alert(`Added R${stokvel.contribution_amount} to ${stokvel.name}`);
+            render();
+        }
+    };
+    
+    window.deleteLoyaltyCard = async (id) => {
+        appData.loyaltyCards = appData.loyaltyCards.filter(c => c.id !== id);
+        await saveToFirebase();
+        render();
+    };
+    
+    window.addMemberToNewStokvel = () => {
+        const input = document.getElementById('memberInput');
+        if (input && input.value.trim()) {
+            newStokvel.members.push({ id: Date.now().toString(), name: input.value.trim() });
+            input.value = '';
+            const memberList = document.getElementById('memberList');
+            if (memberList) {
+                memberList.innerHTML = newStokvel.members.map((m, i) => `
+                    <div class="flex-between" style="background:#f1f5f9; padding:8px 12px; border-radius:12px; margin-bottom:6px;">
+                        <span><span style="background:#1e3c2c; color:white; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; margin-right:8px;">${i+1}</span>${m.name}</span>
+                        <button onclick="removeMemberFromNewStokvel('${m.id}')" style="background:none; border:none; color:#ef4444;">✕</button>
+                    </div>
+                `).join('');
+            }
+        }
+    };
+    
+    window.removeMemberFromNewStokvel = (id) => {
+        newStokvel.members = newStokvel.members.filter(m => m.id !== id);
+        const memberList = document.getElementById('memberList');
+        if (memberList) {
+            memberList.innerHTML = newStokvel.members.map((m, i) => `
+                <div class="flex-between" style="background:#f1f5f9; padding:8px 12px; border-radius:12px; margin-bottom:6px;">
+                    <span><span style="background:#1e3c2c; color:white; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; margin-right:8px;">${i+1}</span>${m.name}</span>
+                    <button onclick="removeMemberFromNewStokvel('${m.id}')" style="background:none; border:none; color:#ef4444;">✕</button>
+                </div>
+            `).join('');
+        }
+    };
+    
+    window.createStokvel = async () => {
+        const name = document.getElementById('stokvelName')?.value;
+        const contribution = parseFloat(document.getElementById('stokvelContribution')?.value);
+        const frequency = document.getElementById('stokvelFrequency')?.value;
+        const startDate = document.getElementById('stokvelStartDate')?.value;
+        
+        if (!name || !contribution || newStokvel.members.length < 2 || !startDate) {
+            alert('Please fill all fields and add at least 2 members');
+            return;
+        }
+        
+        appData.stokvels.push({
+            id: Date.now().toString(), name, contribution_amount: contribution, frequency,
+            start_date: startDate, members: newStokvel.members, yourBalance: 0, current_round: 0
+        });
+        
+        newStokvel = { name: '', contribution_amount: '', frequency: 'monthly', start_date: '', members: [] };
+        await saveToFirebase();
+        showStokvelModal = false;
+        render();
+    };
+    
+    window.createLoyaltyCard = async () => {
+        const store = document.getElementById('loyaltyStore')?.value;
+        const number = document.getElementById('loyaltyNumber')?.value;
+        const type = document.getElementById('loyaltyType')?.value;
+        
+        if (!store || !number) { alert('Please fill store name and card number'); return; }
+        
+        appData.loyaltyCards.push({ id: Date.now().toString(), store_name: store, card_number: number, card_type: type });
+        await saveToFirebase();
+        showLoyaltyModal = false;
+        render();
+    };
     
     window.exportData = () => {
         let csv = "Category,Amount,Store,Date\n";
-        appData.expenses.forEach(e => {
-            csv += `${e.category},${e.amount},${e.store || ''},${e.date}\n`;
-        });
+        appData.expenses.forEach(e => { csv += `${e.category},${e.amount},${e.store || ''},${e.date}\n`; });
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'inkence_export.csv';
-        a.click();
+        a.href = url; a.download = 'inkence_export.csv'; a.click();
         URL.revokeObjectURL(url);
     };
     
-    window.resetData = () => {
+    window.resetData = async () => {
         if (confirm('Delete all data? This cannot be undone.')) {
-            appData = {
-                expenses: [],
-                groceryLists: [],
-                budget: { amount: 5000, spent: 0 },
-                loyaltyCards: [],
-                stokvels: []
-            };
+            appData = { expenses: [], groceryLists: [], budget: { amount: 5000, spent: 0 }, loyaltyCards: [], stokvels: [] };
             recalcSpent();
+            await saveToFirebase();
             render();
         }
     };
     
-    window.handleLogout = () => {
-        if (confirm('Logout?')) {
-            alert('Logged out (demo mode)');
-        }
+    window.handleLoginUI = () => {
+        const email = document.getElementById('loginEmail')?.value;
+        const password = document.getElementById('loginPassword')?.value;
+        if (email && password) handleLogin(email, password);
+        else alert('Please enter email and password');
     };
     
-    // Update modal input handlers
-    function updateModalValues() {
-        if (showStokvelModal) {
-            const nameInput = document.getElementById('stokvelName');
-            const contribInput = document.getElementById('stokvelContribution');
-            const freqSelect = document.getElementById('stokvelFrequency');
-            const dateInput = document.getElementById('stokvelStartDate');
-            const memberInputField = document.getElementById('memberInput');
-            
-            if (nameInput) newStokvel.name = nameInput.value;
-            if (contribInput) newStokvel.contribution_amount = contribInput.value;
-            if (freqSelect) newStokvel.frequency = freqSelect.value;
-            if (dateInput) newStokvel.start_date = dateInput.value;
-            if (memberInputField) memberInput = memberInputField.value;
-        }
-        
-        if (showLoyaltyModal) {
-            const storeInput = document.getElementById('loyaltyStore');
-            const numberInput = document.getElementById('loyaltyNumber');
-            const typeSelect = document.getElementById('loyaltyType');
-            
-            if (storeInput) newLoyalty.store_name = storeInput.value;
-            if (numberInput) newLoyalty.card_number = numberInput.value;
-            if (typeSelect) newLoyalty.card_type = typeSelect.value;
-        }
+    window.handleRegisterUI = () => {
+        const name = document.getElementById('regName')?.value;
+        const email = document.getElementById('regEmail')?.value;
+        const password = document.getElementById('regPassword')?.value;
+        if (name && email && password) handleRegister(email, password, name);
+        else alert('Please fill all fields');
+    };
+    
+    window.handleLogout = handleLogout;
+    window.showForgotPassword = () => {
+        const email = prompt('Enter your email address:');
+        if (email) handleForgotPassword(email);
+    };
+    
+    function showLoginScreen() {
+        document.getElementById('appRoot').innerHTML = renderLoginScreen();
     }
+    
+    function showRegisterScreen() {
+        document.getElementById('appRoot').innerHTML = renderRegisterScreen();
+    }
+    
+    window.showLoginScreen = showLoginScreen;
+    window.showRegisterScreen = showRegisterScreen;
     
     function render() {
+        if (!currentUser) {
+            showLoginScreen();
+            return;
+        }
         const container = document.getElementById('appRoot');
         let mainHtml = '';
-        
-        if (selectedGroceryId) {
-            mainHtml = renderGroceryDetail(selectedGroceryId);
-        } else {
-            const views = {
-                dashboard: renderDashboard,
-                expense: renderExpenseForm,
-                grocery: renderGroceryLists,
-                budget: renderBudgetScreen,
-                more: renderMoreScreen
-            };
+        if (selectedGroceryId) mainHtml = renderGroceryDetail(selectedGroceryId);
+        else {
+            const views = { dashboard: renderDashboard, expense: renderExpenseForm, grocery: renderGroceryLists, budget: renderBudgetScreen, more: renderMoreScreen };
             mainHtml = (views[currentView] || renderDashboard)();
         }
-        
         container.innerHTML = mainHtml + renderModals();
-        
-        // Attach input listeners for modals
-        if (showStokvelModal) {
-            const inputs = ['stokvelName', 'stokvelContribution', 'stokvelFrequency', 'stokvelStartDate', 'memberInput'];
-            inputs.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.addEventListener('input', updateModalValues);
-            });
-        }
-        
-        if (showLoyaltyModal) {
-            const inputs = ['loyaltyStore', 'loyaltyNumber', 'loyaltyType'];
-            inputs.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.addEventListener('input', updateModalValues);
-            });
-        }
     }
     
-    // Initialize
-    recalcSpent();
-    render();
+    // Auth state listener
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUser = user;
+            await loadFromFirebase();
+            render();
+        } else {
+            currentUser = null;
+            showLoginScreen();
+        }
+    });
+    
+    // Initial render
+    showLoginScreen();
 </script>
 </body>
 </html>
